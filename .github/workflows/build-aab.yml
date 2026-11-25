@@ -45,10 +45,9 @@ jobs:
             keytool -genkeypair -v -keystore ./android.keystore -alias android -keyalg RSA -keysize 2048 -validity 10000 -storepass android123 -keypass android123 -dname "CN=Sivaprasad, OU=SuperMart, O=SivaprasadSuperMart, L=Kadapa, ST=AndhraPradesh, C=IN"
           fi
 
-      - name: Update project & Build AAB
+      - name: Build Android AAB
         run: |
           set -e
-          bubblewrap update --manifest=./twa-manifest.json --skipPwaValidation
           bubblewrap build --skipPwaValidation --signingKeyPath=./android.keystore --signingKeyAlias=android --storePassword=android123 --keyPassword=android123
 
       - name: Upload AAB Artifact
