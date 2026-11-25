@@ -31,8 +31,8 @@ jobs:
       - name: Update project & Build AAB
         run: |
           set -e
-          yes "y" | bubblewrap update --manifest=./twa-manifest.json --skipPwaValidation || true
-          yes "y" | bubblewrap build --skipPwaValidation
+          printf "y\n" | bubblewrap update --manifest=./twa-manifest.json --skipPwaValidation || true
+          printf "y\n" | bubblewrap build --skipPwaValidation
 
       - name: Upload AAB Artifact
         if: always()
