@@ -19,8 +19,16 @@ jobs:
       - name: Install Bubblewrap CLI
         run: npm install -g @bubblewrap/cli
 
-      - name: Generate twa-manifest.json
+      - name: Configure Bubblewrap & twa-manifest.json
         run: |
+          mkdir -p "$HOME/.bubblewrap" "$HOME/Android/Sdk"
+          cat <<EOF > "$HOME/.bubblewrap/config.json"
+          {
+            "jdkPath": "$JAVA_HOME",
+            "androidSdkPath": "$HOME/Android/Sdk"
+          }
+          EOF
+
           node -e '
           const fs = require("fs");
           const manifest = {
@@ -82,7 +90,7 @@ jobs:
           KEYSTORE_PASSWORD: supermart123
           KEY_PASSWORD: supermart123
         run: |
-          bubblewrap update --manifest=./twa-manifest.json --skipPwaValidation < /dev/null
+          bubblewrap update --manifest=./twa-manifest.json --skipPwaValidation
           printf "%s\n%s\n" "$KEYSTORE_PASSWORD" "$KEY_PASSWORD" | bubblewrap build --skipPwaValidation
 
       - name: Upload AAB artifact
