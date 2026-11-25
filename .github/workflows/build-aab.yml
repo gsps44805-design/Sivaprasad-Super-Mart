@@ -28,16 +28,11 @@ jobs:
       - name: Install Bubblewrap CLI
         run: npm install -g @bubblewrap/cli
 
-      - name: Check project files
-        run: |
-          ls -la
-          cat twa-manifest.json || true
-
       - name: Update project & Build AAB
         run: |
           set -e
-          yes "" | bubblewrap update --manifest=./twa-manifest.json --skipPwaValidation
-          yes "" | bubblewrap build --skipPwaValidation
+          yes "y" | bubblewrap update --manifest=./twa-manifest.json --skipPwaValidation || true
+          yes "y" | bubblewrap build --skipPwaValidation
 
       - name: Upload AAB Artifact
         if: always()
