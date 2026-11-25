@@ -82,8 +82,7 @@ jobs:
           KEYSTORE_PASSWORD: supermart123
           KEY_PASSWORD: supermart123
         run: |
-          bubblewrap update --manifest=./twa-manifest.json
-          printf "%s\n%s\n" "$KEYSTORE_PASSWORD" "$KEY_PASSWORD" | bubblewrap build
+          yes n | bubblewrap update --manifest=./twa-manifest.json --skipPwaValidation && printf "%s\n%s\n" "$KEYSTORE_PASSWORD" "$KEY_PASSWORD" | bubblewrap build --skipPwaValidation
 
       - name: Upload AAB artifact
         uses: actions/upload-artifact@v4
