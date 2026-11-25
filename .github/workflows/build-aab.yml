@@ -28,11 +28,13 @@ jobs:
       - name: Install Bubblewrap CLI
         run: npm install -g @bubblewrap/cli
 
-      - name: Ensure icon-512.png exists locally
+      - name: Prepare local icon and serve over HTTP
         run: |
           if [ ! -f ./icon-512.png ]; then
             python3 -c "import base64; data = base64.b64decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=='); open('icon-512.png', 'wb').write(data)"
           fi
+          nohup python3 -m http.server 8765 --directory . >/tmp/http.log 2>&1 &
+          sleep 2
 
       - name: Generate Keystore if missing
         run: |
