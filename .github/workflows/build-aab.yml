@@ -1,18 +1,25 @@
-name: Build Android AAB for Sivaprasad Super Mart
+name: Build Android AAB for Sivaprasad
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      CI: "true"
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up JDK 17
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Set up Java
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
@@ -21,84 +28,13 @@ jobs:
       - name: Install Bubblewrap CLI
         run: npm install -g @bubblewrap/cli
 
-      - name: Configure Bubblewrap & twa-manifest.json
-        run: |
-          mkdir -p "$HOME/.bubblewrap" "$HOME/Android/Sdk"
-          cat <<EOF > "$HOME/.bubblewrap/config.json"
-          {
-            "jdkPath": "$JAVA_HOME",
-            "androidSdkPath": "$HOME/Android/Sdk",
-            "installJdk": false,
-            "installAndroidSdk": true
-          }
-          EOF
-
-          node -e '
-          const fs = require("fs");
-          const manifest = {
-            packageId: "com.gsps44805.sivaprasadsupermart",
-            host: "gsps44805-design.github.io",
-            name: "Sivaprasad Super Mart",
-            launcherName: "Super Mart",
-            display: "standalone",
-            themeColor: "#000000",
-            themeColorDark: "#000000",
-            navigationColor: "#000000",
-            navigationColorDark: "#000000",
-            navigationDividerColor: "#000000",
-            navigationDividerColorDark: "#000000",
-            backgroundColor: "#FFFFFF",
-            enableNotifications: false,
-            startUrl: "/Sivaprasad-Super-Mart/",
-            iconUrl: "https://gsps44805-design.github.io/Sivaprasad-Super-Mart/icons/icon-512x512.png",
-            maskableIconUrl: "https://gsps44805-design.github.io/Sivaprasad-Super-Mart/icons/icon-512x512.png",
-            splashScreenFadeOutDuration: 300,
-            signingKey: {
-              path: "./android.keystore",
-              alias: "android"
-            },
-            appVersionName: "1.0.0",
-            appVersionCode: 1,
-            shortcuts: [],
-            generatorApp: "bubblewrap-cli",
-            webManifestUrl: "https://gsps44805-design.github.io/Sivaprasad-Super-Mart/manifest.json",
-            fallbackType: "customtabs",
-            features: {},
-            alphaDependencies: {
-              enabled: false
-            },
-            enableSiteSettingsShortcut: true,
-            isChromeOSOnly: false,
-            isMetaQuest: false,
-            fullScopeUrl: "https://gsps44805-design.github.io/Sivaprasad-Super-Mart/",
-            minSdkVersion: 21,
-            orientation: "default",
-            fingerprints: [],
-            additionalTrustedOrigins: [],
-            retainedBundles: [],
-            protocolHandlers: [],
-            fileHandlers: [],
-            launchHandlerClientMode: [],
-            displayOverride: [],
-            appVersion: "1.0.0"
-          };
-          fs.writeFileSync("twa-manifest.json", JSON.stringify(manifest, null, 2));
-          '
-
-      - name: Generate signing keystore
-        run: |
-          keytool -genkeypair -v -keystore android.keystore -alias android -keyalg RSA -keysize 2048 -validity 10000 -storepass supermart123 -keypass supermart123 -dname "CN=Sivaprasad Super Mart, OU=Store, O=Sivaprasad, L=Kadapa, ST=AP, C=IN"
-
       - name: Update project & Build AAB
-        env:
-          KEYSTORE_PASSWORD: supermart123
-          KEY_PASSWORD: supermart123
         run: |
-          bubblewrap update --manifest=./twa-manifest.json --skipPwaValidation
-          printf "%s\n%s\n" "$KEYSTORE_PASSWORD" "$KEY_PASSWORD" | bubblewrap build --skipPwaValidation
+          yes "" | bubblewrap update --manifest=./twa-manifest.json --skipPwaValidation
+          yes "" | bubblewrap build --skipPwaValidation
 
-      - name: Upload AAB artifact
+      - name: Upload AAB Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: sivaprasad-super-mart-aab
-          path: app-release-bundle.aab
+          name: app-release-aab
+          path: "**/*.aab"
