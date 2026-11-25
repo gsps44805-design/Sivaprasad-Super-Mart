@@ -12,7 +12,7 @@
   "backgroundColor": "#FFFFFF",
   "enableNotifications": true,
   "startUrl": "/Sivaprasad-Super-Mart/",
- "iconUrl": "./icon-512.png",
+ "iconUrl": "https://gsps44805-design.github.io/Sivaprasad-Super-Mart/icon-512.png",
   "splashScreenFadeOutDuration": 300,
   "signingKey": {
     "path": "./android.keystore",
