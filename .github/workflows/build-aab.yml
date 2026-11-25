@@ -37,7 +37,7 @@ jobs:
       - name: Generate Keystore if missing
         run: |
           if [ ! -f ./android.keystore ]; then
-            keytool -genkeypair -v -keystore ./android.keystore -alias android -keyalg RSA -keysize 2048 -validity 10000 -storepass android123 -keypass android123 -dname "CN=Sivaprasad, OU=SuperMart, O=SivaprasadSuperMart, L=Kadapa, ST=AndhraPradesh, C=IN"
+            keytool -genkeypair -v -keystore ./android.keystore -alias android -keyalg RSA -keysize 4096 -validity 20000 -storepass android123 -keypass android123 -dname "CN=Sivaprasad, OU=SuperMart, O=SivaprasadSuperMart, L=Kadapa, ST=AndhraPradesh, C=IN"
           fi
 
       - name: Build Android AAB
@@ -46,7 +46,17 @@ jobs:
           BUBBLEWRAP_KEY_PASSWORD: android123
         run: |
           set -e
-          (for i in $(seq 1 50); do echo "y"; done; sleep 120) | script -q -c "bubblewrap build --skipPwaValidation --signingKeyPath=./android.keystore --signingKeyAlias=android" /dev/null
+          rm -f inputs.txt
+          for i in $(seq 1 800); do
+            echo "y"
+            echo "n"
+            echo "s"
+            echo "r"
+            echo "e"
+            echo "i"
+            echo ""
+          done > inputs.txt
+          (cat inputs.txt; sleep 600) | script -q -c "bubblewrap build --skipPwaValidation --signingKeyPath=./android.keystore --signingKeyAlias=android" /dev/null
 
       - name: Upload AAB Artifact
         if: always()
