@@ -28,6 +28,12 @@ jobs:
       - name: Install Bubblewrap CLI
         run: npm install -g @bubblewrap/cli
 
+      - name: Ensure icon-512.png exists locally
+        run: |
+          if [ ! -f ./icon-512.png ]; then
+            python3 -c "import base64; data = base64.b64decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=='); open('icon-512.png', 'wb').write(data)"
+          fi
+
       - name: Generate Keystore if missing
         run: |
           if [ ! -f ./android.keystore ]; then
@@ -37,7 +43,7 @@ jobs:
       - name: Build Android AAB
         run: |
           set -e
-          yes | bubblewrap build --skipPwaValidation --signingKeyPath=./android.keystore --signingKeyAlias=android --storePassword=android123 --keyPassword=android123
+          printf "1.0.0\n" | bubblewrap build --skipPwaValidation --signingKeyPath=./android.keystore --signingKeyAlias=android --storePassword=android123 --keyPassword=android123
 
       - name: Upload AAB Artifact
         if: always()
