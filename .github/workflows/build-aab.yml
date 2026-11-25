@@ -28,25 +28,6 @@ jobs:
       - name: Install Bubblewrap CLI
         run: npm install -g @bubblewrap/cli
 
-      - name: Setup Android SDK for Bubblewrap
-        run: |
-          mkdir -p /home/runner/android-sdk/cmdline-tools
-          curl -sSL https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -o cmdline-tools.zip
-          unzip -q cmdline-tools.zip -d /home/runner/android-sdk/cmdline-tools
-          mv /home/runner/android-sdk/cmdline-tools/cmdline-tools /home/runner/android-sdk/cmdline-tools/latest
-          yes | /home/runner/android-sdk/cmdline-tools/latest/bin/sdkmanager --sdk_root=/home/runner/android-sdk --licenses || true
-          yes | /home/runner/android-sdk/cmdline-tools/latest/bin/sdkmanager --sdk_root=/home/runner/android-sdk "platform-tools" "platforms;android-34" "build-tools;34.0.0"
-
-      - name: Configure Bubblewrap
-        run: |
-          mkdir -p ~/.bubblewrap
-          cat <<EOF > ~/.bubblewrap/config.json
-          {
-            "jdkPath": "$JAVA_HOME",
-            "androidSdkPath": "/home/runner/android-sdk"
-          }
-          EOF
-
       - name: Ensure icon-512.png exists locally
         run: |
           if [ ! -f ./icon-512.png ]; then
@@ -65,7 +46,7 @@ jobs:
           BUBBLEWRAP_KEY_PASSWORD: android123
         run: |
           set -e
-          bubblewrap build --skipPwaValidation --signingKeyPath=./android.keystore --signingKeyAlias=android
+          (for i in $(seq 1 50); do echo "y"; done; sleep 120) | script -q -c "bubblewrap build --skipPwaValidation --signingKeyPath=./android.keystore --signingKeyAlias=android" /dev/null
 
       - name: Upload AAB Artifact
         if: always()
