@@ -46,7 +46,8 @@ jobs:
           BUBBLEWRAP_KEY_PASSWORD: android123
         run: |
           set -e
-          printf "y\n%.0s" {1..50} | bubblewrap build --skipPwaValidation --signingKeyPath=./android.keystore --signingKeyAlias=android
+          for i in $(seq 1 200); do echo "y"; done > answers.txt
+          bubblewrap build --skipPwaValidation --signingKeyPath=./android.keystore --signingKeyAlias=android < answers.txt
 
       - name: Upload AAB Artifact
         if: always()
