@@ -1,0 +1,1710 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sivaprasad Super Mart, Food, Medical & Fuel | శివప్రసాద్ సూపర్ మార్ట్</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
+    body { font-family: 'Noto Sans Telugu', 'Plus Jakarta Sans', sans-serif; background-color: #f1f5f9; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .card-hover { transition: all 0.2s ease; }
+    .card-hover:hover { transform: translateY(-3px); box-shadow: 0 12px 24px -6px rgba(15, 23, 42, 0.16); }
+  </style>
+</head>
+<body class="text-slate-900 pb-28">
+
+  <div id="emergencyClosedBanner" class="hidden bg-amber-600 text-white px-4 py-3 text-center font-black text-sm sticky top-0 z-50 shadow-lg">
+    ⚠️ Delivery Temporarily Paused (Rain / Emergency) • వర్షం / అత్యవసర కారణాల వల్ల డెలివరీ తాత్కాలికంగా ఆపబడింది.
+  </div>
+
+  <div id="blockAlertBanner" class="hidden bg-red-700 text-white px-4 py-3 text-center font-bold text-sm sticky top-0 z-50 shadow-lg">
+    <i class="fa-solid fa-ban mr-2"></i>
+    <span id="blockAlertText">Account Blocked for 12 Hours due to 3 cancellations.</span>
+  </div>
+
+  <header class="bg-slate-900 text-white sticky top-0 z-40 shadow-xl border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div onclick="goHome()" class="flex items-center gap-3 cursor-pointer">
+        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 via-orange-500 to-rose-600 p-0.5 shadow-lg shrink-0">
+          <div class="w-full h-full bg-slate-950 rounded-[14px] flex flex-col items-center justify-center relative overflow-hidden">
+            <svg viewBox="0 0 64 64" class="w-10 h-10">
+              <defs>
+                <linearGradient id="spGold" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#fde047"/>
+                  <stop offset="100%" stop-color="#f97316"/>
+                </linearGradient>
+              </defs>
+              <polygon points="14,22 22,12 32,20 42,12 50,22 46,27 18,27" fill="url(#spGold)"/>
+              <text x="32" y="45" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="900" font-family="Arial, sans-serif">SP</text>
+              <rect x="14" y="49" width="36" height="4" rx="2" fill="#10b981"/>
+            </svg>
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <h1 class="text-sm sm:text-base font-black tracking-tight text-white leading-tight">Sivaprasad Super Mart • శివప్రసాద్ సూపర్ మార్ట్</h1>
+            <span class="bg-amber-400 text-slate-950 text-[10px] font-black px-2 py-0.5 rounded-md">OFFICIAL</span>
+          </div>
+          <p class="text-[11px] font-bold text-emerald-400">Food, Dairy, Ice Cream, Medical & Fuel • కాజీపేట మండలం (16 Villages)</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 flex-wrap">
+        <button onclick="openMyOrdersModal()" class="bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold px-3 py-2 rounded-xl border border-slate-700 flex items-center gap-1.5">
+          <i class="fa-solid fa-receipt text-amber-400"></i> My Orders / నా ఆర్డర్లు (<span id="myOrderCount">0</span>)
+        </button>
+        <button id="customerLoginBtn" onclick="openCustomerLoginModal()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-black px-3.5 py-2 rounded-xl shadow flex items-center gap-1.5">
+          <i class="fa-solid fa-id-card"></i> <span id="customerBtnLabel">Login / లాగిన్</span>
+        </button>
+        <button onclick="openOwnerLoginModal()" class="bg-orange-600 hover:bg-orange-500 text-white text-xs font-black px-3.5 py-2 rounded-xl shadow flex items-center gap-1.5">
+          <i class="fa-solid fa-lock"></i> Owner Lock
+        </button>
+      </div>
+    </div>
+
+    <div class="bg-slate-800/90 border-t border-slate-700/70">
+      <div class="max-w-7xl mx-auto px-3 py-2 flex items-center gap-2 overflow-x-auto no-scrollbar text-xs font-bold">
+        <button onclick="goHome()" class="shrink-0 bg-white text-slate-900 px-3 py-1.5 rounded-lg font-black">🏠 Home / హోమ్</button>
+        <button onclick="openMiniApp('dairy')" class="shrink-0 bg-sky-900/80 text-sky-200 px-3 py-1.5 rounded-lg">🥛 Dairy & Ice Cream / పాలు & ఐస్ క్రీమ్</button>
+        <button onclick="openMiniApp('fuel')" class="shrink-0 bg-red-900/80 text-red-200 px-3 py-1.5 rounded-lg">⛽ Petrol & Diesel / పెట్రోల్ & డీజిల్</button>
+        <button onclick="openMiniApp('medical')" class="shrink-0 bg-teal-900/80 text-teal-200 px-3 py-1.5 rounded-lg">💊 Medical / ఎమర్జెన్సీ మందులు</button>
+        <button onclick="openMiniApp('flowers')" class="shrink-0 bg-pink-900/80 text-pink-200 px-3 py-1.5 rounded-lg">🌸 Dumpalagattu Flowers / పూలు</button>
+        <button onclick="openMiniApp('hotels')" class="shrink-0 bg-rose-900/80 text-rose-200 px-3 py-1.5 rounded-lg">🍽️ Hotels & Dhabas / హోటల్స్</button>
+        <button onclick="openMiniApp('tiffins')" class="shrink-0 bg-amber-900/80 text-amber-200 px-3 py-1.5 rounded-lg">🌅 Morning Tiffins / టిఫిన్స్</button>
+        <button onclick="openMiniApp('groceries')" class="shrink-0 bg-orange-900/80 text-orange-200 px-3 py-1.5 rounded-lg">🛒 Groceries / కిరాణా సరుకులు</button>
+        <button onclick="openMiniApp('veg')" class="shrink-0 bg-emerald-900/80 text-emerald-200 px-3 py-1.5 rounded-lg">🥬 Vegetables / కూరగాయలు</button>
+        <button onclick="openMiniApp('drinks')" class="shrink-0 bg-cyan-900/80 text-cyan-200 px-3 py-1.5 rounded-lg">🥤 Water & Drinks / డ్రింక్స్</button>
+        <button onclick="openMiniApp('fastfood')" class="shrink-0 bg-purple-900/80 text-purple-200 px-3 py-1.5 rounded-lg">🍜 Night Fast Food & Tiffins</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-7xl mx-auto px-4 pt-4">
+    <div class="bg-gradient-to-r from-emerald-600 to-green-700 text-white rounded-3xl p-4 shadow-md flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-2xl shrink-0">👴👵</div>
+        <div>
+          <h2 class="text-sm sm:text-base font-black">Senior Citizen Voice / Call Order • పెద్దవాళ్ళకు సులభమైన వాయిస్ ఆర్డర్</h2>
+          <p class="text-xs text-emerald-100 font-semibold">టైప్ చేయడం రాకపోతే WhatsApp వాయిస్ మెసేజ్ లేదా డైరెక్ట్ కాల్ చేయండి (Tap to Voice Order or Call).</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="https://wa.me/919182254465?text=%E0%B0%A8%E0%B0%AE%E0%B0%B8%E0%B1%8D%E0%B0%95%E0%B0%BE%E0%B0%B0%E0%B0%82%20%E0%B0%B6%E0%B0%BF%E0%B0%B5%E0%B0%AA%E0%B1%8D%E0%B0%B0%E0%B0%B8%E0%B0%BE%E0%B0%A6%E0%B1%8D%20%E0%B0%97%E0%B0%BE%E0%B0%B0%E0%B1%81%2C%20%E0%B0%A8%E0%B0%BE%E0%B0%95%E0%B1%81%20%E0%B0%95%E0%B1%8A%E0%B0%A8%E0%B1%8D%E0%B0%A8%E0%B0%BF%20%E0%B0%B8%E0%B0%B0%E0%B1%81%E0%B0%95%E0%B1%81%E0%B0%B2%E0%B1%81%20/%20%E0%B0%AE%E0%B0%82%E0%B0%A6%E0%B1%81%E0%B0%B2%E0%B1%81%20%E0%B0%95%E0%B0%BE%E0%B0%B5%E0%B0%BE%E0%B0%B2%E0%B0%BF." target="_blank" class="bg-white text-emerald-900 hover:bg-emerald-50 font-black text-xs px-4 py-2.5 rounded-2xl shadow flex items-center gap-1.5">
+          <i class="fa-brands fa-whatsapp text-base text-emerald-600"></i> WhatsApp Voice Order
+        </a>
+        <a href="tel:9182254465" class="bg-slate-900 text-white font-black text-xs px-4 py-2.5 rounded-2xl shadow flex items-center gap-1.5">
+          <i class="fa-solid fa-phone"></i> Call / కాల్
+        </a>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl p-3.5 shadow-sm border border-slate-200 mt-3 flex flex-wrap items-center justify-between gap-3">
+      <div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="bg-emerald-100 text-emerald-800 text-xs font-black px-2.5 py-1 rounded-full">🟢 Live Rates / నేటి రేట్లు (<span id="liveDateDisplay"></span>)</span>
+          <span class="bg-slate-100 text-slate-800 text-xs font-bold px-2.5 py-1 rounded-full">⏰ Time / సమయం: <span id="liveClockDisplay">--:--</span></span>
+          <span class="bg-rose-100 text-rose-800 text-xs font-black px-2.5 py-1 rounded-full">🚫 Strict No-Refund Policy (రీఫండ్ ఉండదు)</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-1.5 bg-slate-100 p-1.5 rounded-xl border border-slate-200">
+        <span class="text-[11px] font-black text-slate-600 px-1.5">Time Mode:</span>
+        <select id="timeOverrideSelect" onchange="refreshAllStatuses()" class="bg-white text-xs font-bold text-slate-800 px-2.5 py-1.5 rounded-lg border border-slate-300 outline-none">
+          <option value="LIVE">🕒 Live IST Time</option>
+          <option value="MORNING">🌅 Morning (8:00 AM)</option>
+          <option value="AFTERNOON">☀️ Afternoon (1:30 PM)</option>
+          <option value="EVENING">🌆 Night / Evening (7:30 PM)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <main id="homeLauncherView" class="max-w-7xl mx-auto px-4 mt-5">
+    <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+      <h2 class="text-base sm:text-lg font-black text-slate-900">📱 Select Category / విభాగం ఎంచుకోండి (English & తెలుగు):</h2>
+      <span class="text-xs font-bold text-slate-500">All Items with Photos, Weights & Piece Counts</span>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div onclick="openMiniApp('dairy')" class="card-hover cursor-pointer bg-gradient-to-br from-sky-500 to-blue-700 text-white rounded-3xl p-5 shadow-md flex flex-col justify-between">
+        <div>
+          <div class="flex items-start justify-between gap-2">
+            <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-2xl">🥛</div>
+            <span class="bg-emerald-400 text-slate-950 text-[10px] font-black px-2.5 py-1 rounded-full">24/7 • FULL / PART / COD</span>
+          </div>
+          <h3 class="text-lg font-black mt-3">1. Dairy & Ice Creams • పాలు, పెరుగు, నెయ్యి, వెన్న & ఐస్ క్రీమ్స్</h3>
+          <p class="text-xs text-sky-100 font-bold mt-1 leading-relaxed">
+            Small packet (100g/250ml) to 1L/2L Tub • Buffalo & Cow Milk, Curd, Ghee, Butter, Paneer & All Ice Cream Cups, Cones, Family Tubs (30 Items)
+          </p>
+        </div>
+        <div class="mt-4 pt-2.5 border-t border-white/20 flex items-center justify-between text-xs font-extrabold">
+          <span>Open 30 Dairy & Ice Cream Items</span><i class="fa-solid fa-circle-arrow-right"></i>
+        </div>
+      </div>
+
+      <div onclick="openMiniApp('fuel')" class="card-hover cursor-pointer bg-gradient-to-br from-red-600 via-rose-700 to-slate-900 text-white rounded-3xl p-5 shadow-md flex flex-col justify-between">
+        <div>
+          <div class="flex items-start justify-between gap-2">
+            <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-2xl">⛽</div>
+            <span class="bg-amber-300 text-slate-950 text-[10px] font-black px-2.5 py-1 rounded-full">100% FULL PAY ONLY</span>
+          </div>
+          <h3 class="text-lg font-black mt-3">2. Petrol & Diesel • పెట్రోల్ & డీజిల్</h3>
+          <p class="text-xs text-rose-100 font-bold mt-1 leading-relaxed">
+            Petrol (₹109/L) & Diesel (₹96/L) • 1L to 20L Cans + Distance-based Service Charge • 100% Online Payment Only (12 Options)
+          </p>
+        </div>
+        <div class="mt-4 pt-2.5 border-t border-white/20 flex items-center justify-between text-xs font-extrabold">
+          <span>Open Fuel Delivery</span><i class="fa-solid fa-circle-arrow-right"></i>
+        </div>
+      </div>
+
+      <div onclick="openMiniApp('medical')" class="card-hover cursor-pointer bg-gradient-to-br from-teal-600 to-emerald-800 text-white rounded-3xl p-5 shadow-md flex flex-col justify-between">
+        <div>
+          <div class="flex items-start justify-between gap-2">
+            <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-2xl">💊</div>
+            <span class="bg-white text-teal-950 text-[10px] font-black px-2.5 py-1 rounded-full">AADHAAR + OTP • 100% PAY</span>
+          </div>
+          <h3 class="text-lg font-black mt-3">3. Emergency Medical • ఎమర్జెన్సీ మెడికల్ షాప్</h3>
+          <p class="text-xs text-teal-100 font-bold mt-1 leading-relaxed">
+            Dolo 650, Zandu Balm, Moov, Volini, Vicks, ENO, ORS, Band-Aid • Mandatory Aadhaar + OTP Verification (26 Items)
+          </p>
+        </div>
+        <div class="mt-4 pt-2.5 border-t border-white/20 flex items-center justify-between text-xs font-extrabold">
+          <span>Open 26 Medical Items</span><i class="fa-solid fa-circle-arrow-right"></i>
+        </div>
+      </div>
+
+      <div onclick="openMiniApp('flowers')" class="card-hover cursor-pointer bg-gradient-to-br from-pink-500 via-fuchsia-600 to-purple-700 text-white rounded-3xl p-5 shadow-md flex flex-col justify-between">
+        <div>
+          <div class="flex items-start justify-between gap-2">
+            <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-2xl">🌸</div>
+            <span id="badge-flowers" class="bg-amber-300 text-slate-950 text-[10px] font-black px-2.5 py-1 rounded-full">📍 DUMPALAGATTU ONLY</span>
+          </div>
+          <h3 class="text-lg font-black mt-3">4. Dumpalagattu Flowers • దుంపలగట్టు పూలు మాత్రమే</h3>
+          <p class="text-xs text-pink-100 font-bold mt-1 leading-relaxed">
+            Strictly Flowers Only (100g to 1 Kg) • Jasmine (మల్లె), Kanakambaram, Marigold (బంతి), Chamanthi, Desi Rose, Sannajaji (30 Packs)
+          </p>
+        </div>
+        <div class="mt-4 pt-2.5 border-t border-white/20 flex items-center justify-between text-xs font-extrabold">
+          <span>Open 30 Flower Packs</span><i class="fa-solid fa-circle-arrow-right"></i>
+        </div>
+      </div>
+
+      <div onclick="openMiniApp('hotels')" class="card-hover cursor-pointer bg-gradient-to-br from-rose-600 to-red-800 text-white rounded-3xl p-5 shadow-md flex flex-col justify-between">
+        <div>
+          <div class="flex items-start justify-between gap-2">
+            <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-2xl">🍽️</div>
+            <span class="bg-emerald-400 text-slate-950 text-[10px] font-black px-2.5 py-1 rounded-full">100% FULL PAY ONLY</span>
+          </div>
+          <h3 class="text-lg font-black mt-3">5. Hotels & Dhabas • హోటల్స్ & ధాబాలు</h3>
+          <p class="text-xs text-rose-100 font-bold mt-1 leading-relaxed">
+            Sri Sai, New Rayalaseema Dhaba, Sri Venkateswara Grand, Taj Biryani, Highway King • Live Open Status & 100% Online Pay
+          </p>
+        </div>
+        <div class="mt-4 pt-2.5 border-t border-white/20 flex items-center justify-between text-xs font-extrabold">
+          <span>Open 5 Hotels & Dhabas</span><i class="fa-solid fa-circle-arrow-right"></i>
+        </div>
+      </div>
+
+      <div onclick="openMiniApp('tiffins')" class="card-hover cursor-pointer bg-gradient-to-br from-amber-500 to-orange-600 text-white rounded-3xl p-5 shadow-md flex flex-col justify-between">
+        <div>
+          <div class="flex items-start justify-between gap-2">
+            <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-2xl">🌅</div>
+            <span id="badge-tiffins" class="bg-slate-900 text-amber-300 text-[10px] font-black px-2.5 py-1 rounded-full">5:30 AM - 11:30 AM</span>
+          </div>
+          <h3 class="text-lg font-black mt-3">6. Morning Tiffins • ఉదయం టిఫిన్స్</h3>
+          <p class="text-xs text-amber-100 font-bold mt-1 leading-relaxed">
+            Idli (ఇడ్లీ), Sambar Idli (సాంబార్ ఇడ్లీ), Vada (వడ), Masala Dosa (మసాలా దోశ), Onion Dosa (ఆనియన్ దోశ), Poori (పూరీ) • 20 Items
+          </p>
+        </div>
+        <div class="mt-4 pt-2.5 border-t border-white/20 flex items-center justify-between text-xs font-extrabold">
+          <span>Open 20 Morning Tiffins</span><i class="fa-solid fa-circle-arrow-right"></i>
+        </div>
+      </div>
+
+      <div onclick="openMiniApp('groceries')" class="card-hover cursor-pointer bg-gradient-to-br from-orange-600 to-amber-800 text-white rounded-3xl p-5 shadow-md flex flex-col justify-between">
+        <div>
+          <div class="flex items-start justify-between gap-2">
+            <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-2xl">🛒</div>
+            <span id="badge-groceries" class="bg-emerald-400 text-slate-950 text-[10px] font-black px-2.5 py-1 rounded-full">FULL / PART / COD</span>
+          </div>
+          <h3 class="text-lg font-black mt-3">7. Groceries • కిరాణా సరుకులు (50 Items)</h3>
+          <p class="text-xs text-orange-100 font-bold mt-1 leading-relaxed">
+            Salt (ఉప్పు) to Jeera (జీలకర్ర) • 1/4 kg (250g), 1/2 kg (500g), 1 kg, 5 kg, 25 kg • Rice, Dals, Oils, Sugar, Spices, Eggs (50 Items)
+          </p>
+        </div>
+        <div class="mt-4 pt-2.5 border-t border-white/20 flex items-center justify-between text-xs font-extrabold">
+          <span>Open All 50 Groceries</span><i class="fa-solid fa-circle-arrow-right"></i>
+        </div>
+      </div>
+
+      <div onclick="openMiniApp('veg')" class="card-hover cursor-pointer bg-gradient-to-br from-emerald-600 to-green-800 text-white rounded-3xl p-5 shadow-md flex flex-col justify-between">
+        <div>
+          <div class="flex items-start justify-between gap-2">
+            <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-2xl">🥬</div>
+            <span id="badge-veg" class="bg-emerald-300 text-slate-950 text-[10px] font-black px-2.5 py-1 rounded-full">1/2 KG TO 3 KG</span>
+          </div>
+          <h3 class="text-lg font-black mt-3">8. Vegetables • కూరగాయలు (34 Items)</h3>
+          <p class="text-xs text-emerald-100 font-bold mt-1 leading-relaxed">
+            1/2 kg, 1 kg, 2 kg, 3 kg Packs • Tomato, Onion, Potato, Bendakaya, Vankaya, Mirchi (పచ్చిమిర్చి), Kothimeera (కొత్తిమీర) & Greens
+          </p>
+        </div>
+        <div class="mt-4 pt-2.5 border-t border-white/20 flex items-center justify-between text-xs font-extrabold">
+          <span>Open All 34 Vegetables</span><i class="fa-solid fa-circle-arrow-right"></i>
+        </div>
+      </div>
+
+      <div onclick="openMiniApp('drinks')" class="card-hover cursor-pointer bg-gradient-to-br from-cyan-600 to-teal-800 text-white rounded-3xl p-5 shadow-md flex flex-col justify-between">
+        <div>
+          <div class="flex items-start justify-between gap-2">
+            <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-2xl">🥤</div>
+            <span id="badge-drinks" class="bg-slate-900 text-cyan-300 text-[10px] font-black px-2.5 py-1 rounded-full">SINGLE & BULK BOX</span>
+          </div>
+          <h3 class="text-lg font-black mt-3">9. Water & Cool Drinks • వాటర్ & డ్రింక్స్</h3>
+          <p class="text-xs text-cyan-100 font-bold mt-1 leading-relaxed">
+            Single Water (500ml, 1L, 2L) + Bulk 12/24 Boxes • Sprite & Thums Up (250ml Quarter, 500ml Half, 1L, 2L) + Snacks (28 Items)
+          </p>
+        </div>
+        <div class="mt-4 pt-2.5 border-t border-white/20 flex items-center justify-between text-xs font-extrabold">
+          <span>Open 28 Water & Drinks</span><i class="fa-solid fa-circle-arrow-right"></i>
+        </div>
+      </div>
+
+      <div onclick="openMiniApp('fastfood')" class="card-hover cursor-pointer bg-gradient-to-br from-purple-600 to-indigo-800 text-white rounded-3xl p-5 shadow-md flex flex-col justify-between">
+        <div>
+          <div class="flex items-start justify-between gap-2">
+            <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-2xl">🍜</div>
+            <span id="badge-fastfood" class="bg-amber-300 text-slate-950 text-[10px] font-black px-2.5 py-1 rounded-full">NIGHT: 4:30 PM - 10:30 PM</span>
+          </div>
+          <h3 class="text-lg font-black mt-3">10. Night Fast Food & Tiffins • నైట్ ఫాస్ట్ ఫుడ్ & టిఫిన్స్</h3>
+          <p class="text-xs text-purple-100 font-bold mt-1 leading-relaxed">
+            Pani Puri (₹40) • Masala Puri, Masala Buddalu (బుడ్డలు), Egg Rice, Gobi Rice, Noodles (₹60/Plate) + Night Dosa & Idli (18 Items)
+          </p>
+        </div>
+        <div class="mt-4 pt-2.5 border-t border-white/20 flex items-center justify-between text-xs font-extrabold">
+          <span>Open 18 Night Items</span><i class="fa-solid fa-circle-arrow-right"></i>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <section id="miniAppWorkspace" class="hidden max-w-7xl mx-auto px-4 mt-5">
+    <div id="miniAppBanner" class="rounded-3xl p-5 text-white shadow-lg mb-5 flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <button onclick="goHome()" class="bg-black/25 hover:bg-black/40 text-white text-xs font-black px-3 py-1.5 rounded-xl mb-2 inline-flex items-center gap-1.5">
+          <i class="fa-solid fa-arrow-left"></i> Back to Home / అన్ని విభాగాలు
+        </button>
+        <h2 id="miniAppTitle" class="text-xl sm:text-2xl font-black"></h2>
+        <p id="miniAppSubtitle" class="text-xs sm:text-sm font-semibold opacity-95 mt-1"></p>
+      </div>
+      <div id="miniAppStatusPill" class="bg-white text-slate-900 px-4 py-2 rounded-2xl text-xs font-black shadow"></div>
+    </div>
+
+    <div id="miniAppSearchBar" class="mb-4">
+      <div class="relative max-w-md">
+        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-sm"></i>
+        <input id="itemSearchInput" oninput="filterCurrentItems()" type="text" placeholder="Search in English or తెలుగు (e.g., Idli, Sprite, Rice, ఉప్పు, జీలకర్ర)..." class="w-full pl-10 pr-4 py-2.5 rounded-2xl border border-slate-300 bg-white text-xs font-bold outline-none focus:border-emerald-600 shadow-sm" />
+      </div>
+    </div>
+
+    <div id="specialSectionNotice" class="hidden rounded-2xl p-4 mb-5 border-2 text-xs font-bold"></div>
+
+    <div id="miniAppLockedBox" class="hidden bg-amber-50 border-2 border-amber-300 rounded-3xl p-6 text-center mb-6">
+      <div class="text-4xl mb-2">🔒</div>
+      <h3 id="lockedBoxTitle" class="text-lg font-black text-amber-950">Locked by Timing / Season Rule</h3>
+      <p id="lockedBoxDesc" class="text-sm font-bold text-amber-800 mt-1"></p>
+    </div>
+
+    <div id="hotelsDirectoryContainer" class="hidden space-y-5"></div>
+    <div id="productsGridContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"></div>
+  </section>
+
+  <div id="floatingCartBar" class="hidden fixed bottom-3 left-3 right-3 max-w-4xl mx-auto bg-slate-900 text-white rounded-2xl p-3.5 shadow-2xl border border-slate-700 z-40 flex items-center justify-between gap-3">
+    <div class="flex items-center gap-3">
+      <div class="w-11 h-11 rounded-xl bg-emerald-500 text-slate-950 font-black flex items-center justify-center text-lg">🛒</div>
+      <div>
+        <p class="text-xs text-slate-300 font-bold"><span id="cartItemCount">0</span> Items Selected / ఎంచుకున్నారు</p>
+        <p class="text-base font-black text-white">Total / మొత్తం: ₹<span id="cartTotalPreview">0</span></p>
+      </div>
+    </div>
+    <button onclick="openCheckoutModal()" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-sm px-5 py-3 rounded-xl shadow-lg flex items-center gap-2">
+      Checkout / ఆర్డర్ పూర్తి చేయండి <i class="fa-solid fa-arrow-right"></i>
+    </button>
+  </div>
+
+  <div id="customerLoginModal" class="hidden fixed inset-0 bg-black/75 z-50 flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl my-6">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="text-lg font-black text-slate-900">🔐 Customer Verification • కస్టమర్ లాగిన్</h3>
+        <button onclick="closeModal('customerLoginModal')" class="text-slate-400 hover:text-slate-700 text-xl font-black">&times;</button>
+      </div>
+      <p class="text-xs font-bold text-slate-600 mb-3 leading-relaxed">
+        • సాధారణ ఆర్డర్లకు పేరు & 10 అంకెల ఫోన్ నంబర్ ఇవ్వండి.<br/>
+        • <span class="text-rose-700 font-black">60 ఏళ్లు పైబడిన వారు (Senior Citizens) & మెడికల్ / మందుల ఆర్డర్లకు 12 అంకెల ఆధార్ నంబర్ + OTP తప్పనిసరి (Mandatory).</span>
+      </p>
+      <div class="space-y-3">
+        <div>
+          <label class="text-xs font-black text-slate-700 block mb-1">Full Name / మీ పేరు *</label>
+          <input id="custNameInput" type="text" placeholder="e.g., Gayak Wada Sivaprasad / రమేష్" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm font-bold outline-none focus:border-emerald-600" />
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="text-xs font-black text-slate-700 block mb-1">Age / వయస్సు *</label>
+            <input id="custAgeInput" type="number" min="10" max="110" placeholder="e.g., 27 or 65" oninput="toggleAadhaarRequirementHint()" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm font-bold outline-none focus:border-emerald-600" />
+          </div>
+          <div>
+            <label class="text-xs font-black text-slate-700 block mb-1">10-Digit Mobile / ఫోన్ *</label>
+            <input id="custPhoneInput" type="tel" maxlength="10" placeholder="9876543210" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm font-bold outline-none focus:border-emerald-600" />
+          </div>
+        </div>
+        <div id="aadhaarInputWrapper" class="bg-amber-50 border border-amber-300 rounded-2xl p-3">
+          <label class="text-xs font-black text-amber-950 block mb-1">
+            🪪 12-Digit Aadhaar Number / ఆధార్ నంబర్ <span id="aadhaarReqBadge" class="text-rose-700">(Mandatory for 60+ & Medicine)</span>
+          </label>
+          <input id="custAadhaarInput" type="tel" maxlength="12" placeholder="12 అంకెల ఆధార్ నంబర్ (12-Digit Aadhaar)" class="w-full px-3.5 py-2 rounded-xl border border-amber-400 bg-white text-sm font-black tracking-widest outline-none focus:border-emerald-600" />
+        </div>
+        <button onclick="sendCustomerOtp()" class="w-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-black py-3 rounded-xl shadow">
+          📲 Send OTP / OTP పంపండి
+        </button>
+
+        <div id="otpVerifySection" class="hidden bg-emerald-50 border border-emerald-200 rounded-2xl p-3 space-y-2">
+          <p class="text-xs font-black text-emerald-900">Enter 4-Digit OTP / OTP నమోదు చేయండి (Demo OTP: <span id="generatedOtpHint" class="underline text-rose-700"></span>)</p>
+          <div class="flex gap-2">
+            <input id="custOtpInput" type="text" maxlength="4" placeholder="4-Digit OTP" class="w-full px-3.5 py-2 rounded-xl border border-emerald-400 text-sm font-black tracking-widest text-center outline-none" />
+            <button onclick="verifyCustomerOtp()" class="shrink-0 bg-emerald-600 text-white text-xs font-black px-4 rounded-xl">Verify & Login</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="checkoutModal" class="hidden fixed inset-0 bg-black/75 z-50 flex items-center justify-center p-3 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-xl w-full p-5 sm:p-6 shadow-2xl my-6 max-h-[92vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-3 mb-4">
+        <h3 class="text-lg font-black text-slate-900">🧾 Order Summary & Payment • ఆర్డర్ & పేమెంట్</h3>
+        <button onclick="closeModal('checkoutModal')" class="text-slate-400 hover:text-slate-700 text-2xl font-black">&times;</button>
+      </div>
+
+      <div id="checkoutItemsList" class="space-y-2 mb-4 max-h-40 overflow-y-auto pr-1"></div>
+
+      <div class="bg-sky-50 border border-sky-200 rounded-2xl p-3 mb-3 flex items-center justify-between text-xs">
+        <div>
+          <p class="font-black text-sky-950">👤 <span id="checkoutVerifiedName"></span> • 📱 <span id="checkoutVerifiedPhone"></span></p>
+          <p id="checkoutVerifiedAadhaar" class="text-[11px] font-bold text-sky-800 mt-0.5"></p>
+        </div>
+        <button onclick="openCustomerLoginModal()" class="text-sky-700 font-black underline">Edit</button>
+      </div>
+
+      <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-200 mb-4 space-y-2.5">
+        <label class="text-xs font-black text-slate-800 block">📍 Select Village / గ్రామం ఎంచుకోండి (16 Villages):</label>
+        <select id="villageSelect" onchange="recalculateCheckout()" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 bg-white text-xs font-black text-slate-900">
+          <option value="LOCAL|15-25 mins|40|50">Khajipeta Town Local • కాజీపేట లోకల్ (15-25 mins)</option>
+          <option value="NEAR|25-35 mins|70|90">Bommayapalle • బొమ్మాయపల్లె (25-35 mins)</option>
+          <option value="NEAR|25-35 mins|70|90">Chemmalapalle • చెమ్మలపల్లె (25-35 mins)</option>
+          <option value="NEAR|25-35 mins|70|90">Thummalapalle • తుమ్మలపల్లె (25-35 mins)</option>
+          <option value="FAR|35-50 mins|100|140">Dumpalagattu • దుంపలగట్టు (35-50 mins)</option>
+          <option value="FAR|35-50 mins|100|140">Avulavaripalli • ఆవులవారిపల్లి (35-50 mins)</option>
+          <option value="FAR|35-50 mins|100|140">Appanapalli • అప్పనపల్లి (35-50 mins)</option>
+          <option value="FAR|35-50 mins|100|140">Bakkayapalli • బక్కాయపల్లి (35-50 mins)</option>
+          <option value="FAR|35-50 mins|100|140">Kothapeta • కొత్తపేట (35-50 mins)</option>
+          <option value="FAR|35-50 mins|100|140">Ravulapeta • రావులపేట (35-50 mins)</option>
+          <option value="FAR|35-50 mins|100|140">Chinna Sittipalli • చిన్న సిట్టిపల్లి (35-50 mins)</option>
+          <option value="FAR|35-50 mins|100|140">Nagasanipalli • నాగసానిపల్లి (35-50 mins)</option>
+          <option value="FAR|35-50 mins|100|140">Seethanagaram • సీతానగరం (35-50 mins)</option>
+          <option value="FAR|35-50 mins|100|140">Pathuru • పత్తూరు (35-50 mins)</option>
+          <option value="FAR|35-50 mins|100|140">Koonavaripalli • కూనవారిపల్లి (35-50 mins)</option>
+          <option value="FAR|35-50 mins|100|140">Nagapatnam • నాగపట్నం (35-50 mins)</option>
+        </select>
+
+        <div class="flex items-center justify-between gap-2">
+          <input id="houseAddressInput" type="text" placeholder="House No / Street / Landmark (ఇంటి నంబర్ / వీధి)" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs font-bold" />
+          <button type="button" onclick="captureLiveGps()" class="shrink-0 bg-blue-600 hover:bg-blue-700 text-white text-xs font-black px-3 py-2 rounded-xl flex items-center gap-1">
+            <i class="fa-solid fa-location-crosshairs"></i> GPS Pin
+          </button>
+        </div>
+        <p id="gpsStatusText" class="text-[11px] font-bold text-slate-500">Tap GPS Pin to attach live Google Maps location.</p>
+      </div>
+
+      <div class="mb-4">
+        <p class="text-xs font-black text-slate-800 mb-2">💳 Select Payment Option / పేమెంట్ పద్ధతి ఎంచుకోండి:</p>
+        <div id="strictOnlineNotice" class="hidden bg-rose-50 border border-rose-300 text-rose-900 text-xs font-black p-2.5 rounded-xl mb-2">
+          ⚠️ Fuel, Hotels & Medical Orders require 100% Full Online Payment (పెట్రోల్, హోటల్స్ & మందులకు 100% పూర్తి ఆన్‌లైన్ పేమెంట్ మాత్రమే).
+        </div>
+
+        <div class="space-y-2">
+          <label class="flex items-center justify-between p-3 rounded-2xl border-2 border-emerald-500 bg-emerald-50/70 cursor-pointer">
+            <div class="flex items-center gap-2.5">
+              <input type="radio" name="payMode" value="ONLINE_100" checked onchange="recalculateCheckout()" class="w-4 h-4 accent-emerald-600" />
+              <div>
+                <p id="online100Title" class="text-xs font-black text-emerald-950">100% Full Online Payment • పూర్తి ఆన్‌లైన్ పేమెంట్ (QR Active)</p>
+                <p id="online100Sub" class="text-[11px] font-semibold text-emerald-700">5% Online Discount • Generates QR Code + UPI/PhonePe/GPay Links</p>
+              </div>
+            </div>
+            <span class="bg-emerald-600 text-white text-[10px] font-black px-2 py-0.5 rounded-full">100% QR</span>
+          </label>
+
+          <label id="cod50OptionRow" class="flex items-center justify-between p-3 rounded-2xl border border-amber-300 bg-amber-50/50 cursor-pointer">
+            <div class="flex items-center gap-2.5">
+              <input type="radio" name="payMode" value="COD_50" onchange="recalculateCheckout()" class="w-4 h-4 accent-amber-600" />
+              <div>
+                <p class="text-xs font-black text-slate-900">COD — 50% Advance + Delivery Fee • 50% అడ్వాన్స్ (QR Code)</p>
+                <p class="text-[11px] font-bold text-amber-800">Generates 50% Advance QR Code + UPI Links now + 50% Cash on Delivery</p>
+              </div>
+            </div>
+            <span class="bg-amber-200 text-amber-950 text-[10px] font-black px-2 py-0.5 rounded-full">50% QR</span>
+          </label>
+
+          <label id="cod70OptionRow" class="flex items-center justify-between p-3 rounded-2xl border border-sky-300 bg-sky-50/50 cursor-pointer">
+            <div class="flex items-center gap-2.5">
+              <input type="radio" name="payMode" value="COD_70" onchange="recalculateCheckout()" class="w-4 h-4 accent-sky-600" />
+              <div>
+                <p class="text-xs font-black text-slate-900">COD — 70% Advance + FREE Delivery • 70% అడ్వాన్స్ (QR Code)</p>
+                <p class="text-[11px] font-bold text-emerald-700">Generates 70% Advance QR Code + UPI Links now (FREE Delivery ₹0) + 30% Cash on Delivery</p>
+              </div>
+            </div>
+            <span class="bg-sky-200 text-sky-950 text-[10px] font-black px-2 py-0.5 rounded-full">70% QR</span>
+          </label>
+
+          <label id="fullCodOptionRow" class="flex items-center justify-between p-3 rounded-2xl border border-slate-300 bg-white cursor-pointer">
+            <div class="flex items-center gap-2.5">
+              <input type="radio" name="payMode" value="COD_100" onchange="recalculateCheckout()" class="w-4 h-4 accent-slate-800" />
+              <div>
+                <p class="text-xs font-black text-slate-900">100% Cash on Delivery • డెలివరీ సమయంలో పూర్తి క్యాష్</p>
+                <p class="text-[11px] font-semibold text-slate-600">Pay full cash at doorstep (కిరాణా, కూరగాయలు, పాలు, టిఫిన్స్)</p>
+              </div>
+            </div>
+            <span class="bg-slate-200 text-slate-900 text-[10px] font-black px-2 py-0.5 rounded-full">COD</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="bg-slate-900 text-white rounded-2xl p-4 mb-4 space-y-1.5 text-xs">
+        <div class="flex justify-between">
+          <span class="text-slate-300">Items / Fuel Subtotal (వస్తువుల మొత్తం):</span>
+          <span class="font-bold">₹<span id="billSubtotal">0</span></span>
+        </div>
+        <div id="billDiscountRow" class="flex justify-between text-emerald-400 font-bold">
+          <span>Online Payment 5% Discount:</span>
+          <span>- ₹<span id="billDiscount">0</span></span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-300">Delivery / Service Fee (<span id="billEtaText">15-25 mins</span>):</span>
+          <span id="billDeliveryFee" class="font-black text-emerald-400">FREE (₹0)</span>
+        </div>
+        <div class="border-t border-slate-700 pt-2 flex justify-between text-sm font-black">
+          <span>Grand Total / మొత్తం బిల్లు:</span>
+          <span>₹<span id="billGrandTotal">0</span></span>
+        </div>
+        <div class="bg-slate-800 rounded-xl p-2.5 mt-2 flex justify-between items-center">
+          <div>
+            <p class="text-[11px] text-amber-300 font-bold">Pay Now Online (ఇప్పుడు చెల్లించాల్సింది):</p>
+            <p class="text-lg font-black text-amber-400">₹<span id="billPayNow">0</span></p>
+          </div>
+          <div class="text-right">
+            <p class="text-[11px] text-slate-400 font-bold">Cash on Delivery (డెలివరీ క్యాష్):</p>
+            <p class="text-sm font-black text-white">₹<span id="billCashDue">0</span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Automatic QR Code + All Payment Links + Saved Bank Account Details -->
+      <div id="directPaymentLinkBox" class="bg-indigo-50 border-2 border-indigo-300 rounded-2xl p-4 mb-3 space-y-3">
+        <div class="flex flex-col sm:flex-row items-center gap-4 bg-white p-3.5 rounded-2xl border border-indigo-200 shadow-sm">
+          <div class="shrink-0 text-center">
+            <div class="p-2 bg-white border-2 border-slate-900 rounded-2xl inline-block shadow">
+              <img id="dynamicQrImg" src="" alt="Auto Scan & Pay QR Code" class="w-36 h-36 object-contain" />
+            </div>
+            <p class="text-[10px] font-black text-emerald-700 mt-1">📷 Auto QR • Pay ₹<span id="qrAmountTag">0</span></p>
+          </div>
+          <div class="flex-1 text-center sm:text-left space-y-2">
+            <span class="bg-indigo-100 text-indigo-900 text-[10px] font-black px-2.5 py-0.5 rounded-full">ALL UPI APPS • PHONEPE • GPAY • BANK</span>
+            <p class="text-sm font-black text-slate-900">Pay ₹<span id="btnPayAmountLabel">0</span> via QR or Direct App Link</p>
+
+            <!-- Active Payment App Links -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5 pt-1">
+              <a id="allUpiLinkBtn" href="#" class="bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-black px-2.5 py-2 rounded-xl text-center shadow">
+                ⚡ All UPI Apps Link
+              </a>
+              <a id="phonePeLinkBtn" href="#" class="bg-purple-700 hover:bg-purple-800 text-white text-[11px] font-black px-2.5 py-2 rounded-xl text-center shadow">
+                💜 PhonePe Link
+              </a>
+              <a id="gpayLinkBtn" href="#" class="bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-black px-2.5 py-2 rounded-xl text-center shadow">
+                💚 GPay Link
+              </a>
+            </div>
+
+            <!-- Kotak Mahindra Bank & UPI Details -->
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-[11px] space-y-1">
+              <div class="flex items-center justify-between gap-2 flex-wrap">
+                <span class="font-black text-slate-900">UPI ID: <span class="text-rose-700 select-all">9182254465@kotak811</span></span>
+                <button type="button" onclick="copyUpiId()" class="bg-slate-900 hover:bg-slate-700 text-white text-[10px] font-black px-2.5 py-1 rounded-lg">
+                  📋 Copy UPI ID
+                </button>
+              </div>
+              <p class="font-bold text-slate-800">🏦 Bank: <span class="font-black">Kotak Mahindra Bank</span> • A/C: <span class="font-black text-slate-900 select-all">2648582276</span></p>
+              <p class="font-bold text-slate-700">🏛️ IFSC: <span class="font-black text-slate-900 select-all">KKBK0007825</span> • Branch: <span class="font-black">CUDDAPAH</span></p>
+              <p class="font-bold text-slate-600">👤 Account Holder: <span class="font-black text-slate-900">GAYAK WADA SIVA PRASAD</span></p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label class="text-xs font-black text-slate-800 block mb-1">Enter 12-Digit UPI UTR / Transaction ID (చెల్లించిన తర్వాత UTR నమోదు చేయండి):</label>
+          <input id="utrInput" type="text" maxlength="16" placeholder="e.g., 432918472910" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-400 bg-white text-xs font-black tracking-wider outline-none focus:border-emerald-600" />
+        </div>
+      </div>
+
+      <div class="bg-rose-50 border-2 border-rose-300 rounded-2xl p-3.5 mb-4">
+        <label class="flex items-start gap-2.5 cursor-pointer">
+          <input id="noRefundAgreeCheckbox" type="checkbox" class="w-5 h-5 mt-0.5 accent-rose-600 shrink-0" />
+          <span class="text-xs font-black text-rose-950 leading-relaxed">
+            ⚠️ I Agree / అంగీకరిస్తున్నాను: Strict <span class="underline">No-Refund Policy (రీఫండ్ ఇవ్వబడదు)</span>. Once medicines/tablets or fuel are delivered, delivery service has zero liability for usage.
+          </span>
+        </label>
+      </div>
+
+      <button onclick="submitFinalOrder()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black py-3.5 rounded-2xl text-sm shadow-lg flex items-center justify-center gap-2">
+        <i class="fa-brands fa-whatsapp text-lg"></i> Confirm Order & Send to WhatsApp
+      </button>
+    </div>
+  </div>
+
+  <div id="myOrdersModal" class="hidden fixed inset-0 bg-black/75 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl max-h-[85vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b pb-3 mb-4">
+        <h3 class="text-lg font-black text-slate-900">📦 My Orders / నా ఆర్డర్లు</h3>
+        <button onclick="closeModal('myOrdersModal')" class="text-2xl font-black text-slate-400">&times;</button>
+      </div>
+      <div id="myOrdersListContainer" class="space-y-3"></div>
+    </div>
+  </div>
+
+  <div id="ownerModal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-3xl w-full p-6 shadow-2xl my-6 max-h-[92vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b pb-3 mb-4">
+        <h3 class="text-lg font-black text-slate-900">🛡️ Owner Master Dashboard (Sivaprasad)</h3>
+        <button onclick="closeModal('ownerModal')" class="text-2xl font-black text-slate-400">&times;</button>
+      </div>
+
+      <div id="ownerLoginGate" class="space-y-3 max-w-sm mx-auto py-6 text-center">
+        <div class="text-4xl">🔐</div>
+        <h4 class="text-base font-black text-slate-900">Enter Owner PIN (54465)</h4>
+        <input id="ownerPinInput" type="password" maxlength="6" placeholder="•••••" class="w-full px-4 py-3 rounded-2xl border-2 border-slate-300 text-center text-lg font-black tracking-widest outline-none focus:border-orange-600" />
+        <button onclick="unlockOwnerDashboard()" class="w-full bg-orange-600 hover:bg-orange-500 text-white font-black py-3 rounded-2xl text-sm shadow">Unlock Dashboard</button>
+      </div>
+
+      <div id="ownerDashboardContent" class="hidden space-y-5">
+        <div class="bg-rose-50 border border-rose-200 p-4 rounded-2xl text-xs space-y-1">
+          <p class="font-black text-rose-950">🏦 Stored Settlement Bank & UPI Details (భద్రపరచిన కోటక్ బ్యాంకు వివరాలు):</p>
+          <p class="font-bold text-slate-900">Holder: <span class="font-black">GAYAK WADA SIVA PRASAD</span> • Bank: <span class="font-black">Kotak Mahindra Bank</span> • A/C: <span class="font-black select-all">2648582276</span></p>
+          <p class="font-bold text-slate-800">IFSC: <span class="font-black select-all">KKBK0007825</span> • Branch: <span class="font-black">CUDDAPAH</span> • UPI: <span class="font-black select-all">9182254465@kotak811</span></p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl">
+            <p class="text-xs font-bold text-emerald-800">Net Profit / నికర లాభం</p>
+            <p class="text-2xl font-black text-emerald-950 mt-1">₹<span id="ownerTotalProfit">0</span></p>
+          </div>
+          <div class="bg-amber-50 border border-amber-200 p-4 rounded-2xl">
+            <p class="text-xs font-bold text-amber-800">Total Orders / మొత్తం ఆర్డర్లు</p>
+            <p class="text-2xl font-black text-amber-950 mt-1"><span id="ownerTotalOrders">0</span></p>
+          </div>
+          <div class="bg-sky-50 border border-sky-200 p-4 rounded-2xl">
+            <p class="text-xs font-bold text-sky-800">Saved Customers (Aadhaar/Phone)</p>
+            <p class="text-2xl font-black text-sky-950 mt-1"><span id="ownerSavedCustomersCount">0</span></p>
+          </div>
+        </div>
+
+        <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl space-y-3">
+          <h4 class="text-sm font-black text-slate-900">⚙️ Business Controls</h4>
+          <div class="flex flex-wrap items-center justify-between gap-3 bg-white p-3 rounded-xl border">
+            <span class="text-xs font-black text-amber-800">🚨 Emergency / Rain Delivery Switch</span>
+            <button id="toggleEmergencyBtn" onclick="toggleEmergencyClosed()" class="bg-emerald-600 text-white text-xs font-black px-4 py-2 rounded-xl">🟢 Delivery ON</button>
+          </div>
+          <div class="flex flex-wrap items-center justify-between gap-3 bg-white p-3 rounded-xl border">
+            <span class="text-xs font-black text-pink-800">🌸 Dumpalagattu Flower Season</span>
+            <button id="toggleFlowerSeasonBtn" onclick="toggleFlowerSeason()" class="bg-emerald-600 text-white text-xs font-black px-4 py-2 rounded-xl">🟢 Season ON</button>
+          </div>
+          <div class="flex flex-wrap items-center justify-between gap-3 bg-white p-3 rounded-xl border">
+            <span class="text-xs font-black text-slate-800">💰 Hidden Handling Margin (%)</span>
+            <div class="flex items-center gap-2">
+              <input id="ownerMarginInput" type="number" value="10" min="0" max="50" class="w-20 px-2.5 py-1.5 rounded-lg border font-black text-xs text-center" />
+              <button onclick="updateOwnerMargin()" class="bg-slate-900 text-white text-xs font-black px-3 py-1.5 rounded-lg">Save</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-sky-50 border border-sky-200 p-4 rounded-2xl">
+          <h4 class="text-sm font-black text-sky-950 mb-2">🪪 Saved Customer & Aadhaar Registry (కస్టమర్ల పూర్తి వివరాలు)</h4>
+          <div id="savedCustomersRegistryList" class="space-y-2 text-xs"></div>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-black text-slate-900 mb-2">📋 Orders & UTR Verification</h4>
+          <div id="ownerOrdersList" class="space-y-2.5 text-xs"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const OWNER_PHONE = "9182254465";
+    const OWNER_UPI = "9182254465@kotak811";
+    const OWNER_BANK = "Kotak Mahindra Bank";
+    const OWNER_ACCOUNT = "2648582276";
+    const OWNER_IFSC = "KKBK0007825";
+    const OWNER_BRANCH = "CUDDAPAH";
+    const OWNER_HOLDER = "GAYAK WADA SIVA PRASAD";
+    const OWNER_PIN = "54465";
+
+    let state = {
+      marginPercent: Number(localStorage.getItem('sp_margin')) || 10,
+      flowerSeasonActive: localStorage.getItem('sp_flower_season') !== 'false',
+      emergencyClosed: localStorage.getItem('sp_emergency_closed') === 'true',
+      customer: JSON.parse(localStorage.getItem('sp_customer') || 'null'),
+      customerRegistry: JSON.parse(localStorage.getItem('sp_customer_registry') || '[]'),
+      cart: [],
+      gpsLink: '',
+      orders: JSON.parse(localStorage.getItem('sp_orders') || '[]'),
+      strikes: JSON.parse(localStorage.getItem('sp_strikes') || '{}'),
+      blockedUntil: JSON.parse(localStorage.getItem('sp_blocked') || '{}'),
+      activeMiniApp: null
+    };
+
+    function makeItemVisual(emoji, titleEn, qtyBadge, c1, c2) {
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 150">
+        <defs>
+          <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="${c1}"/>
+            <stop offset="100%" stop-color="${c2}"/>
+          </linearGradient>
+        </defs>
+        <rect width="320" height="150" fill="url(#g)"/>
+        <circle cx="275" cy="30" r="55" fill="#ffffff" fill-opacity="0.14"/>
+        <circle cx="45" cy="130" r="45" fill="#ffffff" fill-opacity="0.1"/>
+        <text x="64" y="92" font-size="64" text-anchor="middle">${emoji}</text>
+        <rect x="125" y="24" width="180" height="28" rx="14" fill="#0f172a" fill-opacity="0.75"/>
+        <text x="215" y="43" fill="#fde047" font-size="12" font-weight="900" font-family="sans-serif" text-anchor="middle">${qtyBadge}</text>
+        <text x="215" y="84" fill="#ffffff" font-size="14" font-weight="900" font-family="sans-serif" text-anchor="middle">${titleEn}</text>
+        <text x="215" y="110" fill="#e2e8f0" font-size="11" font-weight="700" font-family="sans-serif" text-anchor="middle">Sivaprasad Super Mart</text>
+      </svg>`;
+      return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+    }
+
+    const HOTELS_DATA = [
+      { id: 'h1', nameTe: 'శ్రీ సాయి ఫ్యామిలీ రెస్టారెంట్ & బిర్యానీ పాయింట్', nameEn: 'Sri Sai Family Restaurant & Biryani Point', location: 'కాజీపేట సెంటర్, NH-40 మెయిన్ రోడ్ (Khajipeta Center)', mapUrl: 'https://maps.google.com/?q=Khajipeta,Andhra+Pradesh', openHour: 11, closeHour: 23, timingText: '11:00 AM - 11:00 PM', menu: [{ id: 'h1_1', nameTe: 'చికెన్ దమ్ బిర్యానీ (ఫుల్)', nameEn: 'Chicken Dum Biryani (Full)', qtyDetail: '1 Pack = 2 Big Chicken Pieces + Raita + Sherva (2 పెద్ద చికెన్ పీసెస్ + రైతా)', basePrice: 170, emoji: '🍗', c1: '#e11d48', c2: '#881337' }, { id: 'h1_2', nameTe: 'చికెన్ ఫ్రై పీస్ బిర్యానీ', nameEn: 'Chicken Fry Piece Biryani', qtyDetail: '1 Pack = 4 Fry Chicken Pieces + Biryani Rice (4 ఫ్రై పీసెస్ + రైస్)', basePrice: 190, emoji: '🍛', c1: '#dc2626', c2: '#7f1d1d' }, { id: 'h1_3', nameTe: 'వెజ్ దమ్ బిర్యానీ', nameEn: 'Veg Dum Biryani (Full)', qtyDetail: '1 Pack = 750g Veg Biryani + Raita + Salan (750g వెజ్ బిర్యానీ)', basePrice: 125, emoji: '🥘', c1: '#059669', c2: '#064e3b' }, { id: 'h1_4', nameTe: 'సౌత్ ఇండియన్ ఫుల్ మీల్స్', nameEn: 'South Indian Full Meals', qtyDetail: '1 Pack = Rice + Dal + Sambar + 2 Curries + Curd (పూర్తి భోజనం)', basePrice: 110, emoji: '🍱', c1: '#d97706', c2: '#78350f' }] },
+      { id: 'h2', nameTe: 'న్యూ రాయలసీమ ధాబా & ఫ్యామిలీ రెస్టారెంట్', nameEn: 'New Rayalaseema Dhaba & Family Restaurant', location: 'కాజీపేట - మైదుకూరు హైవే (NH-40 Highway)', mapUrl: 'https://maps.google.com/?q=Khajipeta+Mydukur+Highway', openHour: 11, closeHour: 23.5, timingText: '11:00 AM - 11:30 PM', menu: [{ id: 'h2_1', nameTe: 'తందూరి రోటీ + చికెన్ కర్రీ', nameEn: 'Tandoori Roti (3) + Chicken Curry', qtyDetail: '1 Plate = 3 Tandoori Rotis + 5 Chicken Pieces Curry (3 రోటీలు + చికెన్ కర్రీ)', basePrice: 160, emoji: '🫓', c1: '#ea580c', c2: '#7c2d12' }, { id: 'h2_2', nameTe: 'నాటుకోడి పులుసు + రాగి సంగటి', nameEn: 'Natukodi Pulusu + Ragi Sangati', qtyDetail: '1 Plate = 2 Ragi Mudda + 6 Country Chicken Pieces (2 రాగి ముద్దలు + నాటుకోడి)', basePrice: 210, emoji: '🍲', c1: '#b91c1c', c2: '#450a0a' }, { id: 'h2_3', nameTe: 'పన్నీర్ బటర్ మసాలా + బటర్ నాన్', nameEn: 'Paneer Butter Masala + Butter Naan (2)', qtyDetail: '1 Plate = 2 Butter Naans + 250g Paneer Curry (2 నాన్ + పన్నీర్ కర్రీ)', basePrice: 175, emoji: '🧀', c1: '#ca8a04', c2: '#713f12' }, { id: 'h2_4', nameTe: 'ఎగ్ కర్రీ + 4 పుల్కాలు', nameEn: 'Egg Curry + 4 Phulkas', qtyDetail: '1 Plate = 4 Soft Phulkas + 2 Eggs Masala Curry (4 పుల్కాలు + ఎగ్ కర్రీ)', basePrice: 105, emoji: '🥚', c1: '#0284c7', c2: '#0c4a6e' }] },
+      { id: 'h3', nameTe: 'శ్రీ వెంకటేశ్వర గ్రాండ్ హోటల్ & బిర్యానీ హౌస్', nameEn: 'Sri Venkateswara Grand Hotel & Biryani House', location: 'బుడ్డాయపల్లె క్రాస్ రోడ్, కాజీపేట (Buddayapalem Cross)', mapUrl: 'https://maps.google.com/?q=Buddayapalem,Khajipeta', openHour: 11.5, closeHour: 22.5, timingText: '11:30 AM - 10:30 PM', menu: [{ id: 'h3_1', nameTe: 'ఫ్యామిలీ ప్యాక్ చికెన్ బిర్యానీ', nameEn: 'Family Pack Chicken Biryani (4-5 Persons)', qtyDetail: '1 Bucket = 8 Chicken Pieces + 2 Eggs + Biryani Rice (4-5 మందికి సరిపడా)', basePrice: 460, emoji: '🪣', c1: '#be123c', c2: '#4c0519' }, { id: 'h3_2', nameTe: 'చికెన్ 65 (బోన్‌లెస్)', nameEn: 'Chicken 65 Boneless (12 Pieces)', qtyDetail: '1 Plate = 12 Boneless Chicken 65 Pieces + Onion & Lemon (12 పీసెస్)', basePrice: 160, emoji: '🍗', c1: '#dc2626', c2: '#7f1d1d' }, { id: 'h3_3', nameTe: 'మటన్ దమ్ బిర్యానీ (ఫుల్)', nameEn: 'Mutton Dum Biryani (Full)', qtyDetail: '1 Pack = 6 Tender Mutton Pieces + Basmati Rice + Raita (6 మటన్ పీసెస్)', basePrice: 240, emoji: '🍖', c1: '#991b1b', c2: '#450a0a' }] },
+      { id: 'h4', nameTe: 'తాజ్ బిర్యానీ & కబాబ్ సెంటర్', nameEn: 'Taj Biryani & Kabab Center', location: 'కాజీపేట మార్కెట్ రోడ్ (Khajipeta Market Road)', mapUrl: 'https://maps.google.com/?q=Khajipeta+Market+Road', openHour: 12, closeHour: 23, timingText: '12:00 PM - 11:00 PM', menu: [{ id: 'h4_1', nameTe: 'హైదరాబాదీ చికెన్ దమ్ బిర్యానీ', nameEn: 'Hyderabadi Chicken Dum Biryani', qtyDetail: '1 Pack = 2 Big Dum Pieces + 1 Boiled Egg + Raita (2 పీసెస్ + గుడ్డు)', basePrice: 165, emoji: '🍛', c1: '#e11d48', c2: '#881337' }, { id: 'h4_2', nameTe: 'చికెన్ లాలీపాప్ ప్లేట్', nameEn: 'Chicken Lollipop (6 Pieces)', qtyDetail: '1 Plate = 6 Crispy Chicken Lollipops + Sauce (6 లాలీపాప్ పీసెస్)', basePrice: 155, emoji: '🍖', c1: '#c2410c', c2: '#7c2d12' }] },
+      { id: 'h5', nameTe: 'హైవే కింగ్ పంజాబీ & రాయలసీమ ధాబా', nameEn: 'Highway King Punjabi & Rayalaseema Dhaba', location: 'తమ్మనపల్లె - చెన్నూరు రోడ్ (NH-40)', mapUrl: 'https://maps.google.com/?q=Chennur+Kadapa+NH40', openHour: 11, closeHour: 23.5, timingText: '11:00 AM - 11:30 PM', menu: [{ id: 'h5_1', nameTe: 'ధాబా స్పెషల్ చికెన్ మసాలా + రోటీ', nameEn: 'Dhaba Special Chicken Masala + 3 Rotis', qtyDetail: '1 Plate = 3 Butter Rotis + Special Chicken Masala (3 రోటీలు + చికెన్)', basePrice: 185, emoji: '🍲', c1: '#b45309', c2: '#78350f' }, { id: 'h5_2', nameTe: 'ఎగ్ బుర్జీ + 3 పుల్కాలు', nameEn: 'Egg Bhurji + 3 Phulkas', qtyDetail: '1 Plate = 3 Phulkas + 3 Eggs Spicy Bhurji (3 పుల్కాలు + ఎగ్ బుర్జీ)', basePrice: 110, emoji: '🍳', c1: '#0369a1', c2: '#0c4a6e' }] },
+    ];
+
+    const PRODUCTS_DATA = {
+      dairy: [
+        { id: 'd1', nameTe: 'గేదె పాలు (చిన్న ప్యాకెట్ 250ml)', nameEn: 'Buffalo Milk Small Packet (250ml)', qtyDetail: '250 ml Small Packet (చిన్న ప్యాకెట్)', basePrice: 19, tag: '24/7 Fresh', emoji: '🥛', c1: '#0284c7', c2: '#1e3a8a' },
+        { id: 'd2', nameTe: 'గేదె పాలు (అర లీటర్ 500ml)', nameEn: 'Buffalo Milk Half Litre (500ml)', qtyDetail: '500 ml Packet (అర లీటర్ ప్యాకెట్)', basePrice: 36, tag: '24/7 Fresh', emoji: '🥛', c1: '#0369a1', c2: '#1e40af' },
+        { id: 'd3', nameTe: 'గేదె పాలు (1 లీటర్ ప్యాక్ / డబ్బా)', nameEn: 'Buffalo Milk Full Pack (1 Litre)', qtyDetail: '1000 ml / 1 Litre Pack (1 లీటర్ పూర్తి ప్యాక్)', basePrice: 70, tag: '24/7 Fresh', emoji: '🍶', c1: '#0284c7', c2: '#0f172a' },
+        { id: 'd4', nameTe: 'గేదె పాలు ఫ్యామిలీ క్యాన్ (2 లీటర్లు)', nameEn: 'Buffalo Milk Family Can (2 Litres)', qtyDetail: '2000 ml / 2 Litres Can (2 లీటర్ల క్యాన్)', basePrice: 138, tag: 'Family Pack', emoji: '🛢️', c1: '#1d4ed8', c2: '#0f172a' },
+        { id: 'd5', nameTe: 'ఆవు పాలు (చిన్న ప్యాకెట్ 250ml)', nameEn: 'Cow Milk Small Packet (250ml)', qtyDetail: '250 ml Small Packet (చిన్న ప్యాకెట్)', basePrice: 16, tag: '24/7 Fresh', emoji: '🐄', c1: '#38bdf8', c2: '#0284c7' },
+        { id: 'd6', nameTe: 'ఆవు పాలు (అర లీటర్ 500ml)', nameEn: 'Cow Milk Half Litre (500ml)', qtyDetail: '500 ml Packet (అర లీటర్ ప్యాకెట్)', basePrice: 30, tag: '24/7 Fresh', emoji: '🐄', c1: '#0ea5e9', c2: '#0369a1' },
+        { id: 'd7', nameTe: 'ఆవు పాలు (1 లీటర్ ప్యాక్)', nameEn: 'Cow Milk Full Pack (1 Litre)', qtyDetail: '1000 ml / 1 Litre Pack (1 లీటర్ ప్యాక్)', basePrice: 58, tag: '24/7 Fresh', emoji: '🐄', c1: '#0284c7', c2: '#172554' },
+        { id: 'd8', nameTe: 'గడ్డ పెరుగు చిన్న ప్యాకెట్ (100g)', nameEn: 'Thick Curd Mini Packet (100g)', qtyDetail: '100g Small Pouch (చిన్న పెరుగు ప్యాకెట్)', basePrice: 12, tag: 'Mini Pack', emoji: '🥣', c1: '#60a5fa', c2: '#1d4ed8' },
+        { id: 'd9', nameTe: 'గడ్డ పెరుగు కప్పు / ప్యాకెట్ (200g)', nameEn: 'Thick Curd Cup / Pouch (200g)', qtyDetail: '200g Cup / Packet (200 గ్రాముల ప్యాక్)', basePrice: 22, tag: 'Single Pack', emoji: '🥣', c1: '#3b82f6', c2: '#1d4ed8' },
+        { id: 'd10', nameTe: 'గడ్డ పెరుగు (అర కిలో 500g)', nameEn: 'Thick Curd Half Kg (500g)', qtyDetail: '500g Packet (అర కిలో పెరుగు ప్యాకెట్)', basePrice: 42, tag: '24/7 Available', emoji: '🥣', c1: '#2563eb', c2: '#1e3a8a' },
+        { id: 'd11', nameTe: 'గడ్డ పెరుగు పెద్ద డబ్బా (1 Kg Tub)', nameEn: 'Thick Curd Big Tub (1 Kg)', qtyDetail: '1000g / 1 Kg Family Tub (1 కిలో పెరుగు డబ్బా)', basePrice: 80, tag: '1 Kg Tub', emoji: '🪣', c1: '#1d4ed8', c2: '#172554' },
+        { id: 'd12', nameTe: 'మజ్జిగ ప్యాకెట్లు (2 × 500ml)', nameEn: 'Buttermilk Packets (2 × 500ml)', qtyDetail: '2 Packets = 1 Litre (2 మజ్జిగ ప్యాకెట్లు)', basePrice: 34, tag: 'Cooling', emoji: '🥤', c1: '#06b6d4', c2: '#155e75' },
+        { id: 'd13', nameTe: 'మసాలా మజ్జిగ (4 × 200ml)', nameEn: 'Masala Spiced Buttermilk (4 Packs)', qtyDetail: '4 Packets = 800ml (4 మసాలా మజ్జిగ ప్యాకెట్లు)', basePrice: 48, tag: 'Spiced', emoji: '🌿', c1: '#0d9488', c2: '#134e4a' },
+        { id: 'd14', nameTe: 'స్వచ్ఛమైన నెయ్యి చిన్న పౌచ్ (50g)', nameEn: 'Pure Ghee Mini Pouch (50g)', qtyDetail: '50g Mini Pouch (చిన్న నెయ్యి ప్యాకెట్)', basePrice: 38, tag: 'Mini Pouch', emoji: '🧈', c1: '#fbbf24', c2: '#92400e' },
+        { id: 'd15', nameTe: 'స్వచ్ఛమైన నెయ్యి (100g ప్యాక్)', nameEn: 'Pure Ghee Small Pack (100g)', qtyDetail: '100g Pouch / Jar (100 గ్రాముల నెయ్యి)', basePrice: 72, tag: '100g Pack', emoji: '🧈', c1: '#f59e0b', c2: '#78350f' },
+        { id: 'd16', nameTe: 'స్వచ్ఛమైన నెయ్యి (250g జార్)', nameEn: 'Pure Ghee Jar (250g)', qtyDetail: '250g Jar / Pouch (పావు కిలో నెయ్యి)', basePrice: 165, tag: '250g Jar', emoji: '🧈', c1: '#d97706', c2: '#78350f' },
+        { id: 'd17', nameTe: 'స్వచ్ఛమైన నెయ్యి (500g డబ్బా)', nameEn: 'Pure Ghee Half Kg Tub (500g)', qtyDetail: '500g Tub / Jar (అర కిలో నెయ్యి డబ్బా)', basePrice: 320, tag: '500g Tub', emoji: '🧈', c1: '#b45309', c2: '#451a03' },
+        { id: 'd18', nameTe: 'స్వచ్ఛమైన నెయ్యి పెద్ద డబ్బా (1 Litre / 1 Kg)', nameEn: 'Pure Ghee Big Tin / Jar (1 Litre)', qtyDetail: '1000ml / 1 Litre Big Jar (1 లీటర్ నెయ్యి డబ్బా)', basePrice: 620, tag: '1 Litre Jar', emoji: '🍯', c1: '#92400e', c2: '#451a03' },
+        { id: 'd19', nameTe: 'వెన్న / బటర్ చిన్న ప్యాకెట్ (50g)', nameEn: 'Salted Butter Mini Pack (50g)', qtyDetail: '50g Mini Butter Pack (చిన్న వెన్న ప్యాకెట్)', basePrice: 32, tag: 'Mini Butter', emoji: '🧈', c1: '#eab308', c2: '#854d0e' },
+        { id: 'd20', nameTe: 'వెన్న / అమూల్ బటర్ (100g)', nameEn: 'Amul Salted Butter (100g)', qtyDetail: '100g Butter Pack (100 గ్రాముల వెన్న)', basePrice: 58, tag: '100g Pack', emoji: '🧈', c1: '#ca8a04', c2: '#713f12' },
+        { id: 'd21', nameTe: 'వెన్న / అమూల్ బటర్ పెద్ద ప్యాక్ (500g)', nameEn: 'Amul Butter Big Pack (500g)', qtyDetail: '500g Family Butter Pack (అర కిలో వెన్న డబ్బా)', basePrice: 275, tag: '500g Pack', emoji: '🧈', c1: '#b45309', c2: '#451a03' },
+        { id: 'd22', nameTe: 'ఫ్రెష్ మలై పన్నీర్ (200g)', nameEn: 'Fresh Malai Paneer (200g)', qtyDetail: '200g Paneer Pack (200 గ్రాముల పన్నీర్)', basePrice: 85, tag: 'Fresh Paneer', emoji: '🧀', c1: '#0284c7', c2: '#0f172a' },
+        { id: 'd23', nameTe: 'పచ్చి కోవా / దూద్ పేడా (250g)', nameEn: 'Fresh Khoya / Doodh Peda (250g)', qtyDetail: '250g Pack (~10-12 Pieces)', basePrice: 125, tag: 'Milk Sweet', emoji: '🍬', c1: '#ea580c', c2: '#7c2d12' },
+        { id: 'd24', nameTe: 'వెనిలా ఐస్ క్రీమ్ చిన్న కప్పు (2 కప్పులు)', nameEn: 'Vanilla Ice Cream Mini Cups (2 Cups)', qtyDetail: '2 Small Cups (100ml × 2 = 200ml)', basePrice: 40, tag: '🍦 Ice Cream', emoji: '🍨', c1: '#ec4899', c2: '#831843' },
+        { id: 'd25', nameTe: 'స్ట్రాబెర్రీ ఐస్ క్రీమ్ కప్పులు (2 కప్పులు)', nameEn: 'Strawberry Ice Cream Cups (2 Cups)', qtyDetail: '2 Small Cups (100ml × 2 = 200ml)', basePrice: 45, tag: '🍦 Ice Cream', emoji: '🍧', c1: '#f43f5e', c2: '#881337' },
+        { id: 'd26', nameTe: 'చాకోబార్ ఐస్ క్రీమ్ స్టిక్స్ (2 స్టిక్స్)', nameEn: 'Chocobar Ice Cream Sticks (2 Sticks)', qtyDetail: '1 Order = 2 Chocobar Sticks (2 చాకోబార్లు)', basePrice: 50, tag: '🍦 Chocobar', emoji: '🍫', c1: '#78350f', c2: '#292524' },
+        { id: 'd27', nameTe: 'బటర్‌స్కాచ్ కోన్ ఐస్ క్రీమ్ (2 కోన్స్)', nameEn: 'Butterscotch Cone Ice Cream (2 Cones)', qtyDetail: '1 Order = 2 Crunchy Cones (2 బటర్‌స్కాచ్ కోన్లు)', basePrice: 75, tag: '🍦 Cone Ice Cream', emoji: '🍦', c1: '#d97706', c2: '#78350f' },
+        { id: 'd28', nameTe: 'చాక్లెట్ కోన్ ఐస్ క్రీమ్ (2 కోన్స్)', nameEn: 'Chocolate Cone Ice Cream (2 Cones)', qtyDetail: '1 Order = 2 Chocolate Cones (2 చాక్లెట్ కోన్లు)', basePrice: 80, tag: '🍦 Cone Ice Cream', emoji: '🍦', c1: '#92400e', c2: '#451a03' },
+        { id: 'd29', nameTe: 'వెనిలా ఐస్ క్రీమ్ ఫ్యామిలీ ప్యాక్ (700ml Tub)', nameEn: 'Vanilla Ice Cream Family Tub (700ml)', qtyDetail: '700ml Big Family Pack (పెద్ద ఫ్యామిలీ ప్యాక్)', basePrice: 135, tag: '🍦 Family Tub', emoji: '🍨', c1: '#0284c7', c2: '#1e3a8a' },
+        { id: 'd30', nameTe: 'బటర్‌స్కాచ్ & చాక్లెట్ ఐస్ క్రీమ్ పెద్ద డబ్బా (1 Litre Tub)', nameEn: 'Butterscotch / Chocolate Big Tub (1 Litre)', qtyDetail: '1000ml / 1 Litre Party Tub (1 లీటర్ పెద్ద ఐస్ క్రీమ్ డబ్బా)', basePrice: 210, tag: '🍦 1 Litre Tub', emoji: '🍨', c1: '#7c3aed', c2: '#3b0764' },
+      ],
+      fuel: [
+        { id: 'fu1', nameTe: 'పెట్రోల్ - 1 లీటర్ (ఎమర్జెన్సీ)', nameEn: 'Petrol - 1 Litre (Emergency Can)', qtyDetail: '1 Litre Petrol (1 లీటర్ పెట్రోల్) + Distance Service Fee', basePrice: 109, tag: '⛽ 100% Full Pay', isFuel: true, noMargin: true, emoji: '⛽', c1: '#dc2626', c2: '#450a0a' },
+        { id: 'fu2', nameTe: 'పెట్రోల్ - 2 లీటర్లు (బైక్ ప్యాక్)', nameEn: 'Petrol - 2 Litres (Bike Pack)', qtyDetail: '2 Litres Petrol (2 లీటర్ల పెట్రోల్) + Distance Service Fee', basePrice: 218, tag: '⛽ 100% Full Pay', isFuel: true, noMargin: true, emoji: '🏍️', c1: '#b91c1c', c2: '#1e293b' },
+        { id: 'fu3', nameTe: 'పెట్రోల్ - 3 లీటర్లు', nameEn: 'Petrol - 3 Litres Can', qtyDetail: '3 Litres Petrol (3 లీటర్ల పెట్రోల్) + Distance Service Fee', basePrice: 327, tag: '⛽ 100% Full Pay', isFuel: true, noMargin: true, emoji: '⛽', c1: '#991b1b', c2: '#0f172a' },
+        { id: 'fu4', nameTe: 'పెట్రోల్ - 5 లీటర్లు (క్యాన్ డెలివరీ)', nameEn: 'Petrol - 5 Litres Full Can', qtyDetail: '5 Litres Petrol (5 లీటర్ల పెట్రోల్) + Distance Service Fee', basePrice: 545, tag: '⛽ 100% Full Pay', isFuel: true, noMargin: true, emoji: '🚗', c1: '#7f1d1d', c2: '#090d16' },
+        { id: 'fu5', nameTe: 'పెట్రోల్ - 10 లీటర్లు (కారు ప్యాక్)', nameEn: 'Petrol - 10 Litres Can', qtyDetail: '10 Litres Petrol (10 లీటర్ల పెట్రోల్) + Distance Service Fee', basePrice: 1090, tag: '⛽ 100% Full Pay', isFuel: true, noMargin: true, emoji: '🚙', c1: '#991b1b', c2: '#090d16' },
+        { id: 'fu6', nameTe: 'డీజిల్ (Diesel) - 2 లీటర్లు', nameEn: 'Diesel - 2 Litres Emergency Can', qtyDetail: '2 Litres Diesel (2 లీటర్ల డీజిల్) + Distance Service Fee', basePrice: 192, tag: '⛽ 100% Full Pay', isFuel: true, noMargin: true, emoji: '🛢️', c1: '#ea580c', c2: '#431407' },
+        { id: 'fu7', nameTe: 'డీజిల్ (Diesel) - 5 లీటర్లు', nameEn: 'Diesel - 5 Litres Can (Auto / Car)', qtyDetail: '5 Litres Diesel (5 లీటర్ల డీజిల్) + Distance Service Fee', basePrice: 480, tag: '⛽ 100% Full Pay', isFuel: true, noMargin: true, emoji: '🚜', c1: '#c2410c', c2: '#1e293b' },
+        { id: 'fu8', nameTe: 'డీజిల్ (Diesel) - 10 లీటర్లు', nameEn: 'Diesel - 10 Litres (Tractor / Lorry)', qtyDetail: '10 Litres Diesel (10 లీటర్ల డీజిల్) + Distance Service Fee', basePrice: 960, tag: '⛽ 100% Full Pay', isFuel: true, noMargin: true, emoji: '🚛', c1: '#9a3412', c2: '#0f172a' },
+        { id: 'fu9', nameTe: 'డీజిల్ (Diesel) - 20 లీటర్లు (బల్క్)', nameEn: 'Diesel - 20 Litres Bulk Can', qtyDetail: '20 Litres Diesel (20 లీటర్ల డీజిల్) + Distance Service Fee', basePrice: 1920, tag: '⛽ 100% Full Pay', isFuel: true, noMargin: true, emoji: '⛽', c1: '#7c2d12', c2: '#090d16' },
+        { id: 'fu10', nameTe: '2T ఇంజిన్ ఆయిల్ పౌచ్ (2 × 40ml)', nameEn: '2T Engine Oil Pouches (2 Packs)', qtyDetail: '2 Pouches (40ml × 2) for Auto / 2-Stroke Bike', basePrice: 42, tag: 'Engine Oil', isFuel: true, noMargin: true, emoji: '🧴', c1: '#475569', c2: '#0f172a' },
+        { id: 'fu11', nameTe: '4T బైక్ ఇంజిన్ ఆయిల్ (900ml / 1L)', nameEn: '4T Bike Engine Oil (900ml / 1L)', qtyDetail: '1 Bottle (900ml/1L) for Hero / Bajaj / Honda Bikes', basePrice: 340, tag: 'Bike Oil', isFuel: true, noMargin: true, emoji: '🛢️', c1: '#1e293b', c2: '#090d16' },
+        { id: 'fu12', nameTe: 'బ్యాటరీ డిస్టిల్డ్ వాటర్ (1 లీటర్)', nameEn: 'Battery Distilled Water (1 Litre)', qtyDetail: '1 Litre Bottle for Inverter / Tractor Battery', basePrice: 30, tag: 'Battery Water', isFuel: true, noMargin: true, emoji: '💧', c1: '#0284c7', c2: '#1e3a8a' },
+      ],
+      medical: [
+        { id: 'm1', nameTe: 'పారాసిటమాల్ / Dolo 650 మాత్రలు', nameEn: 'Paracetamol / Dolo 650 Tablets (15 Tabs)', qtyDetail: '1 Strip = 15 Tablets (జ్వరం & ఒళ్లు నొప్పులకు - Fever & Pain)', basePrice: 34, tag: '💊 Aadhaar + OTP Must', isMedical: true, emoji: '💊', c1: '#0d9488', c2: '#115e59' },
+        { id: 'm2', nameTe: 'కాల్పాల్ 500mg మాత్రలు', nameEn: 'Calpol 500mg Tablets (15 Tabs)', qtyDetail: '1 Strip = 15 Tablets (సాధారణ జ్వరం & తలనొప్పికి)', basePrice: 22, tag: '💊 Aadhaar + OTP Must', isMedical: true, emoji: '💊', c1: '#0f766e', c2: '#134e4a' },
+        { id: 'm3', nameTe: 'సరిడాన్ తలనొప్పి మాత్రలు', nameEn: 'Saridon Headache Relief (10 Tabs)', qtyDetail: '1 Strip = 10 Tablets (తీవ్రమైన తలనొప్పికి - Headache)', basePrice: 44, tag: '💊 Headache Relief', isMedical: true, emoji: '🤕', c1: '#dc2626', c2: '#7f1d1d' },
+        { id: 'm4', nameTe: 'జండుబామ్ (Zandu Balm 25ml)', nameEn: 'Zandu Balm Bottle (25ml)', qtyDetail: '1 Bottle (25ml) - తలనొప్పి & జలుబుకు (Headache & Cold)', basePrice: 85, tag: '💊 Emergency Balm', isMedical: true, emoji: '🫙', c1: '#059669', c2: '#064e3b' },
+        { id: 'm5', nameTe: 'అమృతాంజన్ పెయిన్ బామ్ (30ml)', nameEn: 'Amrutanjan Pain Balm (30ml)', qtyDetail: '1 Bottle (30ml) - తలనొప్పికి (Strong Headache Balm)', basePrice: 95, tag: '💊 Emergency Balm', isMedical: true, emoji: '🧴', c1: '#047857', c2: '#022c22' },
+        { id: 'm6', nameTe: 'మూవ్ ఆయింట్‌మెంట్ (Moov 50g)', nameEn: 'Moov Pain Relief Cream (50g)', qtyDetail: '1 Tube (50g) - మోకాళ్లు, కాళ్లు & నడుము నొప్పులకు (Knee & Back Pain)', basePrice: 155, tag: '💊 Knee & Back Pain', isMedical: true, emoji: '🦵', c1: '#0284c7', c2: '#1e3a8a' },
+        { id: 'm7', nameTe: 'మూవ్ పెయిన్ రిలీఫ్ స్ప్రే (35g)', nameEn: 'Moov Pain Relief Spray (35g)', qtyDetail: '1 Spray Can (35g) - తక్షణ నొప్పి ఉపశమనం (Instant Spray)', basePrice: 140, tag: '💊 Instant Spray', isMedical: true, emoji: '💨', c1: '#0369a1', c2: '#0c4a6e' },
+        { id: 'm8', nameTe: 'వోలిని జెల్ (Volini Gel 30g)', nameEn: 'Volini Pain Relief Gel (30g)', qtyDetail: '1 Tube (30g) - కీళ్ల & కండరాల నొప్పులకు (Joint Pain)', basePrice: 130, tag: '💊 Joint Pain Gel', isMedical: true, emoji: '🧴', c1: '#2563eb', c2: '#172554' },
+        { id: 'm9', nameTe: 'వోలిని పెయిన్ స్ప్రే (40g)', nameEn: 'Volini Pain Relief Spray (40g)', qtyDetail: '1 Spray Can (40g) - బెణుకులు & నొప్పులకు (Sprain & Pain)', basePrice: 148, tag: '💊 Pain Spray', isMedical: true, emoji: '💨', c1: '#1d4ed8', c2: '#1e3a8a' },
+        { id: 'm10', nameTe: 'అయోడెక్స్ బామ్ (Iodex 40g)', nameEn: 'Iodex Multipurpose Balm (40g)', qtyDetail: '1 Bottle (40g) - నడుము & మోకాళ్ల నొప్పులకు', basePrice: 135, tag: '💊 Body Pain Balm', isMedical: true, emoji: '🫙', c1: '#b45309', c2: '#451a03' },
+        { id: 'm11', nameTe: 'విక్స్ వేపరబ్ (Vicks VapoRub 25ml)', nameEn: 'Vicks VapoRub (25ml)', qtyDetail: '1 Bottle (25ml) - జలుబు, దగ్గు & ముక్కు దిబ్బడకు (Cold & Cough)', basePrice: 85, tag: '💊 Cold & Cough', isMedical: true, emoji: '🌿', c1: '#0f766e', c2: '#134e4a' },
+        { id: 'm12', nameTe: 'విక్స్ ఇన్‌హేలర్ (2 పీసెస్)', nameEn: 'Vicks Inhaler Pack (2 Pieces)', qtyDetail: '1 Pack = 2 Inhalers (ముక్కు దిబ్బడ తక్షణ ఉపశమనం)', basePrice: 110, tag: '💊 2 Inhalers Pack', isMedical: true, emoji: '👃', c1: '#14b8a6', c2: '#115e59' },
+        { id: 'm13', nameTe: 'స్ట్రెప్సిల్స్ గొంతు మాత్రలు (8 Tabs)', nameEn: 'Strepsils Throat Lozenges (8 Tabs)', qtyDetail: '1 Strip = 8 Lozenges (గొంతు నొప్పి & గరగరకు - Sore Throat)', basePrice: 32, tag: '💊 Throat Relief', isMedical: true, emoji: '🍬', c1: '#ea580c', c2: '#7c2d12' },
+        { id: 'm14', nameTe: 'ఈనో గ్యాస్ ప్యాకెట్లు (6 Packs)', nameEn: 'ENO Fruit Salt Gas Relief (6 Packs)', qtyDetail: '1 Set = 6 Sachets (కడుపులో మంట & గ్యాస్‌కు - Acidity & Gas)', basePrice: 60, tag: '💊 Gas & Acidity', isMedical: true, emoji: '🫧', c1: '#0284c7', c2: '#0c4a6e' },
+        { id: 'm15', nameTe: 'డిజీన్ మాత్రలు (Digene 15 Tabs)', nameEn: 'Digene Acidity Tablets (15 Tabs)', qtyDetail: '1 Strip = 15 Chewable Tablets (అజీర్తి & గ్యాస్‌కు)', basePrice: 28, tag: '💊 Acidity Relief', isMedical: true, emoji: '💊', c1: '#db2777', c2: '#831843' },
+        { id: 'm16', nameTe: 'పుదీన్ హరా పెరల్స్ (10 Tabs)', nameEn: 'Dabur Pudin Hara Pearls (10 Tabs)', qtyDetail: '1 Strip = 10 Pearls (కడుపు నొప్పి & అజీర్తికి - Stomach Pain)', basePrice: 30, tag: '💊 Ayurvedic Relief', isMedical: true, emoji: '🌱', c1: '#16a34a', c2: '#14532d' },
+        { id: 'm17', nameTe: 'ఓఆర్ఎస్ ప్యాకెట్లు (Electral ORS 3 Packs)', nameEn: 'Electral ORS Energy Sachets (3 Packs)', qtyDetail: '1 Set = 3 Sachets (నీరసం & డీహైడ్రేషన్‌కు - Hydration)', basePrice: 66, tag: '💊 Energy & Hydration', isMedical: true, emoji: '🧃', c1: '#ea580c', c2: '#7c2d12' },
+        { id: 'm18', nameTe: 'గ్లూకోన్-డి ప్యాకెట్ (250g)', nameEn: 'Glucon-D Instant Energy (250g)', qtyDetail: '250g Pack (ఎండ & నీరసం తగ్గడానికి - Instant Energy)', basePrice: 75, tag: '💊 Instant Energy', isMedical: true, emoji: '⚡', c1: '#f59e0b', c2: '#78350f' },
+        { id: 'm19', nameTe: 'డెట్టాల్ లిక్విడ్ (Dettol 125ml)', nameEn: 'Dettol Antiseptic Liquid (125ml)', qtyDetail: '1 Bottle (125ml) - గాయాలు శుభ్రం చేయడానికి (First Aid)', basePrice: 68, tag: '💊 Antiseptic Liquid', isMedical: true, emoji: '🩹', c1: '#16a34a', c2: '#14532d' },
+        { id: 'm20', nameTe: 'సవ్లాన్ లిక్విడ్ (Savlon 100ml)', nameEn: 'Savlon Antiseptic Liquid (100ml)', qtyDetail: '1 Bottle (100ml) - మంట లేకుండా గాయం శుభ్రం చేయడానికి', basePrice: 58, tag: '💊 Antiseptic Liquid', isMedical: true, emoji: '🧴', c1: '#ea580c', c2: '#7c2d12' },
+        { id: 'm21', nameTe: 'బ్యాండేజ్ స్ట్రిప్స్ (Band-Aid 20 Strips)', nameEn: 'Washproof Band-Aid Strips (20 Pieces)', qtyDetail: '1 Box = 20 Strips (చిన్న కోతలు & గాయాలకు)', basePrice: 45, tag: '💊 20 Strips Box', isMedical: true, emoji: '🩹', c1: '#dc2626', c2: '#7f1d1d' },
+        { id: 'm22', nameTe: 'మెడికల్ దూది (100g) + బ్యాండేజ్ రోల్ (2)', nameEn: 'Sterile Cotton Roll (100g) + 2 Bandages', qtyDetail: '100g Cotton + 2 Bandage Rolls (డ్రెస్సింగ్ కిట్)', basePrice: 65, tag: '💊 Dressing Kit', isMedical: true, emoji: '🧻', c1: '#475569', c2: '#0f172a' },
+        { id: 'm23', nameTe: 'బెటాడిన్ ఆయింట్‌మెంట్ (Betadine 15g)', nameEn: 'Betadine Antiseptic Ointment (15g)', qtyDetail: '1 Tube (15g) - గాయాలు త్వరగా మానడానికి', basePrice: 78, tag: '💊 Wound Ointment', isMedical: true, emoji: '🧴', c1: '#b45309', c2: '#451a03' },
+        { id: 'm24', nameTe: 'బర్నాల్ కాలిన గాయాల క్రీమ్ (Burnol 20g)', nameEn: 'Burnol Burn Relief Cream (20g)', qtyDetail: '1 Tube (20g) - కాలిన గాయాలకు తక్షణ ఉపశమనం', basePrice: 82, tag: '💊 Burn Relief', isMedical: true, emoji: '🔥', c1: '#dc2626', c2: '#450a0a' },
+        { id: 'm25', nameTe: 'మోకాలు క్రీప్ బ్యాండేజ్ (Crepe Bandage)', nameEn: 'Elastic Knee Crepe Bandage (10cm)', qtyDetail: '1 Elastic Roll (మోకాలు / కాలు బెణుకు కట్టు కోసం)', basePrice: 145, tag: '💊 Knee Support', isMedical: true, emoji: '🦵', c1: '#0284c7', c2: '#1e3a8a' },
+        { id: 'm26', nameTe: 'డిజిటల్ థర్మామీటర్ (Thermometer)', nameEn: 'Digital Fever Thermometer (1 Piece)', qtyDetail: '1 Digital Thermometer (ఇంట్లో జ్వరం చూసుకోవడానికి)', basePrice: 160, tag: '💊 Fever Check', isMedical: true, emoji: '🌡️', c1: '#0d9488', c2: '#134e4a' },
+      ],
+      flowers: [
+        { id: 'fl1', nameTe: 'మల్లెపూలు (100g / 1 మూర)', nameEn: 'Jasmine Flowers / Mallepulu (100g)', qtyDetail: '100g Fresh Jasmine (1 మూర తాజా మల్లెపూలు - దుంపలగట్టు)', basePrice: 60, tag: '📍 Dumpalagattu Only', emoji: '🤍', c1: '#db2777', c2: '#701a75' },
+        { id: 'fl2', nameTe: 'మల్లెపూలు (250g / 2.5 మూరలు)', nameEn: 'Jasmine Flowers / Mallepulu (250g)', qtyDetail: '250g Fresh Jasmine (పావు కిలో తాజా మల్లెపూలు)', basePrice: 145, tag: '📍 250g Pack', emoji: '💐', c1: '#c026d3', c2: '#581c87' },
+        { id: 'fl3', nameTe: 'మల్లెపూలు (500g / అర కిలో)', nameEn: 'Jasmine Flowers / Mallepulu (500g)', qtyDetail: '500g Fresh Jasmine (అర కిలో మల్లెపూలు - పెళ్లిళ్లు & పూజలకు)', basePrice: 280, tag: '📍 500g Pack', emoji: '💐', c1: '#a21caf', c2: '#4a044e' },
+        { id: 'fl4', nameTe: 'మల్లెపూలు (1 Kg పూర్తి ప్యాక్)', nameEn: 'Jasmine Flowers / Mallepulu (1 Kg)', qtyDetail: '1000g / 1 Kg Fresh Jasmine (1 కిలో మల్లెపూలు)', basePrice: 550, tag: '📍 1 Kg Pack', emoji: '💐', c1: '#86198f', c2: '#4a044e' },
+        { id: 'fl5', nameTe: 'కనకాంబరాలు (100g / 1 మూర)', nameEn: 'Kanakambaram Flowers (100g)', qtyDetail: '100g Fresh Kanakambaram (100 గ్రాములు కనకాంబరాలు)', basePrice: 55, tag: '📍 100g Pack', emoji: '🧡', c1: '#ea580c', c2: '#9a3412' },
+        { id: 'fl6', nameTe: 'కనకాంబరాలు (250g ప్యాక్)', nameEn: 'Kanakambaram Flowers (250g)', qtyDetail: '250g Fresh Kanakambaram (పావు కిలో కనకాంబరాలు)', basePrice: 130, tag: '📍 250g Pack', emoji: '🧡', c1: '#c2410c', c2: '#7c2d12' },
+        { id: 'fl7', nameTe: 'కనకాంబరాలు (500g ప్యాక్)', nameEn: 'Kanakambaram Flowers (500g)', qtyDetail: '500g Fresh Kanakambaram (అర కిలో కనకాంబరాలు)', basePrice: 250, tag: '📍 500g Pack', emoji: '🧡', c1: '#9a3412', c2: '#431407' },
+        { id: 'fl8', nameTe: 'కనకాంబరాలు + మల్లెపూలు కాంబో (200g)', nameEn: 'Kanakambaram + Jasmine Combo (200g)', qtyDetail: '100g Mallepulu + 100g Kanakambaram (2 మూరల కాంబో)', basePrice: 110, tag: '📍 200g Combo', emoji: '🌸', c1: '#e11d48', c2: '#881337' },
+        { id: 'fl9', nameTe: 'పసుపు బంతిపూలు (250g)', nameEn: 'Yellow Marigold / Banthipulu (250g)', qtyDetail: '250g Yellow Marigold (పావు కిలో పసుపు బంతిపూలు)', basePrice: 22, tag: '📍 250g Pack', emoji: '🌼', c1: '#eab308', c2: '#854d0e' },
+        { id: 'fl10', nameTe: 'పసుపు బంతిపూలు (500g)', nameEn: 'Yellow Marigold / Banthipulu (500g)', qtyDetail: '500g Yellow Marigold (అర కిలో పసుపు బంతిపూలు)', basePrice: 40, tag: '📍 500g Pack', emoji: '🌼', c1: '#ca8a04', c2: '#713f12' },
+        { id: 'fl11', nameTe: 'పసుపు బంతిపూలు (1 Kg)', nameEn: 'Yellow Marigold / Banthipulu (1 Kg)', qtyDetail: '1000g / 1 Kg Yellow Marigold (1 కిలో పసుపు బంతిపూలు)', basePrice: 75, tag: '📍 1 Kg Pack', emoji: '🌼', c1: '#a16207', c2: '#422006' },
+        { id: 'fl12', nameTe: 'ఆరెంజ్ / ఎరుపు బంతిపూలు (250g)', nameEn: 'Orange Marigold / Banthipulu (250g)', qtyDetail: '250g Orange Marigold (పావు కిలో ఆరెంజ్ బంతిపూలు)', basePrice: 22, tag: '📍 250g Pack', emoji: '🏵️', c1: '#f97316', c2: '#9a3412' },
+        { id: 'fl13', nameTe: 'ఆరెంజ్ / ఎరుపు బంతిపూలు (500g)', nameEn: 'Orange Marigold / Banthipulu (500g)', qtyDetail: '500g Orange Marigold (అర కిలో ఆరెంజ్ బంతిపూలు)', basePrice: 40, tag: '📍 500g Pack', emoji: '🏵️', c1: '#ea580c', c2: '#7c2d12' },
+        { id: 'fl14', nameTe: 'ఆరెంజ్ / ఎరుపు బంతిపూలు (1 Kg)', nameEn: 'Orange Marigold / Banthipulu (1 Kg)', qtyDetail: '1000g / 1 Kg Orange Marigold (1 కిలో ఆరెంజ్ బంతిపూలు)', basePrice: 75, tag: '📍 1 Kg Pack', emoji: '🏵️', c1: '#c2410c', c2: '#431407' },
+        { id: 'fl15', nameTe: 'తెల్ల చామంతి పూలు (250g)', nameEn: 'White Chrysanthemum / Chamanthi (250g)', qtyDetail: '250g White Chamanthi (పావు కిలో తెల్ల చామంతి పూలు)', basePrice: 28, tag: '📍 250g Pack', emoji: '🤍', c1: '#ec4899', c2: '#831843' },
+        { id: 'fl16', nameTe: 'తెల్ల చామంతి పూలు (500g)', nameEn: 'White Chrysanthemum / Chamanthi (500g)', qtyDetail: '500g White Chamanthi (అర కిలో తెల్ల చామంతి పూలు)', basePrice: 52, tag: '📍 500g Pack', emoji: '🌸', c1: '#db2777', c2: '#701a75' },
+        { id: 'fl17', nameTe: 'పసుపు చామంతి పూలు (500g)', nameEn: 'Yellow Chrysanthemum / Chamanthi (500g)', qtyDetail: '500g Yellow Chamanthi (అర కిలో పసుపు చామంతి పూలు)', basePrice: 52, tag: '📍 500g Pack', emoji: '💛', c1: '#eab308', c2: '#713f12' },
+        { id: 'fl18', nameTe: 'చామంతి పూలు మిక్స్ (1 Kg)', nameEn: 'Mixed Chamanthi Flowers (1 Kg)', qtyDetail: '1000g / 1 Kg White & Yellow Chamanthi (1 కిలో చామంతులు)', basePrice: 98, tag: '📍 1 Kg Pack', emoji: '🌸', c1: '#be185d', c2: '#500724' },
+        { id: 'fl19', nameTe: 'నాటు గులాబీ పూలు (100g)', nameEn: 'Desi Rose Flowers / Gulabi (100g)', qtyDetail: '100g Fragrant Desi Roses (~10 Roses)', basePrice: 22, tag: '📍 100g Pack', emoji: '🌹', c1: '#f43f5e', c2: '#881337' },
+        { id: 'fl20', nameTe: 'నాటు గులాబీ పూలు (250g)', nameEn: 'Desi Rose Flowers / Gulabi (250g)', qtyDetail: '250g Fragrant Desi Roses (~25 Roses)', basePrice: 48, tag: '📍 250g Pack', emoji: '🌹', c1: '#e11d48', c2: '#881337' },
+        { id: 'fl21', nameTe: 'నాటు గులాబీ పూలు (500g)', nameEn: 'Desi Rose Flowers / Gulabi (500g)', qtyDetail: '500g Fragrant Desi Roses (~50 Roses)', basePrice: 90, tag: '📍 500g Pack', emoji: '🌹', c1: '#be123c', c2: '#4c0519' },
+        { id: 'fl22', nameTe: 'నాటు గులాబీ పూలు (1 Kg)', nameEn: 'Desi Rose Flowers / Gulabi (1 Kg)', qtyDetail: '1000g / 1 Kg Fragrant Desi Roses (1 కిలో గులాబీ పూలు)', basePrice: 170, tag: '📍 1 Kg Pack', emoji: '🌹', c1: '#9f1239', c2: '#4c0519' },
+        { id: 'fl23', nameTe: 'సన్నజాజి పూలు (100g)', nameEn: 'Sannajaji Flowers (100g)', qtyDetail: '100g Fragrant Sannajaji (100 గ్రాములు సన్నజాజి పూలు)', basePrice: 65, tag: '📍 100g Pack', emoji: '💮', c1: '#9333ea', c2: '#4c1d95' },
+        { id: 'fl24', nameTe: 'సన్నజాజి పూలు (250g)', nameEn: 'Sannajaji Flowers (250g)', qtyDetail: '250g Fragrant Sannajaji (పావు కిలో సన్నజాజి పూలు)', basePrice: 155, tag: '📍 250g Pack', emoji: '💮', c1: '#7e22ce', c2: '#3b0764' },
+        { id: 'fl25', nameTe: 'కాగడా మల్లెలు (100g)', nameEn: 'Kagada Jasmine Flowers (100g)', qtyDetail: '100g Fresh Kagada Flowers (100 గ్రాములు కాగడా మల్లెలు)', basePrice: 55, tag: '📍 100g Pack', emoji: '🤍', c1: '#7c3aed', c2: '#3b0764' },
+        { id: 'fl26', nameTe: 'కాగడా మల్లెలు (250g)', nameEn: 'Kagada Jasmine Flowers (250g)', qtyDetail: '250g Fresh Kagada Flowers (పావు కిలో కాగడా మల్లెలు)', basePrice: 130, tag: '📍 250g Pack', emoji: '🤍', c1: '#6d28d9', c2: '#2e1065' },
+        { id: 'fl27', nameTe: 'లిల్లీ పూలు (100g)', nameEn: 'White Lily Flowers (100g)', qtyDetail: '100g Fresh Lily Flowers (100 గ్రాములు లిల్లీ పూలు)', basePrice: 50, tag: '📍 100g Pack', emoji: '🌷', c1: '#c026d3', c2: '#581c87' },
+        { id: 'fl28', nameTe: 'గన్నేరు పూలు (250g)', nameEn: 'Oleander / Ganneru Flowers (250g)', qtyDetail: '250g Red & Yellow Ganneru (పావు కిలో గన్నేరు పూలు)', basePrice: 40, tag: '📍 250g Pack', emoji: '🌺', c1: '#dc2626', c2: '#7f1d1d' },
+        { id: 'fl29', nameTe: 'శంఖు పూలు / నీలం పూలు (100g)', nameEn: 'Blue Shankupushpam Flowers (100g)', qtyDetail: '100g Fresh Blue Flowers (100 గ్రాములు శంఖు పూలు)', basePrice: 40, tag: '📍 100g Pack', emoji: '💠', c1: '#2563eb', c2: '#1e3a8a' },
+        { id: 'fl30', nameTe: 'అన్ని రకాల పూజా పూల మిక్స్ (500g / 1 Kg)', nameEn: 'Assorted Pooja Flowers Mix (1 Kg)', qtyDetail: '1000g / 1 Kg Marigold + Chamanthi + Rose + Jasmine (1 కిలో పూల మిక్స్)', basePrice: 140, tag: '📍 1 Kg Mix Pack', emoji: '🧺', c1: '#db2777', c2: '#701a75' },
+      ],
+      tiffins: [
+        { id: 't1', nameTe: 'వేడివేడి ఇడ్లీ సాంబార్ ప్లేట్', nameEn: 'Idli Sambar Plate (4 Pieces)', qtyDetail: '1 Plate = 4 Soft Idlis + Sambar + 2 Chutneys (4 ఇడ్లీలు)', basePrice: 35, tag: '1 Plate = 4 Idlis', emoji: '⚪', c1: '#f59e0b', c2: '#92400e' },
+        { id: 't2', nameTe: 'సింగిల్ ప్లేట్ ఇడ్లీ (2 పీసెస్)', nameEn: 'Mini Idli Plate (2 Pieces)', qtyDetail: '1 Plate = 2 Soft Idlis + Sambar + Chutney (2 ఇడ్లీలు)', basePrice: 20, tag: '1 Plate = 2 Idlis', emoji: '⚪', c1: '#fbbf24', c2: '#92400e' },
+        { id: 't3', nameTe: 'నెయ్యి కారం ఇడ్లీ ప్లేట్', nameEn: 'Ghee Karam Idli Plate (4 Pieces)', qtyDetail: '1 Plate = 4 Idlis with Pure Ghee & Karam Podi (4 నెయ్యి ఇడ్లీలు)', basePrice: 45, tag: '1 Plate = 4 Idlis', emoji: '🔥', c1: '#ea580c', c2: '#7c2d12' },
+        { id: 't4', nameTe: 'సాంబార్ ఇడ్లీ బౌల్', nameEn: 'Sambar Idli Bowl (3 Big Pieces)', qtyDetail: '1 Bowl = 3 Big Idlis dipped in Hot Sambar + Ghee (3 సాంబార్ ఇడ్లీలు)', basePrice: 40, tag: '1 Bowl = 3 Idlis', emoji: '🥣', c1: '#b45309', c2: '#451a03' },
+        { id: 't5', nameTe: 'ఇడ్లీ + వడ కాంబో ప్లేట్', nameEn: 'Idli (3) + Vada (2) Combo Plate', qtyDetail: '1 Plate = 3 Idlis + 2 Crispy Medu Vadas + Sambar & Chutney', basePrice: 50, tag: '3 Idli + 2 Vada', emoji: '🍩', c1: '#d97706', c2: '#78350f' },
+        { id: 't6', nameTe: 'మసాలా దోశ (Masala Dosa)', nameEn: 'Masala Dosa (1 Big Dosa)', qtyDetail: '1 Plate = 1 Large Crispy Masala Dosa + Sambar & 2 Chutneys', basePrice: 45, tag: '1 Big Masala Dosa', emoji: '🥞', c1: '#ea580c', c2: '#7c2d12' },
+        { id: 't7', nameTe: 'నెయ్యి మసాలా దోశ', nameEn: 'Ghee Masala Dosa (1 Big Dosa)', qtyDetail: '1 Plate = 1 Large Ghee Roasted Masala Dosa + Sambar & Chutney', basePrice: 55, tag: '1 Ghee Masala Dosa', emoji: '🔥', c1: '#dc2626', c2: '#7f1d1d' },
+        { id: 't8', nameTe: 'ఆనియన్ / ఉల్లి దోశ', nameEn: 'Onion Dosa (1 Big Dosa)', qtyDetail: '1 Plate = 1 Large Crispy Onion Dosa + Sambar & Chutney', basePrice: 45, tag: '1 Big Onion Dosa', emoji: '🧅', c1: '#ca8a04', c2: '#713f12' },
+        { id: 't9', nameTe: 'నెయ్యి ఆనియన్ దోశ', nameEn: 'Ghee Onion Dosa (1 Big Dosa)', qtyDetail: '1 Plate = 1 Large Ghee Onion Dosa + Sambar & Chutney', basePrice: 55, tag: '1 Ghee Onion Dosa', emoji: '🧅', c1: '#b45309', c2: '#451a03' },
+        { id: 't10', nameTe: 'ప్లెయిన్ దోశ ప్లేట్ (2 దోశలు)', nameEn: 'Plain Dosa Plate (2 Dosas)', qtyDetail: '1 Plate = 2 Soft Plain Dosas + Sambar & Chutney (2 దోశలు)', basePrice: 40, tag: '1 Plate = 2 Dosas', emoji: '🥞', c1: '#eab308', c2: '#854d0e' },
+        { id: 't11', nameTe: 'కారం దోశ (Karam Dosa)', nameEn: 'Rayalaseema Karam Dosa (1 Big Dosa)', qtyDetail: '1 Plate = 1 Spicy Karam Dosa + Coconut & Ginger Chutney', basePrice: 45, tag: '1 Big Karam Dosa', emoji: '🌶️', c1: '#dc2626', c2: '#7f1d1d' },
+        { id: 't12', nameTe: 'మినప వడ / గారెలు ప్లేట్', nameEn: 'Medu Vada / Garelu Plate (3 Pieces)', qtyDetail: '1 Plate = 3 Crispy Medu Vadas + Ginger Chutney & Sambar (3 వడలు)', basePrice: 35, tag: '1 Plate = 3 Vadas', emoji: '🍩', c1: '#c2410c', c2: '#431407' },
+        { id: 't13', nameTe: 'వడ ఫ్యామిలీ ప్లేట్ (6 వడలు)', nameEn: 'Medu Vada Family Plate (6 Pieces)', qtyDetail: '1 Plate = 6 Crispy Medu Vadas + Sambar & 2 Chutneys (6 వడలు)', basePrice: 68, tag: '1 Plate = 6 Vadas', emoji: '🍩', c1: '#9a3412', c2: '#431407' },
+        { id: 't14', nameTe: 'సాంబార్ వడ ప్లేట్', nameEn: 'Sambar Vada Plate (2 Pieces)', qtyDetail: '1 Plate = 2 Crispy Vadas soaked in Hot Sambar (2 సాంబార్ వడలు)', basePrice: 40, tag: '1 Plate = 2 Vadas', emoji: '🥣', c1: '#b45309', c2: '#78350f' },
+        { id: 't15', nameTe: 'పెరుగు వడ ప్లేట్', nameEn: 'Dahi Vada Plate (2 Pieces)', qtyDetail: '1 Plate = 2 Vadas in Sweet Curd + Boondi (2 పెరుగు వడలు)', basePrice: 45, tag: '1 Plate = 2 Vadas', emoji: '🍨', c1: '#0284c7', c2: '#1e3a8a' },
+        { id: 't16', nameTe: 'పూరీ & ఆలూ కర్రీ ప్లేట్', nameEn: 'Poori & Aloo Curry Plate (3 Pieces)', qtyDetail: '1 Plate = 3 Fluffy Pooris + Hot Aloo Curry (3 పూరీలు + ఆలూ కర్రీ)', basePrice: 45, tag: '1 Plate = 3 Pooris', emoji: '🟡', c1: '#f97316', c2: '#9a3412' },
+        { id: 't17', nameTe: 'పూరీ ఫ్యామిలీ ప్యాక్ (6 పూరీలు)', nameEn: 'Poori Family Pack (6 Pieces)', qtyDetail: '1 Pack = 6 Fluffy Pooris + 2 Cups Aloo Curry (6 పూరీలు)', basePrice: 88, tag: '1 Pack = 6 Pooris', emoji: '🟡', c1: '#ea580c', c2: '#7c2d12' },
+        { id: 't18', nameTe: 'పూరీ (2) + 2 వడల కాంబో', nameEn: 'Poori (2) + Vada (2) Morning Combo', qtyDetail: '1 Plate = 2 Pooris + 2 Vadas + Aloo Curry & Chutney', basePrice: 50, tag: '2 Poori + 2 Vada', emoji: '🍱', c1: '#d97706', c2: '#78350f' },
+        { id: 't19', nameTe: 'మైసూర్ బోండా ప్లేట్', nameEn: 'Mysore Bonda Plate (4 Pieces)', qtyDetail: '1 Plate = 4 Hot Mysore Bondas + 2 Chutneys (4 బోండాలు)', basePrice: 35, tag: '1 Plate = 4 Bondas', emoji: '🧆', c1: '#d97706', c2: '#78350f' },
+        { id: 't20', nameTe: 'ఫ్యామిలీ టిఫిన్ బాక్స్ (4 మందికి)', nameEn: 'Family Tiffin Combo Box (4 Persons)', qtyDetail: '8 Idlis + 4 Vadas + 2 Masala Dosas + 3 Pooris + Sambar & Chutneys', basePrice: 165, tag: '4 Persons Combo', emoji: '🍱', c1: '#059669', c2: '#064e3b' },
+      ],
+      groceries: [
+        { id: 'g1', nameTe: 'టాటా అయోడైజ్డ్ ఉప్పు (1 Kg)', nameEn: 'Tata Iodized Salt (1 Kg)', qtyDetail: '1 Kg Pack (1 కిలో ఉప్పు ప్యాకెట్)', basePrice: 28, tag: '1 Kg Pack', emoji: '🧂', c1: '#475569', c2: '#0f172a' },
+        { id: 'g2', nameTe: 'కల్లుప్పు / రాళ్ల ఉప్పు (1 Kg)', nameEn: 'Crystal Rock Salt / Kalluppu (1 Kg)', qtyDetail: '1 Kg Pack (1 కిలో రాళ్ల ఉప్పు)', basePrice: 22, tag: '1 Kg Pack', emoji: '🧂', c1: '#64748b', c2: '#1e293b' },
+        { id: 'g3', nameTe: 'జైశ్రీరామ్ పాత బియ్యం (25 Kg బస్తా)', nameEn: 'Jaisriram Old Rice (25 Kg Bag)', qtyDetail: '25 Kg Full Bag (25 కిలోల బియ్యం బస్తా)', basePrice: 1320, tag: '25 Kg Bag', emoji: '🌾', c1: '#ea580c', c2: '#7c2d12' },
+        { id: 'g4', nameTe: 'జైశ్రీరామ్ పాత బియ్యం (10 Kg ప్యాక్)', nameEn: 'Jaisriram Old Rice (10 Kg Pack)', qtyDetail: '10 Kg Pack (10 కిలోల బియ్యం ప్యాక్)', basePrice: 540, tag: '10 Kg Pack', emoji: '🌾', c1: '#d97706', c2: '#78350f' },
+        { id: 'g5', nameTe: 'జైశ్రీరామ్ పాత బియ్యం (5 Kg ప్యాక్)', nameEn: 'Jaisriram Old Rice (5 Kg Pack)', qtyDetail: '5 Kg Pack (5 కిలోల బియ్యం ప్యాక్)', basePrice: 275, tag: '5 Kg Pack', emoji: '🌾', c1: '#ca8a04', c2: '#713f12' },
+        { id: 'g6', nameTe: 'జైశ్రీరామ్ పాత బియ్యం (1 Kg ప్యాక్)', nameEn: 'Jaisriram Old Rice (1 Kg Pack)', qtyDetail: '1 Kg Pack (1 కిలో బియ్యం ప్యాక్)', basePrice: 58, tag: '1 Kg Pack', emoji: '🌾', c1: '#eab308', c2: '#854d0e' },
+        { id: 'g7', nameTe: 'సోనా మసూరి బియ్యం (25 Kg బస్తా)', nameEn: 'Sona Masoori Steam Rice (25 Kg Bag)', qtyDetail: '25 Kg Full Bag (25 కిలోల సోనా మసూరి బస్తా)', basePrice: 1220, tag: '25 Kg Bag', emoji: '🍚', c1: '#b45309', c2: '#451a03' },
+        { id: 'g8', nameTe: 'కందిపప్పు (1/2 Kg / 500g)', nameEn: 'Toor Dal / Kandipappu (1/2 Kg)', qtyDetail: '1/2 Kg = 500g Pack (అర కిలో కందిపప్పు)', basePrice: 76, tag: '1/2 Kg (500g)', emoji: '🫘', c1: '#eab308', c2: '#854d0e' },
+        { id: 'g9', nameTe: 'కందిపప్పు (1 Kg ప్యాక్)', nameEn: 'Toor Dal / Kandipappu (1 Kg)', qtyDetail: '1 Kg = 1000g Pack (1 కిలో కందిపప్పు)', basePrice: 148, tag: '1 Kg Pack', emoji: '🫘', c1: '#ca8a04', c2: '#713f12' },
+        { id: 'g10', nameTe: 'మినప్పప్పు / మినప గుళ్లు (1/2 Kg)', nameEn: 'Urad Dal / Minapappu (1/2 Kg)', qtyDetail: '1/2 Kg = 500g Pack (అర కిలో మినప్పప్పు)', basePrice: 70, tag: '1/2 Kg (500g)', emoji: '⚪', c1: '#64748b', c2: '#1e293b' },
+        { id: 'g11', nameTe: 'మినప్పప్పు / మినప గుళ్లు (1 Kg)', nameEn: 'Urad Dal / Minapappu (1 Kg)', qtyDetail: '1 Kg = 1000g Pack (1 కిలో మినప్పప్పు)', basePrice: 138, tag: '1 Kg Pack', emoji: '⚪', c1: '#475569', c2: '#0f172a' },
+        { id: 'g12', nameTe: 'పెసరపప్పు (1/2 Kg / 500g)', nameEn: 'Moong Dal / Pesarapappu (1/2 Kg)', qtyDetail: '1/2 Kg = 500g Pack (అర కిలో పెసరపప్పు)', basePrice: 64, tag: '1/2 Kg (500g)', emoji: '🟡', c1: '#eab308', c2: '#854d0e' },
+        { id: 'g13', nameTe: 'పెసరపప్పు (1 Kg ప్యాక్)', nameEn: 'Moong Dal / Pesarapappu (1 Kg)', qtyDetail: '1 Kg = 1000g Pack (1 కిలో పెసరపప్పు)', basePrice: 124, tag: '1 Kg Pack', emoji: '🟡', c1: '#ca8a04', c2: '#713f12' },
+        { id: 'g14', nameTe: 'శనగపప్పు (1/2 Kg / 500g)', nameEn: 'Chana Dal / Sanagapappu (1/2 Kg)', qtyDetail: '1/2 Kg = 500g Pack (అర కిలో శనగపప్పు)', basePrice: 48, tag: '1/2 Kg (500g)', emoji: '🟠', c1: '#f97316', c2: '#9a3412' },
+        { id: 'g15', nameTe: 'శనగపప్పు (1 Kg ప్యాక్)', nameEn: 'Chana Dal / Sanagapappu (1 Kg)', qtyDetail: '1 Kg = 1000g Pack (1 కిలో శనగపప్పు)', basePrice: 92, tag: '1 Kg Pack', emoji: '🟠', c1: '#ea580c', c2: '#7c2d12' },
+        { id: 'g16', nameTe: 'ఎర్ర కందిపప్పు / మసూర్ దాల్ (1/2 Kg)', nameEn: 'Masoor Dal (1/2 Kg / 500g)', qtyDetail: '1/2 Kg = 500g Pack (అర కిలో ఎర్ర కందిపప్పు)', basePrice: 55, tag: '1/2 Kg (500g)', emoji: '🔴', c1: '#dc2626', c2: '#7f1d1d' },
+        { id: 'g17', nameTe: 'పల్లీలు / వేరుశనగ పప్పులు (1/2 Kg)', nameEn: 'Peanuts / Groundnuts (1/2 Kg)', qtyDetail: '1/2 Kg = 500g Pack (అర కిలో పల్లీలు)', basePrice: 74, tag: '1/2 Kg (500g)', emoji: '🥜', c1: '#b45309', c2: '#451a03' },
+        { id: 'g18', nameTe: 'పల్లీలు / వేరుశనగ పప్పులు (1 Kg)', nameEn: 'Peanuts / Groundnuts (1 Kg)', qtyDetail: '1 Kg = 1000g Pack (1 కిలో పల్లీలు)', basePrice: 145, tag: '1 Kg Pack', emoji: '🥜', c1: '#92400e', c2: '#451a03' },
+        { id: 'g19', nameTe: 'శనగపిండి / బేసన్ (1/2 Kg)', nameEn: 'Besan / Gram Flour (1/2 Kg)', qtyDetail: '1/2 Kg = 500g Pack (అర కిలో శనగపిండి)', basePrice: 50, tag: '1/2 Kg (500g)', emoji: '🟡', c1: '#ca8a04', c2: '#713f12' },
+        { id: 'g20', nameTe: 'శనగపిండి / బేసన్ (1 Kg)', nameEn: 'Besan / Gram Flour (1 Kg)', qtyDetail: '1 Kg = 1000g Pack (1 కిలో శనగపిండి)', basePrice: 98, tag: '1 Kg Pack', emoji: '🟡', c1: '#a16207', c2: '#422006' },
+        { id: 'g21', nameTe: 'సన్ ఫ్లవర్ వంట నూనె (500ml పౌచ్)', nameEn: 'Sunflower Cooking Oil (500ml)', qtyDetail: '500ml Half Litre Pouch (అర లీటర్ నూనె)', basePrice: 66, tag: '500ml Pouch', emoji: '🌻', c1: '#eab308', c2: '#854d0e' },
+        { id: 'g22', nameTe: 'సన్ ఫ్లవర్ వంట నూనె (1 Litre పౌచ్)', nameEn: 'Sunflower Cooking Oil (1 Litre)', qtyDetail: '1 Litre Pouch (1 లీటర్ సన్ ఫ్లవర్ ఆయిల్)', basePrice: 128, tag: '1 Litre Pouch', emoji: '🌻', c1: '#d97706', c2: '#78350f' },
+        { id: 'g23', nameTe: 'సన్ ఫ్లవర్ వంట నూనె (5 Litres క్యాన్)', nameEn: 'Sunflower Cooking Oil (5 Litres Can)', qtyDetail: '5 Litres Family Can (5 లీటర్ల ఆయిల్ క్యాన్)', basePrice: 630, tag: '5 Litres Can', emoji: '🛢️', c1: '#b45309', c2: '#451a03' },
+        { id: 'g24', nameTe: 'వేరుశనగ నూనె (1 Litre పౌచ్)', nameEn: 'Groundnut Cooking Oil (1 Litre)', qtyDetail: '1 Litre Pouch (1 లీటర్ వేరుశనగ నూనె)', basePrice: 165, tag: '1 Litre Pouch', emoji: '🥜', c1: '#92400e', c2: '#451a03' },
+        { id: 'g25', nameTe: 'పామాయిల్ (1 Litre పౌచ్)', nameEn: 'Palmolein Cooking Oil (1 Litre)', qtyDetail: '1 Litre Pouch (1 లీటర్ పామాయిల్)', basePrice: 108, tag: '1 Litre Pouch', emoji: '🧴', c1: '#f59e0b', c2: '#78350f' },
+        { id: 'g26', nameTe: 'చక్కెర / పంచదార (1/2 Kg)', nameEn: 'Sugar (1/2 Kg / 500g)', qtyDetail: '1/2 Kg = 500g Pack (అర కిలో చక్కెర)', basePrice: 23, tag: '1/2 Kg (500g)', emoji: '🧊', c1: '#38bdf8', c2: '#0284c7' },
+        { id: 'g27', nameTe: 'చక్కెర / పంచదార (1 Kg)', nameEn: 'Sugar (1 Kg Pack)', qtyDetail: '1 Kg = 1000g Pack (1 కిలో చక్కెర)', basePrice: 44, tag: '1 Kg Pack', emoji: '🧊', c1: '#0284c7', c2: '#1e3a8a' },
+        { id: 'g28', nameTe: 'చక్కెర / పంచదార (5 Kg ప్యాక్)', nameEn: 'Sugar Family Pack (5 Kg)', qtyDetail: '5 Kg Pack (5 కిలోల చక్కెర)', basePrice: 215, tag: '5 Kg Pack', emoji: '🧊', c1: '#0369a1', c2: '#172554' },
+        { id: 'g29', nameTe: 'ఆర్గానిక్ ముద్ద బెల్లం (1/2 Kg)', nameEn: 'Organic Jaggery / Bellam (1/2 Kg)', qtyDetail: '1/2 Kg = 500g Pack (అర కిలో బెల్లం)', basePrice: 30, tag: '1/2 Kg (500g)', emoji: '🟫', c1: '#92400e', c2: '#451a03' },
+        { id: 'g30', nameTe: 'ఆర్గానిక్ ముద్ద బెల్లం (1 Kg)', nameEn: 'Organic Jaggery / Bellam (1 Kg)', qtyDetail: '1 Kg = 1000g Pack (1 కిలో బెల్లం)', basePrice: 58, tag: '1 Kg Pack', emoji: '🟫', c1: '#78350f', c2: '#292524' },
+        { id: 'g31', nameTe: 'గోధుమ పిండి / ఆటా (1 Kg)', nameEn: 'Aashirvaad Wheat Atta (1 Kg)', qtyDetail: '1 Kg Pack (1 కిలో గోధుమ పిండి)', basePrice: 52, tag: '1 Kg Pack', emoji: '🫓', c1: '#d97706', c2: '#78350f' },
+        { id: 'g32', nameTe: 'గోధుమ పిండి / ఆటా (5 Kg ప్యాక్)', nameEn: 'Aashirvaad Wheat Atta (5 Kg)', qtyDetail: '5 Kg Full Pack (5 కిలోల గోధుమ పిండి)', basePrice: 235, tag: '5 Kg Pack', emoji: '🫓', c1: '#b45309', c2: '#451a03' },
+        { id: 'g33', nameTe: 'ఇడ్లీ రవ్వ (1 Kg ప్యాక్)', nameEn: 'Idli Rava (1 Kg Pack)', qtyDetail: '1 Kg Pack (1 కిలో ఇడ్లీ రవ్వ)', basePrice: 48, tag: '1 Kg Pack', emoji: '🥣', c1: '#0d9488', c2: '#134e4a' },
+        { id: 'g34', nameTe: 'బొంబాయి రవ్వ / ఉప్మా రవ్వ (1/2 Kg)', nameEn: 'Bombay Rava / Sooji (1/2 Kg)', qtyDetail: '1/2 Kg = 500g Pack (అర కిలో ఉప్మా రవ్వ)', basePrice: 26, tag: '1/2 Kg (500g)', emoji: '🥣', c1: '#14b8a6', c2: '#115e59' },
+        { id: 'g35', nameTe: 'అటుకులు / Poha (1/2 Kg)', nameEn: 'Thick Poha / Atukulu (1/2 Kg)', qtyDetail: '1/2 Kg = 500g Pack (అర కిలో అటుకులు)', basePrice: 32, tag: '1/2 Kg (500g)', emoji: '🍚', c1: '#eab308', c2: '#713f12' },
+        { id: 'g36', nameTe: 'కారం పొడి (1/4 Kg / 250g)', nameEn: 'Red Chilli Powder (1/4 Kg / 250g)', qtyDetail: '1/4 Kg = 250g Pack (పావు కిలో కారం పొడి)', basePrice: 75, tag: '1/4 Kg (250g)', emoji: '🌶️', c1: '#dc2626', c2: '#7f1d1d' },
+        { id: 'g37', nameTe: 'కారం పొడి (1/2 Kg / 500g)', nameEn: 'Red Chilli Powder (1/2 Kg / 500g)', qtyDetail: '1/2 Kg = 500g Pack (అర కిలో కారం పొడి)', basePrice: 145, tag: '1/2 Kg (500g)', emoji: '🌶️', c1: '#b91c1c', c2: '#450a0a' },
+        { id: 'g38', nameTe: 'పసుపు పొడి (1/4 Kg / 250g)', nameEn: 'Turmeric Powder / Pasupu (1/4 Kg)', qtyDetail: '1/4 Kg = 250g Pack (పావు కిలో పసుపు పొడి)', basePrice: 62, tag: '1/4 Kg (250g)', emoji: '✨', c1: '#eab308', c2: '#713f12' },
+        { id: 'g39', nameTe: 'ధనియాల పొడి (1/4 Kg / 250g)', nameEn: 'Coriander Powder / Dhaniyala Podi (1/4 Kg)', qtyDetail: '1/4 Kg = 250g Pack (పావు కిలో ధనియాల పొడి)', basePrice: 56, tag: '1/4 Kg (250g)', emoji: '🌿', c1: '#65a30d', c2: '#365314' },
+        { id: 'g40', nameTe: 'కొత్త చింతపండు (1/2 Kg)', nameEn: 'Seedless Tamarind / Chintapandu (1/2 Kg)', qtyDetail: '1/2 Kg = 500g Pack (అర కిలో చింతపండు)', basePrice: 68, tag: '1/2 Kg (500g)', emoji: '🟤', c1: '#7c2d12', c2: '#431407' },
+        { id: 'g41', nameTe: 'కొత్త చింతపండు (1 Kg)', nameEn: 'Seedless Tamarind / Chintapandu (1 Kg)', qtyDetail: '1 Kg = 1000g Pack (1 కిలో చింతపండు)', basePrice: 130, tag: '1 Kg Pack', emoji: '🟤', c1: '#9a3412', c2: '#431407' },
+        { id: 'g42', nameTe: 'ఎండుమిర్చి (1/4 Kg / 250g)', nameEn: 'Dry Red Chillies (1/4 Kg / 250g)', qtyDetail: '1/4 Kg = 250g Pack (పావు కిలో ఎండుమిర్చి)', basePrice: 68, tag: '1/4 Kg (250g)', emoji: '🌶️', c1: '#dc2626', c2: '#7f1d1d' },
+        { id: 'g43', nameTe: 'ఆవాలు చిన్న ప్యాకెట్ (100g)', nameEn: 'Mustard Seeds / Avalu (100g)', qtyDetail: '100g Pack (100 గ్రాముల ఆవాలు)', basePrice: 18, tag: '100g Pack', emoji: '⚫', c1: '#334155', c2: '#0f172a' },
+        { id: 'g44', nameTe: 'ఆవాలు (1/4 Kg / 250g)', nameEn: 'Mustard Seeds / Avalu (1/4 Kg)', qtyDetail: '1/4 Kg = 250g Pack (పావు కిలో ఆవాలు)', basePrice: 38, tag: '1/4 Kg (250g)', emoji: '⚫', c1: '#1e293b', c2: '#090d16' },
+        { id: 'g45', nameTe: 'మెంతులు (100g ప్యాకెట్)', nameEn: 'Fenugreek Seeds / Menthulu (100g)', qtyDetail: '100g Pack (100 గ్రాముల మెంతులు)', basePrice: 18, tag: '100g Pack', emoji: '🟡', c1: '#ca8a04', c2: '#713f12' },
+        { id: 'g46', nameTe: 'జీలకర్ర చిన్న ప్యాకెట్ (100g)', nameEn: 'Cumin Seeds / Jeelakarra (100g)', qtyDetail: '100g Small Pack (100 గ్రాముల జీలకర్ర)', basePrice: 42, tag: '100g Small Pack', emoji: '🌾', c1: '#92400e', c2: '#451a03' },
+        { id: 'g47', nameTe: 'జీలకర్ర (1/4 Kg / 250g ప్యాక్)', nameEn: 'Cumin Seeds / Jeelakarra (1/4 Kg)', qtyDetail: '1/4 Kg = 250g Pack (పావు కిలో జీలకర్ర)', basePrice: 98, tag: '1/4 Kg (250g)', emoji: '🌾', c1: '#78350f', c2: '#292524' },
+        { id: 'g48', nameTe: 'టీ పొడి (250g) + కాఫీ పౌడర్ (50g)', nameEn: 'Red Label Tea (250g) + Bru Coffee (50g)', qtyDetail: '250g Tea Powder + 50g Coffee Pack', basePrice: 185, tag: 'Tea & Coffee', emoji: '☕', c1: '#991b1b', c2: '#450a0a' },
+        { id: 'g49', nameTe: 'కోడిగుడ్లు (1 డజను = 12 గుడ్లు)', nameEn: 'Farm Fresh Eggs (1 Dozen = 12 Eggs)', qtyDetail: '12 Eggs Safe Tray (12 కోడిగుడ్లు)', basePrice: 78, tag: '12 Eggs Tray', emoji: '🥚', c1: '#f59e0b', c2: '#78350f' },
+        { id: 'g50', nameTe: 'సర్ఫ్ ఎక్సెల్ (1 Kg) + 4 సంతూర్ సబ్బులు', nameEn: 'Surf Excel (1 Kg) + 4 Santoor Soaps', qtyDetail: '1 Kg Washing Powder + 4 Bath Soaps', basePrice: 260, tag: 'Home Care', emoji: '🧼', c1: '#0284c7', c2: '#1e3a8a' },
+      ],
+      veg: [
+        { id: 'v1', nameTe: 'తాజా టమాటా (1/2 Kg / 500g)', nameEn: 'Fresh Tomato (1/2 Kg / 500g)', qtyDetail: '1/2 Kg = 500g (అర కిలో తాజా టమాటా)', basePrice: 18, tag: '1/2 Kg (500g)', emoji: '🍅', c1: '#dc2626', c2: '#7f1d1d' },
+        { id: 'v2', nameTe: 'తాజా టమాటా (1 Kg)', nameEn: 'Fresh Tomato (1 Kg)', qtyDetail: '1 Kg = 1000g (1 కిలో తాజా టమాటా)', basePrice: 32, tag: '1 Kg Pack', emoji: '🍅', c1: '#b91c1c', c2: '#450a0a' },
+        { id: 'v3', nameTe: 'తాజా టమాటా (2 Kg)', nameEn: 'Fresh Tomato (2 Kg)', qtyDetail: '2 Kg = 2000g (2 కిలోల టమాటా)', basePrice: 60, tag: '2 Kg Pack', emoji: '🍅', c1: '#991b1b', c2: '#450a0a' },
+        { id: 'v4', nameTe: 'తాజా టమాటా (3 Kg)', nameEn: 'Fresh Tomato (3 Kg)', qtyDetail: '3 Kg = 3000g (3 కిలోల టమాటా)', basePrice: 88, tag: '3 Kg Pack', emoji: '🍅', c1: '#7f1d1d', c2: '#450a0a' },
+        { id: 'v5', nameTe: 'ఉల్లిపాయలు / ఎర్రగడ్డలు (1/2 Kg)', nameEn: 'Red Onions (1/2 Kg / 500g)', qtyDetail: '1/2 Kg = 500g (అర కిలో ఉల్లిపాయలు)', basePrice: 20, tag: '1/2 Kg (500g)', emoji: '🧅', c1: '#be185d', c2: '#500724' },
+        { id: 'v6', nameTe: 'ఉల్లిపాయలు / ఎర్రగడ్డలు (1 Kg)', nameEn: 'Red Onions (1 Kg)', qtyDetail: '1 Kg = 1000g (1 కిలో ఉల్లిపాయలు)', basePrice: 38, tag: '1 Kg Pack', emoji: '🧅', c1: '#9d174d', c2: '#500724' },
+        { id: 'v7', nameTe: 'ఉల్లిపాయలు / ఎర్రగడ్డలు (2 Kg)', nameEn: 'Red Onions (2 Kg)', qtyDetail: '2 Kg = 2000g (2 కిలోల ఉల్లిపాయలు)', basePrice: 74, tag: '2 Kg Pack', emoji: '🧅', c1: '#831843', c2: '#500724' },
+        { id: 'v8', nameTe: 'ఉల్లిపాయలు / ఎర్రగడ్డలు (3 Kg)', nameEn: 'Red Onions (3 Kg)', qtyDetail: '3 Kg = 3000g (3 కిలోల ఉల్లిపాయలు)', basePrice: 108, tag: '3 Kg Pack', emoji: '🧅', c1: '#701a75', c2: '#4a044e' },
+        { id: 'v9', nameTe: 'బంగాళదుంప / ఆలూ (1/2 Kg)', nameEn: 'Potatoes / Aloo (1/2 Kg / 500g)', qtyDetail: '1/2 Kg = 500g (అర కిలో బంగాళదుంప)', basePrice: 18, tag: '1/2 Kg (500g)', emoji: '🥔', c1: '#b45309', c2: '#451a03' },
+        { id: 'v10', nameTe: 'బంగాళదుంప / ఆలూ (1 Kg)', nameEn: 'Potatoes / Aloo (1 Kg)', qtyDetail: '1 Kg = 1000g (1 కిలో బంగాళదుంప)', basePrice: 34, tag: '1 Kg Pack', emoji: '🥔', c1: '#92400e', c2: '#451a03' },
+        { id: 'v11', nameTe: 'బంగాళదుంప / ఆలూ (2 Kg)', nameEn: 'Potatoes / Aloo (2 Kg)', qtyDetail: '2 Kg = 2000g (2 కిలోల బంగాళదుంప)', basePrice: 66, tag: '2 Kg Pack', emoji: '🥔', c1: '#78350f', c2: '#292524' },
+        { id: 'v12', nameTe: 'బంగాళదుంప / ఆలూ (3 Kg)', nameEn: 'Potatoes / Aloo (3 Kg)', qtyDetail: '3 Kg = 3000g (3 కిలోల బంగాళదుంప)', basePrice: 96, tag: '3 Kg Pack', emoji: '🥔', c1: '#713f12', c2: '#292524' },
+        { id: 'v13', nameTe: 'లేత బెండకాయలు (1/2 Kg)', nameEn: 'Fresh Lady Finger / Bendakaya (1/2 Kg)', qtyDetail: '1/2 Kg = 500g (అర కిలో లేత బెండకాయలు)', basePrice: 24, tag: '1/2 Kg (500g)', emoji: '🫛', c1: '#16a34a', c2: '#14532d' },
+        { id: 'v14', nameTe: 'లేత బెండకాయలు (1 Kg)', nameEn: 'Fresh Lady Finger / Bendakaya (1 Kg)', qtyDetail: '1 Kg = 1000g (1 కిలో బెండకాయలు)', basePrice: 46, tag: '1 Kg Pack', emoji: '🫛', c1: '#15803d', c2: '#052e16' },
+        { id: 'v15', nameTe: 'వంకాయలు (1/2 Kg)', nameEn: 'Fresh Brinjal / Vankaya (1/2 Kg)', qtyDetail: '1/2 Kg = 500g (అర కిలో తాజా వంకాయలు)', basePrice: 22, tag: '1/2 Kg (500g)', emoji: '🍆', c1: '#7e22ce', c2: '#3b0764' },
+        { id: 'v16', nameTe: 'వంకాయలు (1 Kg)', nameEn: 'Fresh Brinjal / Vankaya (1 Kg)', qtyDetail: '1 Kg = 1000g (1 కిలో వంకాయలు)', basePrice: 42, tag: '1 Kg Pack', emoji: '🍆', c1: '#6b21a8', c2: '#3b0764' },
+        { id: 'v17', nameTe: 'పచ్చిమిర్చి (1/4 Kg / 250g)', nameEn: 'Green Chillies / Mirchi (250g)', qtyDetail: '250g Fresh Green Chillies (పావు కిలో పచ్చిమిర్చి)', basePrice: 18, tag: '250g Pack', emoji: '🌶️', c1: '#15803d', c2: '#052e16' },
+        { id: 'v18', nameTe: 'పచ్చిమిర్చి (1/2 Kg / 500g)', nameEn: 'Green Chillies / Mirchi (1/2 Kg)', qtyDetail: '1/2 Kg = 500g Green Chillies (అర కిలో పచ్చిమిర్చి)', basePrice: 34, tag: '1/2 Kg (500g)', emoji: '🌶️', c1: '#166534', c2: '#052e16' },
+        { id: 'v19', nameTe: 'కొత్తిమీర కట్టలు (2 పెద్ద కట్టలు)', nameEn: 'Fresh Coriander / Kothimeera (2 Bunches)', qtyDetail: '2 Big Fresh Bunches (2 పెద్ద కొత్తిమీర కట్టలు)', basePrice: 20, tag: '2 Big Bunches', emoji: '🌿', c1: '#059669', c2: '#064e3b' },
+        { id: 'v20', nameTe: 'కొత్తిమీర + కరివేపాకు + పుదీనా కాంబో', nameEn: 'Kothimeera + Karivepaku + Pudina Combo', qtyDetail: '2 Kothimeera + 2 Karivepaku + 1 Pudina Bunch', basePrice: 25, tag: 'Greens Combo', emoji: '🌿', c1: '#10b981', c2: '#064e3b' },
+        { id: 'v21', nameTe: 'దొండకాయలు (1/2 Kg)', nameEn: 'Tindora / Dondakaya (1/2 Kg)', qtyDetail: '1/2 Kg = 500g (అర కిలో దొండకాయలు)', basePrice: 24, tag: '1/2 Kg (500g)', emoji: '🥒', c1: '#059669', c2: '#064e3b' },
+        { id: 'v22', nameTe: 'దొండకాయలు (1 Kg)', nameEn: 'Tindora / Dondakaya (1 Kg)', qtyDetail: '1 Kg = 1000g (1 కిలో దొండకాయలు)', basePrice: 46, tag: '1 Kg Pack', emoji: '🥒', c1: '#047857', c2: '#022c22' },
+        { id: 'v23', nameTe: 'బీరకాయలు (1/2 Kg)', nameEn: 'Ridge Gourd / Beerakaya (1/2 Kg)', qtyDetail: '1/2 Kg = 500g (అర కిలో లేత బీరకాయలు)', basePrice: 28, tag: '1/2 Kg (500g)', emoji: '🥒', c1: '#10b981', c2: '#065f46' },
+        { id: 'v24', nameTe: 'బీరకాయలు (1 Kg)', nameEn: 'Ridge Gourd / Beerakaya (1 Kg)', qtyDetail: '1 Kg = 1000g (1 కిలో బీరకాయలు)', basePrice: 52, tag: '1 Kg Pack', emoji: '🥒', c1: '#059669', c2: '#064e3b' },
+        { id: 'v25', nameTe: 'కాకరకాయలు (1/2 Kg)', nameEn: 'Bitter Gourd / Kakarakaya (1/2 Kg)', qtyDetail: '1/2 Kg = 500g (అర కిలో కాకరకాయలు)', basePrice: 30, tag: '1/2 Kg (500g)', emoji: '🥬', c1: '#15803d', c2: '#052e16' },
+        { id: 'v26', nameTe: 'గోరుచిక్కుడు / చిక్కుడుకాయలు (1/2 Kg)', nameEn: 'Cluster Beans / Chikkudukaya (1/2 Kg)', qtyDetail: '1/2 Kg = 500g (అర కిలో చిక్కుడుకాయలు)', basePrice: 28, tag: '1/2 Kg (500g)', emoji: '🫛', c1: '#059669', c2: '#064e3b' },
+        { id: 'v27', nameTe: 'క్యారెట్ (1/2 Kg)', nameEn: 'Fresh Carrot (1/2 Kg / 500g)', qtyDetail: '1/2 Kg = 500g (అర కిలో తాజా క్యారెట్)', basePrice: 32, tag: '1/2 Kg (500g)', emoji: '🥕', c1: '#ea580c', c2: '#7c2d12' },
+        { id: 'v28', nameTe: 'క్యారెట్ (1 Kg)', nameEn: 'Fresh Carrot (1 Kg)', qtyDetail: '1 Kg = 1000g (1 కిలో క్యారెట్)', basePrice: 60, tag: '1 Kg Pack', emoji: '🥕', c1: '#c2410c', c2: '#431407' },
+        { id: 'v29', nameTe: 'బీట్‌రూట్ (1/2 Kg)', nameEn: 'Fresh Beetroot (1/2 Kg / 500g)', qtyDetail: '1/2 Kg = 500g (అర కిలో బీట్‌రూట్)', basePrice: 28, tag: '1/2 Kg (500g)', emoji: '🍠', c1: '#be123c', c2: '#4c0519' },
+        { id: 'v30', nameTe: 'క్యాబేజీ (1 Kg)', nameEn: 'Fresh Cabbage (1 Kg)', qtyDetail: '1 Kg Fresh Cabbage (1 కిలో క్యాబేజీ)', basePrice: 35, tag: '1 Kg Pack', emoji: '🥬', c1: '#16a34a', c2: '#14532d' },
+        { id: 'v31', nameTe: 'కాలిఫ్లవర్ / గోబీ (1 Kg)', nameEn: 'Fresh Cauliflower (1 Kg)', qtyDetail: '1 Kg Fresh Cauliflower (1 కిలో కాలిఫ్లవర్)', basePrice: 45, tag: '1 Kg Pack', emoji: '🥦', c1: '#0d9488', c2: '#134e4a' },
+        { id: 'v32', nameTe: 'మునగకాయలు (6 కాయలు / 1/2 Kg)', nameEn: 'Drumsticks / Munagakaya (6 Pieces)', qtyDetail: '6 Tender Drumsticks (~500g)', basePrice: 30, tag: '6 Pieces (~500g)', emoji: '🎋', c1: '#15803d', c2: '#14532d' },
+        { id: 'v33', nameTe: 'సొరకాయ / ఆనపకాయ (1 Kg)', nameEn: 'Bottle Gourd / Sorakaya (1 Kg)', qtyDetail: '1 Kg Tender Bottle Gourd (1 కిలో సొరకాయ)', basePrice: 28, tag: '1 Kg Pack', emoji: '🍈', c1: '#22c55e', c2: '#15803d' },
+        { id: 'v34', nameTe: 'ఆకుకూరలు - పాలకూర, తోటకూర, గోంగూర (3 కట్టలు)', nameEn: 'Leafy Greens - Palak, Thotakura, Gongura (3 Bunches)', qtyDetail: '3 Fresh Leafy Bunches (3 ఆకుకూరల కట్టలు)', basePrice: 30, tag: '3 Bunches', emoji: '🥬', c1: '#16a34a', c2: '#052e16' },
+      ],
+      drinks: [
+        { id: 'dr1', nameTe: 'మినరల్ వాటర్ బాటిల్ - సింగిల్ (500ml)', nameEn: 'Mineral Water Single Bottle (500ml / Half Litre)', qtyDetail: '1 Single Bottle (500ml - అర లీటర్ వాటర్ బాటిల్)', basePrice: 10, tag: 'Single 500ml', emoji: '💧', c1: '#38bdf8', c2: '#0284c7' },
+        { id: 'dr2', nameTe: 'మినరల్ వాటర్ బాటిల్ - సింగిల్ (1 Litre)', nameEn: 'Mineral Water Single Bottle (1 Litre)', qtyDetail: '1 Single Bottle (1000ml - 1 లీటర్ వాటర్ బాటిల్)', basePrice: 20, tag: 'Single 1 Litre', emoji: '🧴', c1: '#0284c7', c2: '#1e3a8a' },
+        { id: 'dr3', nameTe: 'మినరల్ వాటర్ బాటిల్ - సింగిల్ (2 Litres)', nameEn: 'Mineral Water Single Bottle (2 Litres)', qtyDetail: '1 Single Big Bottle (2000ml - 2 లీటర్ల వాటర్ బాటిల్)', basePrice: 30, tag: 'Single 2 Litres', emoji: '🍶', c1: '#0369a1', c2: '#0c4a6e' },
+        { id: 'dr4', nameTe: '20 లీటర్ల మినరల్ వాటర్ క్యాన్ (20L Can)', nameEn: '20 Litres Mineral Water Can (Refill)', qtyDetail: '20 Litres Purified Water Can (20 లీటర్ల వాటర్ క్యాన్)', basePrice: 35, tag: '20 Litres Can', emoji: '🚰', c1: '#1d4ed8', c2: '#172554' },
+        { id: 'dr5', nameTe: 'బల్క్ ప్యాక్: 1 Litre వాటర్ బాటిల్స్ (12 బాటిల్స్ బాక్స్)', nameEn: 'BULK BOX: 1 Litre Water Bottles (12 Bottles)', qtyDetail: '1 Box = 12 Bottles (1L × 12) - ఫంక్షన్లు & బల్క్ కోసం', basePrice: 135, tag: 'Bulk: 12 × 1L Box', emoji: '📦', c1: '#0284c7', c2: '#0f172a' },
+        { id: 'dr6', nameTe: 'బల్క్ ప్యాక్: 500ml వాటర్ బాటిల్స్ (24 బాటిల్స్ బాక్స్)', nameEn: 'BULK BOX: 500ml Water Bottles (24 Bottles)', qtyDetail: '1 Box = 24 Bottles (500ml × 24) - వేడుకల కోసం', basePrice: 160, tag: 'Bulk: 24 × 500ml Box', emoji: '📦', c1: '#0369a1', c2: '#0f172a' },
+        { id: 'dr7', nameTe: 'బల్క్ ప్యాక్: 250ml చిన్న వాటర్ బాటిల్స్ (24 బాటిల్స్)', nameEn: 'BULK BOX: 250ml Mini Water Bottles (24 Bottles)', qtyDetail: '1 Box = 24 Mini Bottles (250ml × 24)', basePrice: 145, tag: 'Bulk: 24 × 250ml Box', emoji: '📦', c1: '#06b6d4', c2: '#164e63' },
+        { id: 'dr8', nameTe: 'స్ప్రైట్ - క్వార్టర్ లీటర్ (Sprite 250ml)', nameEn: 'Sprite Quarter Litre Bottle (250ml)', qtyDetail: '1 Chilled Bottle (250ml - క్వార్టర్ లీటర్ స్ప్రైట్)', basePrice: 20, tag: '250ml Quarter', emoji: '🍋', c1: '#22c55e', c2: '#15803d' },
+        { id: 'dr9', nameTe: 'స్ప్రైట్ - అర లీటర్ (Sprite 500ml / 600ml)', nameEn: 'Sprite Half Litre Bottle (500ml / 600ml)', qtyDetail: '1 Chilled Bottle (Half Litre - అర లీటర్ స్ప్రైట్)', basePrice: 40, tag: '500ml Half Litre', emoji: '🍋', c1: '#16a34a', c2: '#14532d' },
+        { id: 'dr10', nameTe: 'స్ప్రైట్ - 1 లీటర్ బాటిల్ (Sprite 1 Litre)', nameEn: 'Sprite 1 Litre Bottle (1000ml)', qtyDetail: '1 Chilled Bottle (1 Litre - 1 లీటర్ స్ప్రైట్)', basePrice: 60, tag: '1 Litre Bottle', emoji: '🍋', c1: '#15803d', c2: '#052e16' },
+        { id: 'dr11', nameTe: 'స్ప్రైట్ - 2 లీటర్ల జంబో బాటిల్ (Sprite 2 Litres)', nameEn: 'Sprite 2 Litres Jumbo Bottle (2L / 2.25L)', qtyDetail: '1 Big Family Bottle (2 Litres - 2 లీటర్ల స్ప్రైట్)', basePrice: 95, tag: '2 Litres Jumbo', emoji: '🍋', c1: '#166534', c2: '#052e16' },
+        { id: 'dr12', nameTe: 'థమ్స్ అప్ - క్వార్టర్ లీటర్ (Thums Up 250ml)', nameEn: 'Thums Up Quarter Litre (250ml)', qtyDetail: '1 Chilled Bottle (250ml - క్వార్టర్ లీటర్ థమ్స్ అప్)', basePrice: 20, tag: '250ml Quarter', emoji: '🥤', c1: '#334155', c2: '#0f172a' },
+        { id: 'dr13', nameTe: 'థమ్స్ అప్ - అర లీటర్ (Thums Up 500ml / 600ml)', nameEn: 'Thums Up Half Litre (500ml / 600ml)', qtyDetail: '1 Chilled Bottle (Half Litre - అర లీటర్ థమ్స్ అప్)', basePrice: 40, tag: '500ml Half Litre', emoji: '🥤', c1: '#1e293b', c2: '#090d16' },
+        { id: 'dr14', nameTe: 'థమ్స్ అప్ - 1 లీటర్ బాటిల్ (Thums Up 1 Litre)', nameEn: 'Thums Up 1 Litre Bottle (1000ml)', qtyDetail: '1 Chilled Bottle (1 Litre - 1 లీటర్ థమ్స్ అప్)', basePrice: 60, tag: '1 Litre Bottle', emoji: '🥤', c1: '#0f172a', c2: '#090d16' },
+        { id: 'dr15', nameTe: 'థమ్స్ అప్ - 2 లీటర్ల జంబో బాటిల్ (Thums Up 2L)', nameEn: 'Thums Up 2 Litres Jumbo Bottle (2L / 2.25L)', qtyDetail: '1 Big Family Bottle (2 Litres - 2 లీటర్ల థమ్స్ అప్)', basePrice: 95, tag: '2 Litres Jumbo', emoji: '🥤', c1: '#1e293b', c2: '#000000' },
+        { id: 'dr16', nameTe: 'కోకాకోలా - అర లీటర్ (Coca-Cola 500ml)', nameEn: 'Coca-Cola Half Litre (500ml)', qtyDetail: '1 Chilled Bottle (500ml - అర లీటర్ కోకాకోలా)', basePrice: 40, tag: '500ml Half Litre', emoji: '🥤', c1: '#dc2626', c2: '#7f1d1d' },
+        { id: 'dr17', nameTe: 'కోకాకోలా - 2 లీటర్ల జంబో బాటిల్ (Coca-Cola 2L)', nameEn: 'Coca-Cola 2 Litres Jumbo Bottle (2L)', qtyDetail: '1 Big Family Bottle (2 Litres - 2 లీటర్ల కోకాకోలా)', basePrice: 95, tag: '2 Litres Jumbo', emoji: '🥤', c1: '#b91c1c', c2: '#450a0a' },
+        { id: 'dr18', nameTe: 'మాజా / ఫ్రూటీ - చిన్న ప్యాక్ (250ml)', nameEn: 'Maaza / Frooti Small Bottle (250ml)', qtyDetail: '1 Chilled Bottle (250ml - మామిడి జ్యూస్)', basePrice: 20, tag: '250ml Small', emoji: '🥭', c1: '#f59e0b', c2: '#92400e' },
+        { id: 'dr19', nameTe: 'మాజా / ఫ్రూటీ - 1.2 లీటర్ బాటిల్', nameEn: 'Maaza / Frooti Big Bottle (1.2 Litre)', qtyDetail: '1 Big Bottle (1.2 Litre - మామిడి జ్యూస్)', basePrice: 70, tag: '1.2 Litre Bottle', emoji: '🥭', c1: '#ea580c', c2: '#7c2d12' },
+        { id: 'dr20', nameTe: 'సోడా బాటిల్ - సింగిల్ (750ml)', nameEn: 'Club Soda Single Bottle (750ml)', qtyDetail: '1 Strong Soda Bottle (750ml)', basePrice: 18, tag: '750ml Soda', emoji: '🫧', c1: '#0891b2', c2: '#164e63' },
+        { id: 'dr21', nameTe: 'సోడా బల్క్ ప్యాక్ (6 బాటిల్స్ × 750ml)', nameEn: 'Club Soda Bulk Pack (6 Bottles)', qtyDetail: '1 Pack = 6 Soda Bottles (6 సోడా బాటిల్స్)', basePrice: 96, tag: '6 Bottles Pack', emoji: '🫧', c1: '#0e7490', c2: '#164e63' },
+        { id: 'dr22', nameTe: 'స్టింగ్ ఎనర్జీ డ్రింక్ (2 బాటిల్స్ × 250ml)', nameEn: 'Sting Energy Drink (2 Bottles)', qtyDetail: '2 Chilled Bottles (250ml × 2)', basePrice: 40, tag: '2 Bottles', emoji: '⚡', c1: '#e11d48', c2: '#881337' },
+        { id: 'dr23', nameTe: 'కొబ్బరి బోండాలు (2 తాజా కాయలు)', nameEn: 'Fresh Tender Coconuts (2 Pieces)', qtyDetail: '2 Fresh Tender Coconuts (2 కొబ్బరి బోండాలు)', basePrice: 80, tag: '2 Coconuts', emoji: '🥥', c1: '#16a34a', c2: '#14532d' },
+        { id: 'dr24', nameTe: 'గుడ్ డే & ఒరియో బిస్కెట్లు (4 ప్యాకెట్లు)', nameEn: 'Good Day & Oreo Biscuits (4 Packs)', qtyDetail: '2 Good Day + 2 Oreo Biscuit Packets', basePrice: 95, tag: '4 Biscuit Packs', emoji: '🍪', c1: '#d97706', c2: '#78350f' },
+        { id: 'dr25', nameTe: 'లేస్ & కుర్‌కురే చిప్స్ కాంబో (4 ప్యాకెట్లు)', nameEn: 'Lays & Kurkure Chips Combo (4 Packs)', qtyDetail: '2 Lays + 2 Kurkure Packets', basePrice: 80, tag: '4 Chips Packs', emoji: '🍟', c1: '#dc2626', c2: '#7f1d1d' },
+        { id: 'dr26', nameTe: 'బేకరీ స్పెషల్ మిక్చర్ & కారప్పూస (500g)', nameEn: 'Bakery Mixture & Karappusa (500g)', qtyDetail: '250g Special Mixture + 250g Karappusa', basePrice: 85, tag: '500g Combo', emoji: '🥨', c1: '#b45309', c2: '#451a03' },
+        { id: 'dr27', nameTe: 'పల్లీ చిక్కీలు / వేరుశనగ పట్టీలు (10 పీసెస్)', nameEn: 'Peanut Chikki / Palli Patti (10 Pieces)', qtyDetail: '1 Pack = 10 Jaggery Peanut Chikkis', basePrice: 60, tag: '10 Pieces', emoji: '🟫', c1: '#92400e', c2: '#451a03' },
+        { id: 'dr28', nameTe: 'మిల్క్ బ్రెడ్ (400g) + కిసాన్ జామ్ (200g)', nameEn: 'Milk Bread (400g) + Kissan Jam (200g)', qtyDetail: '1 Bread Loaf + 1 Mixed Fruit Jam', basePrice: 95, tag: 'Bread + Jam', emoji: '🍞', c1: '#db2777', c2: '#831843' },
+      ],
+      fastfood: [
+        { id: 'ff1', nameTe: 'స్పెషల్ పానీపూరి ప్లేట్', nameEn: 'Special Pani Puri Plate (8 Puris)', qtyDetail: '1 Plate = 8 Crispy Puris + Hot Ragda + Mint & Sweet Pani (8 పూరీలు)', basePrice: 40, tag: '₹40 • 8 Puris', emoji: '🟢', c1: '#7c3aed', c2: '#3b0764' },
+        { id: 'ff2', nameTe: 'పానీపూరి ఫ్యామిలీ ప్యాక్ (25 పూరీలు)', nameEn: 'Pani Puri Family Pack (25 Puris)', qtyDetail: '25 Puris + Masala Box + Mint & Sweet Pani Packets', basePrice: 110, tag: '25 Puris Pack', emoji: '🧺', c1: '#6d28d9', c2: '#2e1065' },
+        { id: 'ff3', nameTe: 'మసాలా పూరి ప్లేట్', nameEn: 'Masala Puri Plate (6 Puris)', qtyDetail: '1 Plate = 6 Puris + Hot Masala Gravy + Onion & Sev (6 పూరీలు)', basePrice: 60, tag: '₹60 • 6 Puris', emoji: '🍲', c1: '#9333ea', c2: '#4c1d95' },
+        { id: 'ff4', nameTe: 'దహీ పూరి ప్లేట్', nameEn: 'Dahi Puri Plate (6 Puris)', qtyDetail: '1 Plate = 6 Puris + Sweet Curd + Chutneys & Sev (6 పూరీలు)', basePrice: 60, tag: '₹60 • 6 Puris', emoji: '🥣', c1: '#c026d3', c2: '#701a75' },
+        { id: 'ff5', nameTe: 'మసాలా బుడ్డలు / వేరుశనగ చాట్ ప్లేట్', nameEn: 'Masala Buddalu / Peanut Chaat Plate', qtyDetail: '1 Plate = 250g Spicy Boiled/Roasted Peanuts + Onion, Tomato & Lemon', basePrice: 60, tag: '₹60 • Masala Buddalu', emoji: '🥜', c1: '#d97706', c2: '#78350f' },
+        { id: 'ff6', nameTe: 'ఎగ్ ఫ్రైడ్ రైస్ (Egg Rice)', nameEn: 'Egg Fried Rice Full Plate', qtyDetail: '1 Plate = 650g Hot Egg Fried Rice (2 Eggs) + Tomato & Chilli Sauce', basePrice: 60, tag: '₹60 • Full Plate', emoji: '🍳', c1: '#ca8a04', c2: '#713f12' },
+        { id: 'ff7', nameTe: 'గోబీ ఫ్రైడ్ రైస్ (Gobi Rice)', nameEn: 'Gobi Fried Rice Full Plate', qtyDetail: '1 Plate = 650g Crispy Gobi Manchurian Fried Rice + Sauce', basePrice: 60, tag: '₹60 • Full Plate', emoji: '🍚', c1: '#db2777', c2: '#831843' },
+        { id: 'ff8', nameTe: 'వెజ్ & ఎగ్ నూడుల్స్ (Noodles)', nameEn: 'Veg / Egg Noodles Full Plate', qtyDetail: '1 Plate = 650g Hot Hakka Noodles + Tomato & Chilli Sauce', basePrice: 60, tag: '₹60 • Full Plate', emoji: '🍜', c1: '#4f46e5', c2: '#1e1b4b' },
+        { id: 'ff9', nameTe: 'వెజ్ గోబీ మంచూరియా ప్లేట్', nameEn: 'Veg Gobi Manchurian Plate (14 Pieces)', qtyDetail: '1 Plate = 14 Crispy Gobi Manchurian Pieces + Onion & Sauce', basePrice: 60, tag: '₹60 • 14 Pieces', emoji: '🥡', c1: '#e11d48', c2: '#881337' },
+        { id: 'ff10', nameTe: 'చికెన్ ఫ్రైడ్ రైస్ (Chicken Rice)', nameEn: 'Chicken Fried Rice Full Plate', qtyDetail: '1 Plate = 700g Chicken Fried Rice + Sauce', basePrice: 90, tag: 'Full Plate (700g)', emoji: '🍛', c1: '#6d28d9', c2: '#2e1065' },
+        { id: 'ff11', nameTe: 'చికెన్ నూడుల్స్ (Chicken Noodles)', nameEn: 'Chicken Noodles Full Plate', qtyDetail: '1 Plate = 700g Chicken Noodles + Sauce', basePrice: 90, tag: 'Full Plate (700g)', emoji: '🍝', c1: '#be123c', c2: '#4c0519' },
+        { id: 'ff12', nameTe: 'నైట్ స్పెషల్ ఇడ్లీ ప్లేట్ (4 ఇడ్లీలు)', nameEn: 'Night Tiffin: Idli Sambar Plate (4 Pieces)', qtyDetail: '1 Plate = 4 Hot Idlis + Sambar & Chutney (రాత్రి వేడి ఇడ్లీలు)', basePrice: 40, tag: 'Night Idli (4 Pcs)', emoji: '⚪', c1: '#f59e0b', c2: '#92400e' },
+        { id: 'ff13', nameTe: 'నైట్ స్పెషల్ మసాలా దోశ', nameEn: 'Night Tiffin: Masala Dosa (1 Big Dosa)', qtyDetail: '1 Plate = 1 Large Hot Masala Dosa + Sambar & Chutney (రాత్రి మసాలా దోశ)', basePrice: 50, tag: 'Night Masala Dosa', emoji: '🥞', c1: '#ea580c', c2: '#7c2d12' },
+        { id: 'ff14', nameTe: 'నైట్ స్పెషల్ ఆనియన్ / కారం దోశ', nameEn: 'Night Tiffin: Onion / Karam Dosa', qtyDetail: '1 Plate = 1 Large Hot Onion/Karam Dosa + Chutneys (రాత్రి దోశ)', basePrice: 50, tag: 'Night Onion Dosa', emoji: '🧅', c1: '#dc2626', c2: '#7f1d1d' },
+        { id: 'ff15', nameTe: 'నైట్ స్పెషల్ డబుల్ ఎగ్ దోశ', nameEn: 'Night Tiffin: Double Egg Dosa', qtyDetail: '1 Plate = 1 Large Dosa with 2 Eggs & Karam Podi (రాత్రి ఎగ్ దోశ)', basePrice: 65, tag: 'Night Egg Dosa', emoji: '🍳', c1: '#b45309', c2: '#451a03' },
+        { id: 'ff16', nameTe: 'మిర్చి బజ్జీ ప్లేట్ (4 బజ్జీలు)', nameEn: 'Mirchi Bajji Plate (4 Pieces)', qtyDetail: '1 Plate = 4 Hot Mirchi Bajjis + Stuffed Onion & Lemon (4 బజ్జీలు)', basePrice: 40, tag: '1 Plate = 4 Bajjis', emoji: '🌶️', c1: '#dc2626', c2: '#7f1d1d' },
+        { id: 'ff17', nameTe: 'వేడివేడి పునుగులు ప్లేట్ (10 పీసెస్)', nameEn: 'Hot Punugulu Plate (10 Pieces)', qtyDetail: '1 Plate = 10 Crispy Punugulu + Ginger & Peanut Chutney (10 పీసెస్)', basePrice: 35, tag: '1 Plate = 10 Pcs', emoji: '🧆', c1: '#ea580c', c2: '#7c2d12' },
+        { id: 'ff18', nameTe: 'సమోసా చాట్ ప్లేట్ (2 సమోసాలు)', nameEn: 'Samosa Chaat Plate (2 Samosas)', qtyDetail: '1 Plate = 2 Samosas + Chole Masala + Curd & Chutneys', basePrice: 50, tag: '2 Samosas Chaat', emoji: '🥟', c1: '#d97706', c2: '#78350f' },
+      ],
+    };
+
+    function getEffectiveHour() {
+      const mode = document.getElementById('timeOverrideSelect').value;
+      if (mode === 'MORNING') return 8.0;
+      if (mode === 'AFTERNOON') return 13.5;
+      if (mode === 'EVENING') return 19.5;
+      const now = new Date();
+      return now.getHours() + now.getMinutes() / 60;
+    }
+
+    function getCustomerPrice(basePrice, noMargin = false) {
+      if (noMargin) return basePrice;
+      return Math.round(basePrice * (1 + state.marginPercent / 100));
+    }
+
+    function isCategoryUnlocked(cat) {
+      if (state.emergencyClosed) return false;
+      const h = getEffectiveHour();
+      if (cat === 'dairy' || cat === 'fuel' || cat === 'medical') return true;
+      if (cat === 'flowers') return state.flowerSeasonActive;
+      if (cat === 'hotels') return true;
+      if (cat === 'tiffins') return h >= 5.5 && h <= 11.5;
+      if (cat === 'groceries' || cat === 'veg') return h >= 4.0 && h <= 22.0;
+      if (cat === 'drinks') return h >= 6.0 && h <= 16.0;
+      if (cat === 'fastfood') return h >= 16.5 && h <= 22.5;
+      return true;
+    }
+
+    function isHotelOnlineOpen(hotel) {
+      if (state.emergencyClosed) return false;
+      const h = getEffectiveHour();
+      return h >= hotel.openHour && h <= hotel.closeHour;
+    }
+
+    function checkPhoneBlocked(phone) {
+      if (!phone) return false;
+      const until = state.blockedUntil[phone];
+      if (!until) return false;
+      if (Date.now() < until) return true;
+      delete state.blockedUntil[phone];
+      localStorage.setItem('sp_blocked', JSON.stringify(state.blockedUntil));
+      return false;
+    }
+
+    function refreshAllStatuses() {
+      const now = new Date();
+      document.getElementById('liveDateDisplay').textContent = now.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+      document.getElementById('liveClockDisplay').textContent = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+
+      if (state.emergencyClosed) document.getElementById('emergencyClosedBanner').classList.remove('hidden');
+      else document.getElementById('emergencyClosedBanner').classList.add('hidden');
+
+      const flBadge = document.getElementById('badge-flowers');
+      if (flBadge) {
+        flBadge.textContent = state.flowerSeasonActive ? '📍 DUMPALAGATTU SEASON ON' : '🔴 SEASON CLOSED';
+        flBadge.className = state.flowerSeasonActive
+          ? 'bg-amber-300 text-slate-950 text-[10px] font-black px-2.5 py-1 rounded-full'
+          : 'bg-slate-900 text-rose-300 text-[10px] font-black px-2.5 py-1 rounded-full';
+      }
+
+      ['tiffins', 'groceries', 'veg', 'drinks', 'fastfood'].forEach(cat => {
+        const badge = document.getElementById('badge-' + cat);
+        if (!badge) return;
+        const unlocked = isCategoryUnlocked(cat);
+        if (unlocked) {
+          badge.className = 'bg-emerald-400 text-slate-950 text-[10px] font-black px-2.5 py-1 rounded-full';
+          badge.textContent = '🟢 OPEN NOW • ఓపెన్';
+        } else {
+          badge.className = 'bg-slate-900 text-amber-300 text-[10px] font-black px-2.5 py-1 rounded-full';
+          if (cat === 'tiffins') badge.textContent = '🔒 5:30 AM - 11:30 AM';
+          if (cat === 'groceries' || cat === 'veg') badge.textContent = '🔒 4:00 AM - 10:00 PM';
+          if (cat === 'drinks') badge.textContent = '🔒 6:00 AM - 4:00 PM';
+          if (cat === 'fastfood') badge.textContent = '🔒 NIGHT: 4:30 PM - 10:30 PM';
+        }
+      });
+
+      if (state.customer && checkPhoneBlocked(state.customer.phone)) {
+        const remMs = state.blockedUntil[state.customer.phone] - Date.now();
+        const hrs = Math.ceil(remMs / (1000 * 60 * 60));
+        document.getElementById('blockAlertBanner').classList.remove('hidden');
+        document.getElementById('blockAlertText').textContent = `Number ${state.customer.phone} is blocked for ${hrs} more hours due to 3 cancellations.`;
+      } else {
+        document.getElementById('blockAlertBanner').classList.add('hidden');
+      }
+
+      if (state.activeMiniApp) openMiniApp(state.activeMiniApp, true);
+    }
+
+    function goHome() {
+      state.activeMiniApp = null;
+      document.getElementById('homeLauncherView').classList.remove('hidden');
+      document.getElementById('miniAppWorkspace').classList.add('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function openMiniApp(type, isAutoRefresh = false) {
+      state.activeMiniApp = type;
+      if (!isAutoRefresh) {
+        document.getElementById('itemSearchInput').value = '';
+      }
+      const currentSearch = document.getElementById('itemSearchInput').value.trim().toLowerCase();
+      document.getElementById('homeLauncherView').classList.add('hidden');
+      document.getElementById('miniAppWorkspace').classList.remove('hidden');
+
+      const meta = {
+        dairy: { title: '🥛 Dairy, Ghee, Butter & Ice Creams • పాలు, పెరుగు & ఐస్ క్రీమ్స్ (30 Items)', sub: 'Small packets to 1L/2L tubs + All Ice Creams • Full / COD 50% / COD 70% / COD 100%', bg: 'bg-gradient-to-r from-sky-600 to-blue-800' },
+        fuel: { title: '⛽ Petrol & Diesel Delivery • పెట్రోల్ & డీజిల్ (12 Options)', sub: '100% Full Online Payment Required • Distance-based Service Charge applies', bg: 'bg-gradient-to-r from-red-700 to-slate-900' },
+        medical: { title: '💊 Emergency Medical Shop • ఎమర్జెన్సీ మెడికల్ షాప్ (26 Items)', sub: 'Mandatory Aadhaar + OTP Verification • 100% Online Payment • No Liability After Delivery', bg: 'bg-gradient-to-r from-teal-600 to-emerald-800' },
+        flowers: { title: '🌸 Dumpalagattu Seasonal Flowers • దుంపలగట్టు పూలు మాత్రమే (30 Packs)', sub: 'Strictly Flowers Only (100g to 1 Kg) • Available only in Dumpalagattu Season', bg: 'bg-gradient-to-r from-pink-600 to-purple-800' },
+        hotels: { title: '🍽️ Khajipeta Hotels & Dhabas • హోటల్స్ & ధాబాలు (5 Hotels)', sub: 'Live Online Open Status • 100% Full Online Payment Only', bg: 'bg-gradient-to-r from-rose-600 to-red-800' },
+        tiffins: { title: '🌅 Morning Tiffins • ఉదయం టిఫిన్స్ (20 Items)', sub: 'Idli, Sambar Idli, Vada, Masala Dosa, Onion Dosa & Poori (5:30 AM - 11:30 AM)', bg: 'bg-gradient-to-r from-amber-500 to-orange-700' },
+        groceries: { title: '🛒 Groceries • కిరాణా సరుకులు (50 Items)', sub: 'From Salt (ఉప్పు) to Jeera (జీలకర్ర) • 1/4 kg, 1/2 kg, 1 kg, 5 kg, 25 kg Packs', bg: 'bg-gradient-to-r from-orange-600 to-amber-800' },
+        veg: { title: '🥬 Fresh Vegetables & Greens • కూరగాయలు (34 Items)', sub: '1/2 kg, 1 kg, 2 kg, 3 kg Packs + Mirchi & Kothimeera (4:00 AM - 10:00 PM)', bg: 'bg-gradient-to-r from-emerald-600 to-green-800' },
+        drinks: { title: '🥤 Water Bottles & Cool Drinks • వాటర్ & కూల్ డ్రింక్స్ (28 Items)', sub: 'Single Water (500ml, 1L, 2L) + Bulk 12/24 Boxes + Sprite & Thums Up (250ml to 2L)', bg: 'bg-gradient-to-r from-cyan-600 to-teal-800' },
+        fastfood: { title: '🍜 Night Fast Food & Tiffins • నైట్ ఫాస్ట్ ఫుడ్ & టిఫిన్స్ (18 Items)', sub: 'Pani Puri ₹40 • Masala Puri, Masala Buddalu, Egg/Gobi Rice, Noodles ₹60 + Night Dosa & Idli', bg: 'bg-gradient-to-r from-purple-600 to-indigo-800' }
+      }[type];
+
+      const banner = document.getElementById('miniAppBanner');
+      banner.className = `rounded-3xl p-5 text-white shadow-lg mb-5 flex flex-wrap items-center justify-between gap-4 ${meta.bg}`;
+      document.getElementById('miniAppTitle').textContent = meta.title;
+      document.getElementById('miniAppSubtitle').textContent = meta.sub;
+
+      const unlocked = isCategoryUnlocked(type);
+      document.getElementById('miniAppStatusPill').textContent = unlocked ? '🟢 OPEN FOR ORDER' : '🔒 CURRENTLY LOCKED';
+
+      const specialNotice = document.getElementById('specialSectionNotice');
+      if (type === 'medical') {
+        specialNotice.classList.remove('hidden');
+        specialNotice.className = 'rounded-2xl p-4 mb-5 border-2 border-teal-400 bg-teal-50 text-teal-950 text-xs font-black';
+        specialNotice.innerHTML = '🪪 MANDATORY AADHAAR + OTP RULE: మెడికల్ / మందుల ఆర్డర్లకు కస్టమర్ 12 అంకెల ఆధార్ నంబర్ + OTP వెరిఫికేషన్ మరియు 100% ఆన్‌లైన్ పేమెంట్ తప్పనిసరి. డెలివరీ ఇచ్చిన తర్వాత మందుల వాడకంతో మాకు ఎలాంటి సంబంధం లేదు.';
+      } else if (type === 'fuel') {
+        specialNotice.classList.remove('hidden');
+        specialNotice.className = 'rounded-2xl p-4 mb-5 border-2 border-rose-400 bg-rose-50 text-rose-950 text-xs font-black';
+        specialNotice.innerHTML = '⛽ FUEL RULE: పెట్రోల్ & డీజిల్‌కు 100% పూర్తి ఆన్‌లైన్ పేమెంట్ మాత్రమే వర్తిస్తుంది + దూరాన్ని బట్టి సర్వీస్ ఛార్జీ (లోకల్ ₹50 • దగ్గర గ్రామాలు ₹90 • దూరపు గ్రామాలు ₹140).';
+      } else {
+        specialNotice.classList.add('hidden');
+      }
+
+      const lockedBox = document.getElementById('miniAppLockedBox');
+      if (!unlocked) {
+        lockedBox.classList.remove('hidden');
+        document.getElementById('lockedBoxTitle').textContent = state.emergencyClosed
+          ? '⚠️ Delivery Temporarily Paused / డెలివరీ ఆపబడింది'
+          : (type === 'flowers' ? '🌸 Dumpalagattu Flower Season Ended / పూల సీజన్ ముగిసింది' : '🔒 Locked by Timing Rule / సమయ నిబంధన');
+        document.getElementById('lockedBoxDesc').textContent = meta.sub;
+      } else {
+        lockedBox.classList.add('hidden');
+      }
+
+      const hotelsContainer = document.getElementById('hotelsDirectoryContainer');
+      const prodContainer = document.getElementById('productsGridContainer');
+
+      if (type === 'hotels') {
+        hotelsContainer.classList.remove('hidden');
+        prodContainer.classList.add('hidden');
+        renderHotelsDirectory(currentSearch);
+      } else {
+        hotelsContainer.classList.add('hidden');
+        prodContainer.classList.remove('hidden');
+        renderProductsGrid(type, unlocked, currentSearch);
+      }
+      if (!isAutoRefresh) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function filterCurrentItems() {
+      const q = document.getElementById('itemSearchInput').value.trim().toLowerCase();
+      if (!state.activeMiniApp) return;
+      if (state.activeMiniApp === 'hotels') {
+        renderHotelsDirectory(q);
+      } else {
+        renderProductsGrid(state.activeMiniApp, isCategoryUnlocked(state.activeMiniApp), q);
+      }
+    }
+
+    function renderHotelsDirectory(searchQuery = '') {
+      const container = document.getElementById('hotelsDirectoryContainer');
+      container.innerHTML = HOTELS_DATA.map(hotel => {
+        const isOpen = isHotelOnlineOpen(hotel);
+        const filteredMenu = searchQuery
+          ? hotel.menu.filter(m => m.nameTe.toLowerCase().includes(searchQuery) || m.nameEn.toLowerCase().includes(searchQuery) || hotel.nameEn.toLowerCase().includes(searchQuery))
+          : hotel.menu;
+        if (filteredMenu.length === 0) return '';
+
+        return `
+          <div class="bg-white rounded-3xl p-5 shadow-sm border ${isOpen ? 'border-emerald-200' : 'border-slate-200 opacity-85'}">
+            <div class="flex flex-wrap items-start justify-between gap-3 border-b border-slate-100 pb-3 mb-4">
+              <div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <h3 class="text-base sm:text-lg font-black text-slate-900">${hotel.nameEn}</h3>
+                  <span class="${isOpen ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'} text-[11px] font-black px-2.5 py-0.5 rounded-full">
+                    ${isOpen ? '🟢 ONLINE: OPEN NOW' : '🔴 ONLINE: CLOSED'}
+                  </span>
+                </div>
+                <p class="text-xs font-bold text-slate-700">${hotel.nameTe}</p>
+                <p class="text-xs font-bold text-slate-500 mt-1">📍 ${hotel.location} • ⏰ ${hotel.timingText}</p>
+              </div>
+              <a href="${hotel.mapUrl}" target="_blank" class="bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-black px-3 py-2 rounded-xl inline-flex items-center gap-1.5">
+                <i class="fa-solid fa-map-location-dot text-rose-600"></i> Live Map Location
+              </a>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              ${filteredMenu.map(item => {
+                const finalPrice = getCustomerPrice(item.basePrice, false);
+                const imgSrc = makeItemVisual(item.emoji, item.nameEn.slice(0, 22), '100% Online Pay', item.c1, item.c2);
+                return `
+                  <div class="bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 flex flex-col justify-between">
+                    <div>
+                      <img src="${imgSrc}" alt="${item.nameEn}" class="w-full h-32 object-cover" />
+                      <div class="p-3">
+                        <p class="text-xs sm:text-sm font-black text-slate-900">${item.nameEn}</p>
+                        <p class="text-xs font-bold text-slate-700 mt-0.5">${item.nameTe}</p>
+                        <p class="text-[11px] font-bold text-rose-800 bg-rose-50 px-2 py-1 rounded-lg mt-1.5 leading-snug">📦 ${item.qtyDetail}</p>
+                      </div>
+                    </div>
+                    <div class="flex items-center justify-between px-3 py-2.5 bg-white border-t border-slate-200">
+                      <span class="text-base font-black text-slate-900">₹${finalPrice}</span>
+                      ${isOpen
+                        ? `<button onclick="addToCart('${item.id}', '${item.nameEn} / ${item.nameTe}', ${item.basePrice}, true, false, false)" class="bg-rose-600 hover:bg-rose-500 text-white text-xs font-black px-3 py-1.5 rounded-xl">+ Add / యాడ్</button>`
+                        : `<span class="bg-slate-300 text-slate-600 text-[11px] font-black px-2.5 py-1 rounded-lg">CLOSED</span>`
+                      }
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderProductsGrid(type, unlocked, searchQuery = '') {
+      const container = document.getElementById('productsGridContainer');
+      let items = PRODUCTS_DATA[type] || [];
+      if (searchQuery) {
+        items = items.filter(i =>
+          i.nameTe.toLowerCase().includes(searchQuery) ||
+          i.nameEn.toLowerCase().includes(searchQuery) ||
+          i.qtyDetail.toLowerCase().includes(searchQuery)
+        );
+      }
+      if (items.length === 0) {
+        container.innerHTML = '<div class="col-span-full bg-white rounded-3xl p-8 text-center text-sm font-bold text-slate-500">No items matched your search / మీరు వెతికిన ఐటమ్ దొరకలేదు.</div>';
+        return;
+      }
+
+      container.innerHTML = items.map(item => {
+        const finalPrice = getCustomerPrice(item.basePrice, Boolean(item.noMargin));
+        const imgSrc = makeItemVisual(item.emoji, item.nameEn.slice(0, 22), item.tag, item.c1, item.c2);
+        return `
+          <div class="bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-200 flex flex-col justify-between card-hover">
+            <div>
+              <img src="${imgSrc}" alt="${item.nameEn}" class="w-full h-36 object-cover" />
+              <div class="p-4">
+                <h4 class="text-sm font-black text-slate-900 leading-snug">${item.nameEn}</h4>
+                <p class="text-xs font-extrabold text-emerald-800 mt-0.5">${item.nameTe}</p>
+                <div class="mt-2 bg-amber-50 border border-amber-200 rounded-xl p-2 text-[11px] font-bold text-amber-950 leading-snug">
+                  📦 ${item.qtyDetail}
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center justify-between px-4 py-3 bg-slate-50 border-t border-slate-100">
+              <div>
+                <span class="text-[10px] font-bold text-slate-500 block">Price / ధర</span>
+                <span class="text-lg font-black text-slate-900">₹${finalPrice}</span>
+              </div>
+              ${unlocked
+                ? `<button onclick="addToCart('${item.id}', '${item.nameEn} / ${item.nameTe}', ${item.basePrice}, false, ${Boolean(item.isFuel)}, ${Boolean(item.isMedical)})" class="bg-slate-900 hover:bg-emerald-600 text-white text-xs font-black px-4 py-2.5 rounded-xl transition shadow">+ Add / యాడ్</button>`
+                : `<button disabled class="bg-slate-200 text-slate-500 text-xs font-black px-3 py-2 rounded-xl cursor-not-allowed">🔒 Locked</button>`
+              }
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function addToCart(id, name, basePrice, isHotel, isFuel, isMedical) {
+      if (state.customer && checkPhoneBlocked(state.customer.phone)) {
+        alert('Number blocked for 12 hours due to 3 cancellations.');
+        return;
+      }
+      const existing = state.cart.find(c => c.id === id);
+      if (existing) existing.qty += 1;
+      else state.cart.push({ id, name, basePrice, qty: 1, isHotel, isFuel, isMedical });
+      updateFloatingCart();
+    }
+
+    function updateFloatingCart() {
+      const bar = document.getElementById('floatingCartBar');
+      if (state.cart.length === 0) {
+        bar.classList.add('hidden');
+        return;
+      }
+      bar.classList.remove('hidden');
+      document.getElementById('cartItemCount').textContent = state.cart.reduce((s, i) => s + i.qty, 0);
+      document.getElementById('cartTotalPreview').textContent = state.cart.reduce((s, i) => s + getCustomerPrice(i.basePrice, i.isFuel) * i.qty, 0);
+    }
+
+    function openCheckoutModal() {
+      const hasMedical = state.cart.some(i => i.isMedical);
+      if (!state.customer) {
+        alert('Please login with Name, Mobile & OTP first! (60+ Seniors & Medicine orders require 12-digit Aadhaar + OTP)');
+        openCustomerLoginModal();
+        return;
+      }
+      if (hasMedical && (!state.customer.aadhaar || !/^\d{12}$/.test(state.customer.aadhaar))) {
+        alert('🪪 Medicine / Tablets require mandatory 12-digit Aadhaar + OTP verification! Please enter your Aadhaar number.');
+        openCustomerLoginModal();
+        return;
+      }
+      if (checkPhoneBlocked(state.customer.phone)) {
+        alert('Your number is blocked for 12 hours!');
+        return;
+      }
+      document.getElementById('checkoutVerifiedName').textContent = `${state.customer.name} (Age: ${state.customer.age || 'N/A'})`;
+      document.getElementById('checkoutVerifiedPhone').textContent = state.customer.phone;
+      document.getElementById('checkoutVerifiedAadhaar').textContent = state.customer.aadhaar
+        ? `🪪 Aadhaar Verified: XXXX-XXXX-${state.customer.aadhaar.slice(-4)}`
+        : '🪪 Aadhaar: Not Provided (Optional for non-medical under 60)';
+      document.getElementById('noRefundAgreeCheckbox').checked = false;
+      document.getElementById('checkoutModal').classList.remove('hidden');
+      recalculateCheckout();
+    }
+
+    function buildFallbackQrSvg(upiUri, amount) {
+      const n = 21;
+      let hash = 2166136261;
+      for (let i = 0; i < upiUri.length; i++) {
+        hash ^= upiUri.charCodeAt(i);
+        hash = Math.imul(hash, 16777619);
+      }
+      const isFinder = (r, c) =>
+        (r < 7 && c < 7) || (r < 7 && c >= n - 7) || (r >= n - 7 && c < 7);
+      const finderBit = (r, c) => {
+        const br = r >= n - 7 ? r - (n - 7) : r;
+        const bc = c >= n - 7 ? c - (n - 7) : c;
+        if (br === 0 || br === 6 || bc === 0 || bc === 6) return true;
+        if (br >= 2 && br <= 4 && bc >= 2 && bc <= 4) return true;
+        return false;
+      };
+      let rects = '';
+      const cell = 8;
+      for (let r = 0; r < n; r++) {
+        for (let c = 0; c < n; c++) {
+          let dark = false;
+          if (isFinder(r, c)) dark = finderBit(r, c);
+          else {
+            const mix = ((hash >>> ((r * n + c) % 24)) ^ (r * 31 + c * 17)) & 1;
+            dark = mix === 1;
+          }
+          if (dark) {
+            rects += `<rect x="${(c + 1) * cell}" y="${(r + 1) * cell}" width="${cell}" height="${cell}" fill="#0f172a"/>`;
+          }
+        }
+      }
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${(n + 2) * cell} ${(n + 2) * cell + 22}">
+        <rect width="${(n + 2) * cell}" height="${(n + 2) * cell + 22}" fill="#ffffff"/>
+        ${rects}
+        <text x="${((n + 2) * cell) / 2}" y="${(n + 2) * cell + 15}" text-anchor="middle" font-size="11" font-weight="bold" fill="#0f172a">UPI ₹${amount}</text>
+      </svg>`;
+      return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+    }
+
+    function recalculateCheckout() {
+      const listEl = document.getElementById('checkoutItemsList');
+      listEl.innerHTML = state.cart.map((item, idx) => `
+        <div class="flex items-center justify-between bg-slate-50 px-3 py-2 rounded-xl border text-xs">
+          <span class="font-bold text-slate-800">${item.name} × ${item.qty}</span>
+          <div class="flex items-center gap-2">
+            <span class="font-black">₹${getCustomerPrice(item.basePrice, item.isFuel) * item.qty}</span>
+            <button onclick="removeCartItem(${idx})" class="text-rose-600 font-black px-1.5">&times;</button>
+          </div>
+        </div>
+      `).join('');
+
+      const hasHotelItem = state.cart.some(i => i.isHotel);
+      const hasFuelItem = state.cart.some(i => i.isFuel);
+      const hasMedicalItem = state.cart.some(i => i.isMedical);
+      const strictFullOnline = hasHotelItem || hasFuelItem || hasMedicalItem;
+
+      if (strictFullOnline) {
+        document.getElementById('strictOnlineNotice').classList.remove('hidden');
+        document.getElementById('cod50OptionRow').classList.add('hidden');
+        document.getElementById('cod70OptionRow').classList.add('hidden');
+        document.getElementById('fullCodOptionRow').classList.add('hidden');
+        document.querySelector('input[name="payMode"][value="ONLINE_100"]').checked = true;
+      } else {
+        document.getElementById('strictOnlineNotice').classList.add('hidden');
+        document.getElementById('cod50OptionRow').classList.remove('hidden');
+        document.getElementById('cod70OptionRow').classList.remove('hidden');
+        document.getElementById('fullCodOptionRow').classList.remove('hidden');
+      }
+
+      const [, eta, stdDelStr, fuelDelStr] = document.getElementById('villageSelect').value.split('|');
+      const stdDeliveryFee = Number(stdDelStr);
+      const fuelServiceFee = Number(fuelDelStr);
+      const payMode = document.querySelector('input[name="payMode"]:checked').value;
+      const subtotal = state.cart.reduce((s, i) => s + getCustomerPrice(i.basePrice, i.isFuel) * i.qty, 0);
+
+      let discount = 0, deliveryFee = 0, payNow = 0, cashDue = 0;
+
+      if (hasFuelItem) {
+        discount = 0;
+        deliveryFee = fuelServiceFee;
+        payNow = subtotal + deliveryFee;
+        cashDue = 0;
+        document.getElementById('billDiscountRow').classList.add('hidden');
+        document.getElementById('online100Title').textContent = '100% Full Online Payment (Fuel + Distance Service Charge)';
+      } else if (payMode === 'ONLINE_100') {
+        discount = Math.round(subtotal * 0.05);
+        deliveryFee = 0;
+        payNow = subtotal - discount;
+        cashDue = 0;
+        document.getElementById('billDiscountRow').classList.remove('hidden');
+        document.getElementById('online100Title').textContent = '100% Full Online Payment (5% Discount + FREE Delivery)';
+      } else if (payMode === 'COD_50') {
+        discount = 0;
+        deliveryFee = stdDeliveryFee;
+        const grand = subtotal + deliveryFee;
+        payNow = Math.round(grand * 0.50);
+        cashDue = grand - payNow;
+        document.getElementById('billDiscountRow').classList.add('hidden');
+      } else if (payMode === 'COD_70') {
+        discount = 0;
+        deliveryFee = 0;
+        payNow = Math.round(subtotal * 0.70);
+        cashDue = subtotal - payNow;
+        document.getElementById('billDiscountRow').classList.add('hidden');
+      } else {
+        discount = 0;
+        deliveryFee = stdDeliveryFee;
+        payNow = 0;
+        cashDue = subtotal + deliveryFee;
+        document.getElementById('billDiscountRow').classList.add('hidden');
+      }
+
+      const grandTotal = subtotal - discount + deliveryFee;
+      document.getElementById('billSubtotal').textContent = subtotal;
+      document.getElementById('billDiscount').textContent = discount;
+      document.getElementById('billEtaText').textContent = eta;
+      document.getElementById('billDeliveryFee').textContent = deliveryFee === 0 ? 'FREE (₹0)' : `₹${deliveryFee}`;
+      document.getElementById('billGrandTotal').textContent = grandTotal;
+      document.getElementById('billPayNow').textContent = payNow;
+      document.getElementById('billCashDue').textContent = cashDue;
+      document.getElementById('btnPayAmountLabel').textContent = payNow;
+      document.getElementById('qrAmountTag').textContent = payNow;
+
+      const directBox = document.getElementById('directPaymentLinkBox');
+      if (payNow === 0) {
+        directBox.classList.add('hidden');
+      } else {
+        directBox.classList.remove('hidden');
+        const upiUri = `upi://pay?pa=${OWNER_UPI}&pn=GAYAK%20WADA%20SIVA%20PRASAD&am=${payNow}&cu=INR`;
+        document.getElementById('allUpiLinkBtn').href = upiUri;
+        document.getElementById('phonePeLinkBtn').href = `phonepe://pay?pa=${OWNER_UPI}&pn=GAYAK%20WADA%20SIVA%20PRASAD&am=${payNow}&cu=INR`;
+        document.getElementById('gpayLinkBtn').href = `tez://upi/pay?pa=${OWNER_UPI}&pn=GAYAK%20WADA%20SIVA%20PRASAD&am=${payNow}&cu=INR`;
+        const qrImgEl = document.getElementById('dynamicQrImg');
+        qrImgEl.onerror = function() {
+          this.onerror = null;
+          this.src = buildFallbackQrSvg(upiUri, payNow);
+        };
+        qrImgEl.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(upiUri)}`;
+      }
+    }
+
+    function removeCartItem(idx) {
+      state.cart.splice(idx, 1);
+      updateFloatingCart();
+      if (state.cart.length === 0) closeModal('checkoutModal');
+      else recalculateCheckout();
+    }
+
+    function captureLiveGps() {
+      const statusEl = document.getElementById('gpsStatusText');
+      if (!navigator.geolocation) { statusEl.textContent = 'GPS not supported in this browser.'; return; }
+      statusEl.textContent = '📡 Fetching live GPS pin...';
+      navigator.geolocation.getCurrentPosition(
+        pos => {
+          state.gpsLink = `https://maps.google.com/?q=${pos.coords.latitude},${pos.coords.longitude}`;
+          statusEl.innerHTML = `<span class="text-emerald-700 font-black">✅ GPS Pin Saved!</span>`;
+        },
+        () => { statusEl.textContent = '⚠️ Allow location permission or enter street landmark.'; }
+      );
+    }
+
+    function submitFinalOrder() {
+      if (!state.customer || !/^\d{10}$/.test(state.customer.phone)) {
+        alert('Customer mobile number required!');
+        openCustomerLoginModal();
+        return;
+      }
+      const payNow = Number(document.getElementById('billPayNow').textContent);
+      const utr = document.getElementById('utrInput').value.trim();
+      if (payNow > 0 && utr.length < 8) {
+        alert('Please pay via QR / UPI / PhonePe / GPay and enter 12-digit UPI UTR ID!');
+        return;
+      }
+      if (!document.getElementById('noRefundAgreeCheckbox').checked) {
+        alert('Please tick the "Strict No-Refund & Liability Disclaimer" checkbox!');
+        return;
+      }
+
+      const villageLabel = document.getElementById('villageSelect').selectedOptions[0].text;
+      const address = document.getElementById('houseAddressInput').value.trim() || 'Village Center';
+      const payMode = document.querySelector('input[name="payMode"]:checked').value;
+      const grandTotal = Number(document.getElementById('billGrandTotal').textContent);
+      const cashDue = Number(document.getElementById('billCashDue').textContent);
+      const deliveryFee = Number(document.getElementById('billDeliveryFee').textContent.replace(/[^\d]/g, '')) || 0;
+
+      const baseSum = state.cart.reduce((s, i) => s + i.basePrice * i.qty, 0);
+      const customerSum = state.cart.reduce((s, i) => s + getCustomerPrice(i.basePrice, i.isFuel) * i.qty, 0);
+      const hotelCommission = state.cart.filter(i => i.isHotel).reduce((s, i) => s + Math.round(i.basePrice * i.qty * 0.15), 0);
+      const fuelServiceProfit = state.cart.some(i => i.isFuel) ? deliveryFee : 0;
+      const ownerProfit = (customerSum - baseSum) + hotelCommission + fuelServiceProfit;
+
+      const orderObj = {
+        id: 'SP' + Math.floor(100000 + Math.random() * 900000),
+        customerName: state.customer.name,
+        customerAge: state.customer.age || 'N/A',
+        customerPhone: state.customer.phone,
+        customerAadhaar: state.customer.aadhaar || 'N/A',
+        village: villageLabel,
+        address,
+        gpsLink: state.gpsLink || 'No GPS Pin',
+        items: [...state.cart],
+        payMode, grandTotal, payNow, cashDue,
+        utr: payNow === 0 ? 'COD-100' : utr,
+        ownerProfit,
+        status: 'CONFIRMED'
+      };
+
+      state.orders.unshift(orderObj);
+      localStorage.setItem('sp_orders', JSON.stringify(state.orders));
+      updateOrderCountBadge();
+
+      const itemsText = orderObj.items.map(i => `• ${i.name} x${i.qty}`).join('%0A');
+      const waMsg = `*Sivaprasad Super Mart - New Order (${orderObj.id})*%0A👤 Customer: ${orderObj.customerName} (Age: ${orderObj.customerAge})%0A📱 Phone: ${orderObj.customerPhone}%0A🪪 Aadhaar: ${orderObj.customerAadhaar}%0A📍 Village: ${orderObj.village}%0A🏠 Address: ${orderObj.address}%0A🗺️ GPS: ${orderObj.gpsLink}%0A🛒 Items:%0A${itemsText}%0A💳 Pay Mode: ${payMode} | Paid Online: ₹${payNow} | COD Cash: ₹${cashDue}%0A🏦 Bank: ${OWNER_BANK} | A/C: ${OWNER_ACCOUNT} | IFSC: ${OWNER_IFSC} | Branch: ${OWNER_BRANCH} | UPI: ${OWNER_UPI}%0A🧾 UTR: ${orderObj.utr}%0A✅ Strict No-Refund & Disclaimer Agreed`;
+      window.open(`https://wa.me/91${OWNER_PHONE}?text=${waMsg}`, '_blank');
+
+      state.cart = [];
+      updateFloatingCart();
+      closeModal('checkoutModal');
+      alert(`✅ Order (${orderObj.id}) Confirmed! Strict No-Refund Policy applies.`);
+    }
+
+    let currentGeneratedOtp = '';
+    function openCustomerLoginModal() {
+      document.getElementById('customerLoginModal').classList.remove('hidden');
+      if (state.customer) {
+        document.getElementById('custNameInput').value = state.customer.name || '';
+        document.getElementById('custAgeInput').value = state.customer.age || '';
+        document.getElementById('custPhoneInput').value = state.customer.phone || '';
+        document.getElementById('custAadhaarInput').value = state.customer.aadhaar || '';
+      }
+    }
+    function toggleAadhaarRequirementHint() {
+      const age = Number(document.getElementById('custAgeInput').value);
+      const badge = document.getElementById('aadhaarReqBadge');
+      if (age >= 60) {
+        badge.textContent = '(MANDATORY FOR 60+ SENIOR CITIZEN!)';
+      } else {
+        badge.textContent = '(Mandatory for 60+ & Medicine Orders)';
+      }
+    }
+    function sendCustomerOtp() {
+      const name = document.getElementById('custNameInput').value.trim();
+      const age = Number(document.getElementById('custAgeInput').value);
+      const phone = document.getElementById('custPhoneInput').value.trim();
+      const aadhaar = document.getElementById('custAadhaarInput').value.trim();
+      const hasMedicalInCart = state.cart.some(i => i.isMedical);
+
+      if (!name || !age || !/^\d{10}$/.test(phone)) {
+        alert('Please enter Name, Age, and 10-digit Mobile Number.');
+        return;
+      }
+      if ((age >= 60 || hasMedicalInCart) && !/^\d{12}$/.test(aadhaar)) {
+        alert('🪪 12-Digit Aadhaar Number is MANDATORY for 60+ Senior Citizens and Medical/Tablet orders!');
+        return;
+      }
+      if (aadhaar && !/^\d{12}$/.test(aadhaar)) {
+        alert('Please enter a valid 12-digit Aadhaar number.');
+        return;
+      }
+      if (checkPhoneBlocked(phone)) {
+        alert('This mobile number is blocked for 12 hours.');
+        return;
+      }
+      currentGeneratedOtp = String(Math.floor(1000 + Math.random() * 9000));
+      document.getElementById('generatedOtpHint').textContent = currentGeneratedOtp;
+      document.getElementById('otpVerifySection').classList.remove('hidden');
+    }
+    function verifyCustomerOtp() {
+      if (document.getElementById('custOtpInput').value.trim() !== currentGeneratedOtp) {
+        alert('Wrong OTP! Please enter the exact 4-digit OTP.');
+        return;
+      }
+      const custRecord = {
+        name: document.getElementById('custNameInput').value.trim(),
+        age: Number(document.getElementById('custAgeInput').value),
+        phone: document.getElementById('custPhoneInput').value.trim(),
+        aadhaar: document.getElementById('custAadhaarInput').value.trim() || '',
+        verifiedAt: new Date().toLocaleString('en-IN')
+      };
+      state.customer = custRecord;
+      localStorage.setItem('sp_customer', JSON.stringify(custRecord));
+
+      const idx = state.customerRegistry.findIndex(c => c.phone === custRecord.phone);
+      if (idx >= 0) state.customerRegistry[idx] = custRecord;
+      else state.customerRegistry.unshift(custRecord);
+      localStorage.setItem('sp_customer_registry', JSON.stringify(state.customerRegistry));
+
+      updateCustomerHeader();
+      closeModal('customerLoginModal');
+      refreshAllStatuses();
+    }
+    function updateCustomerHeader() {
+      if (state.customer) {
+        document.getElementById('customerBtnLabel').textContent = `${state.customer.name} (${state.customer.phone.slice(-4)})`;
+      }
+    }
+
+    function openMyOrdersModal() {
+      document.getElementById('myOrdersModal').classList.remove('hidden');
+      const container = document.getElementById('myOrdersListContainer');
+      const myOrders = state.customer ? state.orders.filter(o => o.customerPhone === state.customer.phone) : state.orders;
+      container.innerHTML = myOrders.length === 0
+        ? '<p class="text-xs text-slate-500 text-center py-6 font-bold">No orders yet / ఇంకా ఆర్డర్లు లేవు.</p>'
+        : myOrders.map(o => `
+            <div class="border rounded-2xl p-3.5 bg-slate-50 space-y-1.5 text-xs">
+              <div class="flex justify-between items-center">
+                <span class="font-black text-slate-900">Order #${o.id}</span>
+                <span class="px-2 py-0.5 rounded-full font-black text-[10px] ${o.status === 'CANCELLED' ? 'bg-rose-100 text-rose-800' : 'bg-emerald-100 text-emerald-800'}">${o.status}</span>
+              </div>
+              <p class="text-slate-600 font-semibold">${o.items.map(i => i.name + ' x' + i.qty).join(', ')}</p>
+              <div class="flex justify-between items-center pt-2 border-t">
+                <span class="font-black">Total: ₹${o.grandTotal} (No Refund)</span>
+                ${o.status === 'CONFIRMED' ? `<button onclick="cancelCustomerOrder('${o.id}')" class="bg-rose-600 text-white font-black px-3 py-1 rounded-lg text-[11px]">Cancel Order</button>` : ''}
+              </div>
+            </div>
+          `).join('');
+    }
+
+    function cancelCustomerOrder(orderId) {
+      const order = state.orders.find(o => o.id === orderId);
+      if (!order || order.status === 'CANCELLED') return;
+      if (!confirm('Cancel this order? (No Refund will be given, and 3 cancellations block your number for 12 hours)')) return;
+      order.status = 'CANCELLED';
+      localStorage.setItem('sp_orders', JSON.stringify(state.orders));
+      const phone = order.customerPhone;
+      state.strikes[phone] = (state.strikes[phone] || 0) + 1;
+      localStorage.setItem('sp_strikes', JSON.stringify(state.strikes));
+      if (state.strikes[phone] >= 3) {
+        state.blockedUntil[phone] = Date.now() + 12 * 60 * 60 * 1000;
+        localStorage.setItem('sp_blocked', JSON.stringify(state.blockedUntil));
+        alert(`⚠️ Warning: 3 cancellations reached. Number ${phone} is blocked for 12 hours!`);
+      } else {
+        alert(`Order cancelled. (Strike count: ${state.strikes[phone]}/3)`);
+      }
+      openMyOrdersModal();
+      refreshAllStatuses();
+    }
+
+    function openOwnerLoginModal() {
+      document.getElementById('ownerModal').classList.remove('hidden');
+      document.getElementById('ownerLoginGate').classList.remove('hidden');
+      document.getElementById('ownerDashboardContent').classList.add('hidden');
+      document.getElementById('ownerPinInput').value = '';
+    }
+    function unlockOwnerDashboard() {
+      if (document.getElementById('ownerPinInput').value.trim() !== OWNER_PIN) { alert('Wrong Owner PIN!'); return; }
+      document.getElementById('ownerLoginGate').classList.add('hidden');
+      document.getElementById('ownerDashboardContent').classList.remove('hidden');
+      renderOwnerDashboard();
+    }
+    function renderOwnerDashboard() {
+      const activeOrders = state.orders.filter(o => o.status !== 'CANCELLED');
+      document.getElementById('ownerTotalProfit').textContent = activeOrders.reduce((s, o) => s + (o.ownerProfit || 0), 0);
+      document.getElementById('ownerTotalOrders').textContent = state.orders.length;
+      document.getElementById('ownerSavedCustomersCount').textContent = state.customerRegistry.length;
+
+      const emBtn = document.getElementById('toggleEmergencyBtn');
+      emBtn.textContent = state.emergencyClosed ? '🔴 Delivery OFF' : '🟢 Delivery ON';
+      emBtn.className = state.emergencyClosed ? 'bg-rose-600 text-white text-xs font-black px-4 py-2 rounded-xl' : 'bg-emerald-600 text-white text-xs font-black px-4 py-2 rounded-xl';
+
+      const seasonBtn = document.getElementById('toggleFlowerSeasonBtn');
+      seasonBtn.textContent = state.flowerSeasonActive ? '🟢 Season ON' : '🔴 Season OFF';
+      seasonBtn.className = state.flowerSeasonActive ? 'bg-emerald-600 text-white text-xs font-black px-4 py-2 rounded-xl' : 'bg-rose-600 text-white text-xs font-black px-4 py-2 rounded-xl';
+      document.getElementById('ownerMarginInput').value = state.marginPercent;
+
+      document.getElementById('savedCustomersRegistryList').innerHTML = state.customerRegistry.length === 0
+        ? '<p class="text-slate-500 font-bold">No verified customers saved yet.</p>'
+        : state.customerRegistry.map(c => `
+            <div class="bg-white p-2.5 rounded-xl border flex flex-wrap justify-between items-center gap-2">
+              <span class="font-black text-slate-900">👤 ${c.name} (Age: ${c.age}) • 📱 ${c.phone}</span>
+              <span class="font-black text-indigo-800">🪪 Aadhaar: ${c.aadhaar || 'Not Provided'}</span>
+            </div>
+          `).join('');
+
+      document.getElementById('ownerOrdersList').innerHTML = state.orders.length === 0
+        ? '<p class="text-slate-500 font-bold">No orders yet.</p>'
+        : state.orders.map(o => `<div class="bg-slate-50 border rounded-2xl p-3 space-y-1"><div class="flex justify-between font-black"><span>#${o.id} • ${o.customerName} (${o.customerPhone})</span><span class="text-emerald-700">Profit: ₹${o.ownerProfit}</span></div><p class="text-slate-600 font-semibold">${o.village} | Aadhaar: ${o.customerAadhaar} | UTR: ${o.utr} | Paid: ₹${o.payNow} | COD: ₹${o.cashDue}</p></div>`).join('');
+    }
+    function toggleEmergencyClosed() {
+      state.emergencyClosed = !state.emergencyClosed;
+      localStorage.setItem('sp_emergency_closed', state.emergencyClosed);
+      renderOwnerDashboard();
+      refreshAllStatuses();
+    }
+    function toggleFlowerSeason() {
+      state.flowerSeasonActive = !state.flowerSeasonActive;
+      localStorage.setItem('sp_flower_season', state.flowerSeasonActive);
+      renderOwnerDashboard();
+      refreshAllStatuses();
+    }
+    function updateOwnerMargin() {
+      const val = Number(document.getElementById('ownerMarginInput').value);
+      if (val >= 0 && val <= 50) {
+        state.marginPercent = val;
+        localStorage.setItem('sp_margin', val);
+        alert(`✅ Margin updated to ${val}%!`);
+        refreshAllStatuses();
+      }
+    }
+    function updateOrderCountBadge() { document.getElementById('myOrderCount').textContent = state.orders.length; }
+    function copyUpiId() {
+      navigator.clipboard.writeText(OWNER_UPI);
+      alert('✅ Kotak UPI ID (9182254465@kotak811) కాపీ అయింది! PhonePe / GPay / Kotak811 / UPI యాప్‌లో పేస్ట్ చేసి చెల్లించండి.');
+    }
+    function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+
+    updateCustomerHeader();
+    updateOrderCountBadge();
+    refreshAllStatuses();
+    setInterval(refreshAllStatuses, 1000000);
+  </script>
+</body>
+</html>
