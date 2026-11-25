@@ -28,17 +28,6 @@ jobs:
       - name: Install Bubblewrap CLI
         run: npm install -g @bubblewrap/cli
 
-      - name: Configure Bubblewrap SDK & JDK automatically
-        run: |
-          mkdir -p ~/.bubblewrap
-          cat <<EOF > ~/.bubblewrap/config.json
-          {
-            "jdkPath": "$JAVA_HOME",
-            "androidSdkPath": "$ANDROID_HOME"
-          }
-          EOF
-          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
-
       - name: Generate Keystore if missing
         run: |
           if [ ! -f ./android.keystore ]; then
@@ -48,7 +37,7 @@ jobs:
       - name: Build Android AAB
         run: |
           set -e
-          bubblewrap build --skipPwaValidation --signingKeyPath=./android.keystore --signingKeyAlias=android --storePassword=android123 --keyPassword=android123
+          yes | bubblewrap build --skipPwaValidation --signingKeyPath=./android.keystore --signingKeyAlias=android --storePassword=android123 --keyPassword=android123
 
       - name: Upload AAB Artifact
         if: always()
