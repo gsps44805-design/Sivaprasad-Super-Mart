@@ -48,6 +48,8 @@ jobs:
           BUBBLEWRAP_KEY_PASSWORD: android123
         run: |
           set -e
+          unset ANDROID_SDK_ROOT
+          export ANDROID_HOME="$HOME/.bubblewrap/android_sdk"
           yes | bubblewrap build --skipPwaValidation --signingKeyPath=./android.keystore --signingKeyAlias=android
 
       - name: Upload AAB Artifact
