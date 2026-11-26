@@ -28,6 +28,18 @@ jobs:
       - name: Install Bubblewrap CLI
         run: npm install -g @bubblewrap/cli
 
+      - name: Ensure minSdkVersion is 24 in twa-manifest.json
+        run: |
+          python3 -c "
+          import json
+          with open('twa-manifest.json', 'r', encoding='utf-8') as f:
+              data = json.load(f)
+          data['minSdkVersion'] = 24
+          with open('twa-manifest.json', 'w', encoding='utf-8') as f:
+              json.dump(data, f, indent=2)
+          print('Updated minSdkVersion to 24')
+          "
+
       - name: Prepare local icon and serve over HTTP
         run: |
           if [ ! -f ./icon-512.png ]; then
